@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>登录异常提示 — Jbone</title>
+    <title>自定义登录异常提示 — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,9 +12,9 @@
     <link rel="alternate" hreflang="x-default" href="https://jbone.cn/sso/custom-exception.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="登录异常提示 — Jbone">
-    <meta property="og:description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
-    <meta property="og:keywords" content="jbone,Spring Cloud,sso,微服务">
+    <meta property="og:title" content="自定义登录异常提示 — Jbone">
+    <meta property="og:description" content="CAS自定义登录异常提示">
+    <meta property="og:keywords" content="sso,cas,自定义异常">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -43,6 +43,10 @@
 
     
 
+    <script>
+      Vue.config.productionTip = false
+      window.PAGE_TYPE = "sso"
+    </script>
 
     <!-- 百度统计 -->
       <script>
@@ -353,7 +357,7 @@
 
     
     <li>
-      <a href="/sso/custom-exception.html" class="sidebar-link current">登录异常提示</a>
+      <a href="/sso/custom-exception.html" class="sidebar-link current">自定义登录异常提示</a>
     </li>
   
     
@@ -390,7 +394,7 @@
     
   
   
-    <h1>登录异常提示</h1>
+    <h1>自定义登录异常提示</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -398,7 +402,96 @@
 
 -->
   
-    
+    <p>在我们系统中用户登录异常的情况可能很多，如密码错误、用户被锁定、用户没有登录权限、以及其他业务异常等等。而为了降低用户理解成本，往往需要根据这些异常场景给用户不同的提示信息。</p>
+<p>在jbone单点登录服务中，只需要简单的配置就可以实现自定义异常。</p>
+<ol>
+<li>新建自定义异常类</li>
+<li>在登录校验逻辑中抛出自定义异常</li>
+<li>将自定义异常类配置到登录异常集合中</li>
+<li>配置异常提示信息</li>
+</ol>
+<h3 id="新建自定义异常类"><a href="#新建自定义异常类" class="headerlink" title="新建自定义异常类"></a>新建自定义异常类</h3><blockquote>
+<p>根据CAS标准，自定义异常类继承Exeption即可。</p>
+</blockquote>
+<p>首先我们要定义自己的异常类，本例中我们添加两个。</p>
+<pre><code class="hljs java">
+<span class="hljs-comment">/**
+ * 密码错误异常
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccountInvalidPasswordException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RuntimeException</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AccountInvalidPasswordException</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">super</span>();&#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AccountInvalidPasswordException</span><span class="hljs-params">(String message)</span></span>&#123;
+        <span class="hljs-keyword">super</span>(message);
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs java">
+<span class="hljs-comment">/**
+ * 用户无权登录
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccountPermissionDeniedException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RuntimeException</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AccountPermissionDeniedException</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">super</span>();&#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AccountPermissionDeniedException</span><span class="hljs-params">(String message)</span></span>&#123;
+        <span class="hljs-keyword">super</span>(message);
+    &#125;
+&#125;</code></pre>
+
+<h3 id="抛出自定义异常"><a href="#抛出自定义异常" class="headerlink" title="抛出自定义异常"></a>抛出自定义异常</h3><blockquote>
+<p>本例来自jbone sso的登录校验逻辑</p>
+</blockquote>
+<pre><code class="hljs java">
+<span class="hljs-function"><span class="hljs-keyword">protected</span> AuthenticationHandlerExecutionResult <span class="hljs-title">authenticateUsernamePasswordInternal</span><span class="hljs-params">(UsernamePasswordCredential credential, String originalPassword)</span> <span class="hljs-keyword">throws</span> GeneralSecurityException, PreventedException </span>&#123;
+    UserRequestDO userRequestDO = UserRequestDO.buildAll(credential.getUsername(),<span class="hljs-keyword">null</span>);
+    Result&lt;UserResponseDO&gt; result = getUserApi().commonRequest(userRequestDO);
+
+    <span class="hljs-keyword">if</span>(result == <span class="hljs-keyword">null</span> || !result.isSuccess() || result.getData() == <span class="hljs-keyword">null</span>)&#123;
+        logger.warn(<span class="hljs-string">"用户[&#123;&#125;]不存在"</span>,credential.getUsername());
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> AccountNotFoundException(<span class="hljs-string">"用户不存在"</span>);
+    &#125;
+
+    UserResponseDO userResponseDO = result.getData();
+
+
+    String caculatePwd = PasswordUtils.getMd5PasswordWithSalt(originalPassword,userResponseDO.getSecurityInfo().getSalt());
+    <span class="hljs-keyword">if</span>(!caculatePwd.equals(userResponseDO.getSecurityInfo().getPassword()))&#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> AccountInvalidPasswordException(<span class="hljs-string">"密码错误"</span>);
+    &#125;
+
+
+    <span class="hljs-keyword">if</span>(userResponseDO.getSecurityInfo().getLocked() == <span class="hljs-number">1</span>)&#123;
+        logger.warn(<span class="hljs-string">"用户[&#123;&#125;]已被锁定"</span>,credential.getUsername());
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> AccountLockedException(<span class="hljs-string">"用户已被锁定，禁止登录"</span>);
+    &#125;
+
+    <span class="hljs-keyword">if</span>(userResponseDO.getAuthInfo() == <span class="hljs-keyword">null</span> || CollectionUtils.isEmpty(userResponseDO.getAuthInfo().getRoles()) || !userResponseDO.getAuthInfo().getRoles().contains(requiredRole))&#123;
+        logger.warn(<span class="hljs-string">"用户[&#123;&#125;]没有登录权限"</span>,credential.getUsername());
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> AccountPermissionDeniedException(<span class="hljs-string">"用户没有登录权限"</span>);
+    &#125;
+    Map&lt;String,Object&gt; attributes = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+    attributes.put(SsoConstants.USER_INFO, JSON.toJSONString(converUserInfo(userResponseDO)));
+
+    <span class="hljs-keyword">return</span> createHandlerResult(credential,
+            <span class="hljs-keyword">this</span>.principalFactory.createPrincipal(credential.getUsername(),attributes));
+
+
+&#125;</code></pre>
+
+<h3 id="配置登录异常集合"><a href="#配置登录异常集合" class="headerlink" title="配置登录异常集合"></a>配置登录异常集合</h3><p>在application.properties中加入以下配置：</p>
+<pre><code class="hljs properties">
+<span class="hljs-meta">cas.authn.exceptions.exceptions</span>=<span class="hljs-string">cn.jbone.sso.common.exceptions.AccountInvalidPasswordException,cn.jbone.sso.common.exceptions.AccountPermissionDeniedException</span></code></pre>
+
+<h3 id="配置异常提示信息"><a href="#配置异常提示信息" class="headerlink" title="配置异常提示信息"></a>配置异常提示信息</h3><p>在messages_zh_CN.properties中加入以下配置：</p>
+<blockquote>
+<p>如果需要支持多语言，还需要在其他语种配置文件中加入。</p>
+</blockquote>
+<pre><code class="hljs properties"><span class="hljs-comment">
+# 自定义异常提示</span>
+<span class="hljs-meta">authenticationFailure.AccountInvalidPasswordException</span>=<span class="hljs-string">用户名或密码错误。</span>
+<span class="hljs-meta">authenticationFailure.AccountPermissionDeniedException</span>=<span class="hljs-string">用户没有登录权限。</span></code></pre>
+
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>下面是输入错误密码后的提示效果：</p>
+<p><img src="/images/custom-exception-01.png" alt="密码错误自定义异常"></p>
+
   
   
   <div class="footer">
@@ -423,29 +516,5 @@
     <script src="/js/css.escape.js"></script>
     <script src="/js/common.js"></script>
 
-    <!-- search -->
-    <link href="//code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/search.css">
-    <script src="//code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js"></script>
-    <script>
-    [
-      '#search-query-nav',
-      '#search-query-sidebar',
-      '#search-query-menu'
-    ].forEach(function (selector) {
-      if (!document.querySelector(selector)) return
-      // search index defaults to v2
-      var match = window.location.pathname.match(/^\/(v\d+)/)
-      var version = match ? match[1] : 'v2'
-      docsearch({
-      appId: 'BH4D9OD16A',
-      apiKey: '5638280abff9d207417bb03be05f0b25',
-      indexName: 'vuejs_cn2',
-      inputSelector: selector,
-      algoliaOptions: { facetFilters: ["version:" + version] },
-      autocompleteOptions: { hint: false, appendTo: 'body'}
-      })
-    })
-    </script>
   </body>
 </html>
