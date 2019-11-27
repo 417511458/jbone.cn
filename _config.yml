@@ -14,7 +14,7 @@ timezone: ''
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://417511458.github.io/
-root: /jbone.cn
+root: /jbone.cn/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -98,3 +98,5 @@ deploy:
   type: git
   repository: git@github.com:417511458/417511458.github.io
   branch: site
+
+# a6e75943a84e97a21db98a38f381873ffd1313d7
