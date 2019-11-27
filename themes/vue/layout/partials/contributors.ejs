@@ -1,0 +1,42 @@
+<div id="contributors">
+<p>特别感谢jbone的贡献者们。</p>
+<hr>
+<p>共 <span style="color: #e66; font-size: 28px;" v-text="list.length"></span> 人参与贡献，排名不分先后</p>
+<ul class="contributors">
+  <a v-for="item in list"
+    class="contributor"
+    :href="'https://github.com/' + item.github" target="_blank">
+    <img class="contributor__img" :src="'https://github.com/' + item.github + '.png?size=64'" />
+    <p v-text="item.github" style="margin: 0;"></p>
+  </a>
+</ul>
+</div>
+
+<style>
+.contributor {
+  display: inline-block;
+  margin: 10px 15px;
+  text-align: center;
+}
+.contributor__img {
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+}
+</style>
+
+
+<script>
+new Vue({
+  el: "#contributors",
+  data: function() {
+    return {
+      list: [
+        {
+          github: '417511458'
+        }
+      ]
+    };
+  }
+})
+</script>

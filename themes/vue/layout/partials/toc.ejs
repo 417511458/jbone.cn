@@ -1,0 +1,29 @@
+<ul class="menu-root">
+  <% ['api', 'style-guide'].indexOf(type) === -1 && site.pages.find({type: type}).sort('order').each(function (p) { %>
+    <% var fileName = p.path.replace(/^.+?\/([\w-]+)\.html/, '$1') %>
+    <% if (type === 'sso') { %>
+      <% if (fileName === 'base-installation') { %>
+        <li><h3>基础</h3></li>
+      <% } %>
+      <% if (fileName === 'third-party-github') { %>
+        <li><h3>第三方账号登录</h3></li>
+      <% } %>
+      <% if (fileName === 'custom-exception') { %>
+        <li><h3>自定义</h3></li>
+      <% } %>
+      <% if (fileName === 'service-management-register') { %>
+        <li><h3>服务治理</h3></li>
+      <% } %>
+      <% if (fileName === 'client-mvc') { %>
+        <li><h3>客户端</h3></li>
+      <% } %>
+      <% if (fileName === 'management-service') { %>
+        <li><h3>后台管理系统</h3></li>
+      <% } %>
+
+    <% } %>
+    <li>
+      <a href="<%- url_for(p.path) %>" class="sidebar-link<%- page.title === p.title ? ' current' : '' %><%- p.is_new ? ' new' : '' %>"><%- p.title %></a>
+    </li>
+  <% }) %>
+</ul>

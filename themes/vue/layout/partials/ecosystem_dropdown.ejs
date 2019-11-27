@@ -1,0 +1,12 @@
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">生态系统</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="<%- url_for("/sso/") %>" class="nav-link<%- page.path.match(/\/sso(\/|$)/) ? ' current' : '' %>">单点登录</a></li>
+    <!--
+    <li><a href="<%- url_for("/service-management/") %>" class="nav-link<%- page.path.match(/\/sso(\/|$)/) ? ' current' : '' %>">服务治理</a></li>
+    <li><a href="<%- url_for("/file-system/") %>" class="nav-link<%- page.path.match(/\/sso(\/|$)/) ? ' current' : '' %>">文件系统</a></li>
+    <li><a href="<%- url_for("/system/") %>" class="nav-link<%- page.path.match(/\/sso(\/|$)/) ? ' current' : '' %>">权限管理</a></li>
+    <li><a href="<%- url_for("/cms/") %>" class="nav-link<%- page.path.match(/\/sso(\/|$)/) ? ' current' : '' %>">CMS</a></li>
+    -->
+  </ul>
+</li>

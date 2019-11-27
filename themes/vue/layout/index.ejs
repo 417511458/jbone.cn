@@ -1,0 +1,96 @@
+<div class="sidebar">
+  <div class="sidebar-inner-index">
+    <ul class="main-menu">
+      <%- partial('partials/main_menu', { context: 'sidebar' }) %>
+    </ul>
+  </div>
+</div>
+
+<div id="hero">
+  <div class="inner">
+    <div class="left">
+      <img class="hero-logo" src="<%- url_for("/images/logo.png") %>" alt="vue logo">
+    </div><div class="right">
+      <h2 class="vue">Jbone</h2>
+      <h1>
+        Spring Cloud<br>综合应用实践和基础开发框架
+      </h1>
+      <p>
+        <a class="button" href="<%- url_for("/guide/") %>">起步</a>
+        <a class="button gray has-icon" href="https://github.com/417511458/jbone" target="_blank" rel="noopener">
+          <%- partial('icons/github-dark') %>
+          GITHUB</a>
+         <a class="button gray has-icon" href="https://gitee.com/majunwei2017/jbone" target="_blank" rel="noopener">
+          <%- partial('icons/gitee-dark') %>
+         GITEE</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div id="special">
+<!--
+  <h3>特别赞助</h3>
+
+  <%_ for (const sponsor of theme.platinum_sponsors_china) { _%>
+  <a href="<%- sponsor.url %>" target="_blank" rel="noopener">
+    <img src="<%- url_for(`/images/${sponsor.img}`) %>" style="width:200px">
+  </a>
+  <%_ } _%>
+  -->
+  <%_if (theme.platinum_sponsors_china.length < 2) { _%>
+  <br>
+  <a class="become-backer" href="/support-jbone/">
+    成为特别赞助商
+  </a>
+  <%_} _%>
+</div>
+
+<div id="highlights">
+  <div class="inner">
+    <div class="point">
+      <h2>单点登录</h2>
+      <p>基于CAS实现的SSO解决方案。可作为单独服务使用。支持CAS、OAuth的等协议，轻松接入MVC、前后端分离、微服务网关等应用。</p>
+    </div>
+
+    <div class="point">
+      <h2>服务治理</h2>
+      <p>基于Spring Cloud实现的服务治理套件。包括服务注册与发现、服务监控和管理、服务网关、调用链追踪等。</p>
+    </div>
+
+    <div class="point">
+      <h2>权限管理</h2>
+      <p>
+        基于RBAC权限管理模型实现的通用权限管理系统。包括用户管理、角色管理、系统管理、菜单管理、功能权限管理等，还可作为单独服务使用。
+      </p>
+    </div>
+    <div class="point">
+      <h2>文件系统</h2>
+      <p>
+          实现了灵活的文件存储和管理，目前存储方案实现了七牛云、fastdfs的支持，可以灵活选择使用，也可以混用。
+      </p>
+    </div>
+    <div class="point">
+          <h2>CMS</h2>
+          <p>
+              多站点内容管理系统。包括站点管理、分类管理、文字管理、插件管理、配额管理等功能，既可以用户个人或企业，也可用于平台化运营。
+          </p>
+        </div>
+  </div>
+
+</div>
+
+<div id="footer">
+  <p>
+    <a class="social-icon" href="https://github.com/417511458/jbone" target="_blank" rel="noopener">
+      <%- partial('icons/github') %>
+    </a>
+    <a class="social-icon" href="https://gitee.com/majunwei2017/jbone" target="_blank" rel="noopener">
+      <%- partial('icons/gitee') %>
+    </a>
+  </p>
+  <p>遵循 <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">Apache 2.0 开源协议</a><br>
+  Copyright &copy; 2017-<%- new Date().getFullYear() %> Ma Junwei</p>
+</div>
+
