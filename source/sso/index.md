@@ -2,6 +2,8 @@
 title: 介绍
 type: sso
 order: 1
+description: jbone单点登录介绍
+keywords: sso,cas,单点登录
 ---
 
 ## 介绍

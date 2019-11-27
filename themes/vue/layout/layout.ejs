@@ -12,8 +12,10 @@
     <link rel="alternate" hreflang="x-default" href="https://jbone.cn/<%- page.path %>">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="<%- page.title ? page.title + ' — ' : '' %>Vue.js">
-    <meta property="og:description" content="<%- theme.site_description %>">
+    <meta property="og:title" content="<%- page.title ? page.title + ' — ' : '' %>Jbone">
+    <meta property="og:description" content="<%- page.description ? page.description : theme.site_description %>">
+    <meta property="og:keywords" content="<%- page.keywords ? page.keywords : theme.keywords %>">
+
     <meta property="og:image" content="https://<%- theme.root_domain %>/<%- url_for("/images/logo.png") %>">
 
     <link rel="icon" href="<%- url_for("/images/logo.png") %>" type="image/png">
