@@ -1,120 +1,14 @@
 (function () {
-  initHashLevelRedirects()
   initMobileMenu()
   initVideoModal()
   initNewNavLinks()
   if (PAGE_TYPE) {
-    initVersionSelect()
-    initApiSpecLinks()
     initSubHeaders()
     initLocationHashFuzzyMatching()
   }
 
-  // Most redirects should be specified in Hexo's
-  // _config.yml. However, it can't handle hash-level
-  // redirects, such as:
-  //
-  // /foo#hello -> /bar#hello
-  //
-  // For these cases where a section on one page has
-  // moved to a perhaps differently-named section on
-  // another page, we need this.
-  function initHashLevelRedirects() {
-    checkForHashRedirect(/list\.html$/, {
-      key: '/v2/guide/list.html#维护状态'
-    })
-    checkForHashRedirect(/components\.html$/, {
-      '什么是组件？': '/v2/guide/components.html',
-      '使用组件': '/v2/guide/components-registration.html',
-      '全局注册': '/v2/guide/components-registration.html#全局注册',
-      '局部注册': '/v2/guide/components-registration.html#局部注册',
-      'DOM-模板解析注意事项': '/v2/guide/components.html#解析-DOM-模板时的注意事项',
-      'DOM-模板解析说明': '/v2/guide/components.html#解析-DOM-模板时的注意事项',
-      'data-必须是函数': '/v2/guide/components.html#data-必须是一个函数',
-      '组件组合': '/v2/guide/components.html#组件的组织',
-      'Prop': '/v2/guide/components.html#通过-Prop-向子组件传递数据',
-      'Props': '/v2/guide/components.html#通过-Prop-向子组件传递数据',
-      '使用-Prop-传递数据': '/v2/guide/components.html#通过-Prop-向子组件传递数据',
-      'camelCase-vs-kebab-case': '/v2/guide/components-props.html#Prop-的大小写-camelCase-vs-kebab-case',
-      '动态-Prop': '/v2/guide/components-props.html#静态的和动态的-Prop',
-      '字面量语法-vs-动态语法': '/v2/guide/components-props.html#静态的和动态的-Prop',
-      '单向数据流': '/v2/guide/components-props.html#单向数据流',
-      'Prop-验证': '/v2/guide/components-props.html#Prop-验证',
-      '非-Prop-特性': '/v2/guide/components-props.html#非-Prop-的特性',
-      '替换-合并现有的特性': '/v2/guide/components-props.html#替换-合并已有的特性',
-      '自定义事件': '/v2/guide/components.html#监听子组件事件',
-      '使用-v-on-绑定自定义事件': '/v2/guide/components.html#监听子组件事件',
-      '给组件绑定原生事件': '/v2/guide/components-custom-events.html#将原生事件绑定到组件',
-      'sync-修饰符': '/v2/guide/components-custom-events.html#sync-修饰符',
-      '使用自定义事件的表单输入组件': '/v2/guide/components-custom-events.html#将原生事件绑定到组件',
-      '自定义组件的-v-model': '/v2/guide/components-custom-events.html#自定义组件的-v-model',
-      '在组件上使用-v-model': '/v2/guide/components-custom-events.html#自定义组件的-v-model',
-      '非父子组件的通信': '/v2/guide/state-management.html',
-      '使用插槽分发内容': '/v2/guide/components.html#通过插槽分发内容',
-      '编译作用域': '/v2/guide/components-slots.html#编译作用域',
-      '单个插槽': '/v2/guide/components-slots.html#插槽内容',
-      '具名插槽': '/v2/guide/components-slots.html#具名插槽',
-      '作用域插槽': '/v2/guide/components-slots.html#作用域插槽',
-      '动态组件': '/v2/guide/components.html#动态组件',
-      'keep-alive': '/v2/guide/components-dynamic-async.html#在动态组件上使用-keep-alive',
-      '杂项': '/v2/guide/components-edge-cases.html',
-      '编写可复用组件': '/v2/guide/components.html#组件的组织',
-      '子组件引用': '/v2/guide/components-edge-cases.html#访问子组件实例或子元素',
-      '子组件索引': '/v2/guide/components-edge-cases.html#访问子组件实例或子元素',
-      '异步组件': '/v2/guide/components-dynamic-async.html#异步组件',
-      '高级异步组件': '/v2/guide/components-dynamic-async.html#处理加载状态',
-      '组件命名约定': '/v2/guide/components-registration.html#组件名',
-      '递归组件': '/v2/guide/components-edge-cases.html#递归组件',
-      '组件间的循环引用': '/v2/guide/components-edge-cases.html#组件之间的循环引用',
-      '内联模板': '/v2/guide/components-edge-cases.html#内联模板',
-      'X-Templates': '/v2/guide/components-edge-cases.html#X-Templates',
-      '对低开销的静态组件使用-v-once': '/v2/guide/components-edge-cases.html#通过-v-once-创建低开销的静态组件'
-    })
-    function checkForHashRedirect(pageRegex, redirects) {
-      // Abort if the current page doesn't match the page regex
-      if (!pageRegex.test(window.location.pathname)) return
 
-      var redirectPath = redirects[decodeURIComponent(window.location.hash.slice(1))]
-      if (redirectPath) {
-        window.location.href = window.location.origin + redirectPath
-      }
-    }
-  }
 
-  function initApiSpecLinks () {
-    var apiContent = document.querySelector('.content.api')
-    if (apiContent) {
-      var apiTitles = [].slice.call(apiContent.querySelectorAll('h3'))
-      apiTitles.forEach(function (titleNode) {
-        var methodMatch = titleNode.textContent.match(/^([^(]+)\(/)
-        if (methodMatch) {
-          var idWithoutArguments = slugize(methodMatch[1])
-          titleNode.setAttribute('id', idWithoutArguments)
-          titleNode.querySelector('a').setAttribute('href', '#' + idWithoutArguments)
-        }
-
-        var ulNode = titleNode.parentNode.nextSibling
-        if (ulNode.tagName !== 'UL') {
-          ulNode = ulNode.nextSibling
-          if (!ulNode) return
-        }
-        if (ulNode.tagName === 'UL') {
-          var specNode = document.createElement('li')
-          var specLink = createSourceSearchPath(titleNode.textContent)
-          specNode.innerHTML = '<a href="' + specLink + '" target="_blank" rel="noopener">源代码</a>'
-          ulNode.appendChild(specNode)
-        }
-      })
-    }
-
-    function createSourceSearchPath (query) {
-      query = query
-        .replace(/\([^\)]*?\)/g, '')
-        .replace(/(Vue\.)(\w+)/g, '$1$2" OR "$2')
-        .replace(/vm\./g, 'Vue.prototype.')
-      return 'https://github.com/search?utf8=%E2%9C%93&q=repo%3Avuejs%2Fvue+extension%3Ajs+' + encodeURIComponent('"' + query + '"') + '&type=Code'
-    }
-  }
 
   function parseRawHash (hash) {
     // Remove leading hash
@@ -295,25 +189,7 @@
     })
   }
 
-  /**
-   * Doc version select
-   */
 
-  function initVersionSelect () {
-    // version select
-    var versionSelect = document.querySelector('.version-select')
-    versionSelect && versionSelect.addEventListener('change', function (e) {
-      var version = e.target.value
-      var section = window.location.pathname.match(/\/v\d\/(\w+?)\//)[1]
-      if (version === 'SELF') return
-      window.location.assign(
-        'https://' +
-        version +
-        (version && '.') +
-        'vuejs.org/' + section + '/'
-      )
-    })
-  }
 
   /**
    * Sub headers in sidebar
