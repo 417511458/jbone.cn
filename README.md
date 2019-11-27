@@ -1,6 +1,6 @@
 ## jbone.cn
 
-本项目是 [jbone.cn](http://jbone.cn) 的官网源码。基于[Hexo](https://hexo.io/) + [Github Pages](https://pages.github.com/) + [Netlify](https://www.netlify.com/)构建。
+本项目是 [jbone.cn](http://jbone.cn) 项目网站源码。基于[Hexo](https://hexo.io/) + [Github Pages](https://pages.github.com/) + [Netlify](https://www.netlify.com/)构建。
 
 ## 构建
 
