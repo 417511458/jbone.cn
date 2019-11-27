@@ -1,0 +1,405 @@
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>介绍 — Jbone</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Jbone - Spring Cloud综合应用实践和基础开发框架">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/guide/index.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="介绍 — Vue.js">
+    <meta property="og:description" content="Jbone - Spring Cloud综合应用实践和基础开发框架">
+    <meta property="og:image" content="https://jbone.cn//jbone.cn/images/logo.png">
+
+    <link rel="icon" href="/jbone.cn/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+
+
+    <!-- <link href="https://fonts.googleapis.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin> -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com" rel="preconnect" crossorigin> -->
+
+    <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+
+    <link href="//code.bdstatic.com/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/jbone.cn/css/page.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script src="/jbone.cn/js/vue.js"></script>
+
+    
+
+    <script>
+      Vue.config.productionTip = false
+      window.PAGE_TYPE = "guide"
+    </script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-46852172-3', 'jbone.cn');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" >
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/jbone.cn/">
+    <img src="/jbone.cn/images/logo.png" alt="vue logo">
+    <span>Jbone</span>
+  </a>
+  <ul id="nav">
+    <!--
+<li>
+  <form id="search-form">
+    <input type="text" id="search-query-nav" class="search-query st-default-search-input" aria-label="搜索">
+  </form>
+</li>
+-->
+<!--
+<li class="nav-dropdown-container learn">
+  <a class="nav-link">学习</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="/jbone.cn/lean/cas/" class="nav-link">CAS</a></li>
+    <li><a href="/jbone.cn/lean/spring-cloud/" class="nav-link">Spring Cloud</a></li>
+  </ul>
+</li>
+
+-->
+<li class="nav-dropdown-container ecosystem">
+  <a class="nav-link">生态系统</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="/jbone.cn/sso/" class="nav-link">单点登录</a></li>
+    <!--
+    <li><a href="/jbone.cn/service-management/" class="nav-link">服务治理</a></li>
+    <li><a href="/jbone.cn/file-system/" class="nav-link">文件系统</a></li>
+    <li><a href="/jbone.cn/system/" class="nav-link">权限管理</a></li>
+    <li><a href="/jbone.cn/cms/" class="nav-link">CMS</a></li>
+    -->
+  </ul>
+</li>
+
+
+<li><a href="/jbone.cn/support-jbone/" target="_blank" class="nav-link contribute">支持jbone</a></li>
+
+  </ul>
+</div>
+
+    
+      <div id="main" class="fix-sidebar">
+        
+          
+  
+
+<div class="sidebar">
+  <div class="sidebar-inner">
+    
+    <div class="list">
+      
+        <h2>
+          
+          教程
+        </h2>
+        <ul class="menu-root">
+  
+    
+    
+    <li>
+      <a href="/jbone.cn/guide/index.html" class="sidebar-link current">介绍</a>
+    </li>
+  
+</ul>
+
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="content guide with-sidebar index-guide">
+  
+    
+      
+<div id="ad">
+
+</div>
+
+
+    
+  
+  
+    <h1>介绍</h1>
+  
+<!--
+  <div class="ad-pagetop" style="display:hidden">
+</div>
+
+-->
+  
+    <p><img src="/images/logo-text.png" alt="Jbone logo"></p>
+<p>jbone是基于Spring Cloud开发的项目群，可作为微服务开发基础框架，也可用于Spring Cloud应用实践的学习交流。</p>
+<p><strong>功能架构图</strong></p>
+<p><img src="/images/features.png" alt="Jbone功能架构图"></p>
+<p><strong>项目成员</strong></p>
+<table>
+<thead>
+<tr>
+<th>项目名</th>
+<th>简介</th>
+<th>项目地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>jbone-sso</td>
+<td>单点登录模块</td>
+<td><a href="https://github.com/417511458/jbone-sso" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone-sso" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-service-management</td>
+<td>服务管理模块(包含注册中心、服务网关、服务监控、调用链追踪等)</td>
+<td><a href="https://github.com/417511458/jbone-service-management" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone-service-management" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-system</td>
+<td>系统管理模块,通用权限管理等</td>
+<td><a href="https://github.com/417511458/jbone-system" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone-system" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-fs</td>
+<td>文件系统，用于存储和管理文件、图片等</td>
+<td><a href="https://github.com/417511458/jbone-fs" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone-fs" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-cms</td>
+<td>多站点内容管理系统</td>
+<td><a href="https://github.com/417511458/jbone-cms" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone-cms" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-common</td>
+<td>公共模块，封装工具类等</td>
+<td><a href="https://github.com/417511458/jbone" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-banner</td>
+<td>jbone通用艺术banner</td>
+<td><a href="https://github.com/417511458/jbone" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-configuration</td>
+<td>公共配置模块</td>
+<td><a href="https://github.com/417511458/jbone" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-ui</td>
+<td>以webjars形式管理前端静态资源，所有包含页面的工程需要依赖此模块。</td>
+<td><a href="https://github.com/417511458/jbone" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-b2b2c</td>
+<td>多店铺电商平台 (未完成)</td>
+<td><a href="https://github.com/417511458/jbone-b2b2c" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone-b2b2c" target="_blank" rel="noopener">码云</a></td>
+</tr>
+<tr>
+<td>jbone-bpm</td>
+<td>工作流模块(未完成)</td>
+<td><a href="https://github.com/417511458/jbone-bpm" target="_blank" rel="noopener">github</a> , <a href="https://gitee.com/majunwei2017/jbone-bpm" target="_blank" rel="noopener">码云</a></td>
+</tr>
+</tbody></table>
+<h1 id="交流方式"><a href="#交流方式" class="headerlink" title="交流方式"></a>交流方式</h1><p><a href="http://jbone.cn" target="_blank" rel="noopener">项目官网</a></p>
+<p>QQ群：992113778（2群）、547104190（1群）</p>
+<p>公众号：writebugs</p>
+<p>作者QQ：417511458</p>
+<p>作者微信：dreamming_now</p>
+<p>微信群：先添加作者好友再加入</p>
+<h1 id="系统简介"><a href="#系统简介" class="headerlink" title="系统简介"></a>系统简介</h1><h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p><strong>JDK11+</strong></p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><table>
+<thead>
+<tr>
+<th>技术</th>
+<th>简介</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Spring Boot</td>
+<td>基础构建框架，用于快速整合各资源</td>
+<td><a href="https://projects.spring.io/spring-boot/" target="_blank" rel="noopener">https://projects.spring.io/spring-boot/</a></td>
+</tr>
+<tr>
+<td>Spring Framework</td>
+<td>底层容器</td>
+<td><a href="https://projects.spring.io/spring-framework/" target="_blank" rel="noopener">https://projects.spring.io/spring-framework/</a></td>
+</tr>
+<tr>
+<td>Spring Cloud</td>
+<td>微服务框架</td>
+<td><a href="https://projects.spring.io/spring-cloud/" target="_blank" rel="noopener">https://projects.spring.io/spring-cloud/</a></td>
+</tr>
+<tr>
+<td>Spring Cloud Eureka</td>
+<td>服务注册中心</td>
+<td><a href="https://projects.spring.io/spring-cloud/" target="_blank" rel="noopener">https://projects.spring.io/spring-cloud/</a></td>
+</tr>
+<tr>
+<td>Spring Cloud Zuul</td>
+<td>服务网关</td>
+<td><a href="https://projects.spring.io/spring-cloud/" target="_blank" rel="noopener">https://projects.spring.io/spring-cloud/</a></td>
+</tr>
+<tr>
+<td>Spring Cloud Hystrix</td>
+<td>服务容错框架</td>
+<td><a href="https://projects.spring.io/spring-cloud/" target="_blank" rel="noopener">https://projects.spring.io/spring-cloud/</a></td>
+</tr>
+<tr>
+<td>Spring Cloud Feign</td>
+<td>微服务声明式调用框架</td>
+<td><a href="https://projects.spring.io/spring-cloud/" target="_blank" rel="noopener">https://projects.spring.io/spring-cloud/</a></td>
+</tr>
+<tr>
+<td>Spring Boot Admin</td>
+<td>服务管理中心</td>
+<td><a href="https://github.com/codecentric/spring-boot-admin" target="_blank" rel="noopener">https://github.com/codecentric/spring-boot-admin</a></td>
+</tr>
+<tr>
+<td>Spring Data Jpa</td>
+<td>持久化框架</td>
+<td><a href="https://projects.spring.io/spring-data-jpa/" target="_blank" rel="noopener">https://projects.spring.io/spring-data-jpa/</a></td>
+</tr>
+<tr>
+<td>Spring Data Redis</td>
+<td>缓存框架</td>
+<td><a href="https://projects.spring.io/spring-data-redis/" target="_blank" rel="noopener">https://projects.spring.io/spring-data-redis/</a></td>
+</tr>
+<tr>
+<td>Apache Shiro</td>
+<td>权限框架</td>
+<td><a href="http://shiro.apache.org/" target="_blank" rel="noopener">http://shiro.apache.org/</a></td>
+</tr>
+<tr>
+<td>thymeleaf-extras-shiro</td>
+<td>thymeleaf的shiro标签</td>
+<td><a href="https://github.com/theborakompanioni/thymeleaf-extras-shiro" target="_blank" rel="noopener">https://github.com/theborakompanioni/thymeleaf-extras-shiro</a></td>
+</tr>
+<tr>
+<td>Apereo CAS</td>
+<td>单点登陆框架</td>
+<td><a href="https://github.com/apereo/cas" target="_blank" rel="noopener">https://github.com/apereo/cas</a></td>
+</tr>
+<tr>
+<td>Spring Validator</td>
+<td>后端验证框架</td>
+<td><a href="https://projects.spring.io/spring-framework/" target="_blank" rel="noopener">https://projects.spring.io/spring-framework/</a></td>
+</tr>
+<tr>
+<td>Hibernate Validator</td>
+<td>Hibernate验证框架</td>
+<td><a href="http://hibernate.org/" target="_blank" rel="noopener">http://hibernate.org/</a></td>
+</tr>
+<tr>
+<td>lombok</td>
+<td>一个通过注解自动生成get/set方法的类库</td>
+<td><a href="https://projectlombok.org/" target="_blank" rel="noopener">https://projectlombok.org/</a></td>
+</tr>
+<tr>
+<td>webjars</td>
+<td>以jars的形式管理前端静态资源</td>
+<td><a href="http://www.webjars.org/" target="_blank" rel="noopener">http://www.webjars.org/</a></td>
+</tr>
+<tr>
+<td>Thymeleaf</td>
+<td>模板引擎</td>
+<td><a href="http://www.thymeleaf.org/" target="_blank" rel="noopener">http://www.thymeleaf.org/</a></td>
+</tr>
+<tr>
+<td>Maven</td>
+<td>项目构建管理</td>
+<td><a href="http://maven.apache.org/" target="_blank" rel="noopener">http://maven.apache.org/</a></td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>分布式缓存数据库</td>
+<td><a href="https://redis.io/" target="_blank" rel="noopener">https://redis.io/</a></td>
+</tr>
+<tr>
+<td>Mysql</td>
+<td>对象关系数据库</td>
+<td><a href="https://www.mysql.com/" target="_blank" rel="noopener">https://www.mysql.com/</a></td>
+</tr>
+</tbody></table>
+
+  
+  
+    <div class="guide-links">
+      
+      
+      
+      
+    </div>
+  
+  <div class="footer">
+      <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<div id="bsa-native"></div>
+</script>
+
+
+    发现错误？想参与编辑？
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/guide/index.md" rel="noopener" target="_blank">
+      在 GitHub 上编辑此页！
+    </a>
+  </div>
+</div>
+
+        
+      </div>
+      <script src="/jbone.cn/js/smooth-scroll.min.js"></script>
+    
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/jbone.cn/js/css.escape.js"></script>
+    <script src="/jbone.cn/js/common.js"></script>
+
+    <!-- search -->
+    <link href="//code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.css" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/jbone.cn/css/search.css">
+    <script src="//code.bdstatic.com/npm/docsearch.js@1.5.0/dist/cdn/docsearch.min.js"></script>
+    <script>
+    [
+      '#search-query-nav',
+      '#search-query-sidebar',
+      '#search-query-menu'
+    ].forEach(function (selector) {
+      if (!document.querySelector(selector)) return
+      // search index defaults to v2
+      var match = window.location.pathname.match(/^\/(v\d+)/)
+      var version = match ? match[1] : 'v2'
+      docsearch({
+      appId: 'BH4D9OD16A',
+      apiKey: '5638280abff9d207417bb03be05f0b25',
+      indexName: 'vuejs_cn2',
+      inputSelector: selector,
+      algoliaOptions: { facetFilters: ["version:" + version] },
+      autocompleteOptions: { hint: false, appendTo: 'body'}
+      })
+    })
+    </script>
+  </body>
+</html>
