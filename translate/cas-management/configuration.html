@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>单点登录 — Jbone</title>
+    <title>配置 — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/sso/base-sso.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/cas-management/configuration.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="单点登录 — Jbone">
-    <meta property="og:description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
-    <meta property="og:keywords" content="jbone,Spring Cloud,sso,微服务">
+    <meta property="og:title" content="配置 — Jbone">
+    <meta property="og:description" content="CAS后台管理系统配置">
+    <meta property="og:keywords" content="CAS management,CAS管理">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -45,7 +45,7 @@
 
     <script>
       Vue.config.productionTip = false
-      window.PAGE_TYPE = "sso"
+      window.PAGE_TYPE = "translate-cas-management"
     </script>
 
     <!-- 百度统计 -->
@@ -132,252 +132,14 @@
   
     
     
-      
-        <li><h3>基础</h3></li>
-      
-      
-      
-      
-      
-      
-
-    
     <li>
-      <a href="/sso/base-installation.html" class="sidebar-link">安装</a>
+      <a href="/translate/cas-management/configuration.html" class="sidebar-link current">配置</a>
     </li>
   
     
     
-      
-      
-      
-      
-      
-      
-
-    
     <li>
-      <a href="/sso/index.html" class="sidebar-link">介绍</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/base-sso.html" class="sidebar-link current">单点登录</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/base-slo.html" class="sidebar-link">单点登出</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/base-forget-passowrd.html" class="sidebar-link">忘记密码</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-        <li><h3>客户端</h3></li>
-      
-      
-
-    
-    <li>
-      <a href="/sso/client-mvc.html" class="sidebar-link">Java MVC</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/client-vue.html" class="sidebar-link">Vue</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/client-js.html" class="sidebar-link">JavaScript</a>
-    </li>
-  
-    
-    
-      
-      
-        <li><h3>第三方账号登录</h3></li>
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/third-party-github.html" class="sidebar-link">GITHUB</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/third-party-paychat.html" class="sidebar-link">微信</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/third-party-qq.html" class="sidebar-link">QQ</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/third-party-csdn.html" class="sidebar-link">CSDN</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-        <li><h3>服务治理</h3></li>
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/service-management-register.html" class="sidebar-link">服务注册与发现</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/service-management-monitor.html" class="sidebar-link">服务监控</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-        <li><h3>后台管理系统</h3></li>
-      
-
-    
-    <li>
-      <a href="/sso/management-service.html" class="sidebar-link">服务管理</a>
-    </li>
-  
-    
-    
-      
-      
-      
-        <li><h3>自定义</h3></li>
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/custom-exception.html" class="sidebar-link">自定义登录异常提示</a>
-    </li>
-  
-    
-    
-      
-      
-      
-      
-      
-      
-
-    
-    <li>
-      <a href="/sso/custom-theme.html" class="sidebar-link">自定义皮肤</a>
+      <a href="/translate/cas-management/index.html" class="sidebar-link">安装</a>
     </li>
   
 </ul>
@@ -388,7 +150,7 @@
 </div>
 
 
-<div class="content sso with-sidebar ">
+<div class="content translate-cas-management with-sidebar ">
   
     
       
@@ -400,7 +162,7 @@
     
   
   
-    <h1>单点登录</h1>
+    <h1>配置</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -418,7 +180,7 @@
 
 
     发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/sso/base-sso.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/cas-management/configuration.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
