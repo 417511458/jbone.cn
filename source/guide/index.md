@@ -21,6 +21,7 @@ jbone是基于Spring Cloud开发的项目群，可作为微服务开发基础框
 jbone-sso | 单点登录模块 | [github](https://github.com/417511458/jbone-sso) , [码云](https://gitee.com/majunwei2017/jbone-sso)
 jbone-service-management | 服务管理模块(包含注册中心、服务网关、服务监控、调用链追踪等)  |  [github](https://github.com/417511458/jbone-service-management) , [码云](https://gitee.com/majunwei2017/jbone-service-management)
 jbone-system | 系统管理模块,通用权限管理等 | [github](https://github.com/417511458/jbone-system) , [码云](https://gitee.com/majunwei2017/jbone-system)
+jbone-system-admin | 系统管理后台 | [github](https://github.com/417511458/jbone-system-admin) , [码云](https://gitee.com/majunwei2017/jbone-system-admin)
 jbone-fs | 文件系统，用于存储和管理文件、图片等 | [github](https://github.com/417511458/jbone-fs) , [码云](https://gitee.com/majunwei2017/jbone-fs)
 jbone-cms | 多站点内容管理系统 | [github](https://github.com/417511458/jbone-cms) , [码云](https://gitee.com/majunwei2017/jbone-cms)
 jbone-common | 公共模块，封装工具类等 | [github](https://github.com/417511458/jbone) , [码云](https://gitee.com/majunwei2017/jbone)
@@ -75,3 +76,4 @@ Thymeleaf | 模板引擎  | [http://www.thymeleaf.org/](http://www.thymeleaf.org
 Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org/)
 Redis | 分布式缓存数据库 | [https://redis.io/](https://redis.io/)
 Mysql | 对象关系数据库 | [https://www.mysql.com/](https://www.mysql.com/)
+
