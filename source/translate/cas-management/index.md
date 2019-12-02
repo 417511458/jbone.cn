@@ -11,9 +11,7 @@ description: CAS后台管理系统安装
 CAS web管理系统不再是CAS server的一部分了，而是一个独立的内置Apache Tomcat容器的Spring Boot web应用。
 
 CAS web管理系统是一个可以完全独立于CAS，部署在不同环境上的管理界面。它可让CAS管理员和应用负责人委托访问，管理和修改应用的策略。CAS server本身的操作能力和CAS web管理系统部署状态无关；你可以在任意指定的时间下线维护应用或彻底删除。
-
-> 同步配置
-> 切记：所有应用（CAS server和CAS web管理系统）必须使用相同的服务注册表配置来管理CAS服务。
+<p class="tip"> **同步配置**  <br>切记：所有应用（CAS server和CAS web管理系统）必须使用相同的服务注册表配置来管理CAS服务。</p>
 
 注意对于某些类型的服务注册表的后端存储，需要部署web管理系统，因为它可作为处理后端存储的CRUD操作界面。如果没有web管理系统，你要找到替代的工具手动管理注册表的后端存储。
 
@@ -105,6 +103,7 @@ mgmt.syncScript=/etc/cas/sync.sh
 * MFA提供者类型
 * 委托的身份验证客户端类型
 * 可用的发布属性
+
 这将把选项列表缩小到您当前配置的CAS部署所支持的范围。
 如果`status/discovery`端点没有启用或者webapp不能成功连接到这个端点，那么不管当前的部署是否支持，表单数据都会在CAS中的默认展示所有可用选项。
 
@@ -115,5 +114,11 @@ cas.authn.attributeRepository.stub.attributes.uid=uid
 cas.authn.attributeRepository.stub.attributes.givenName=givenName
 cas.authn.attributeRepository.stub.attributes.eppn=eppn
 ```
+## 认证
+可以配置管理webapp的以下访问策略：
+### CAS服务
+CAS web管理系统的身份认证可以配置为CAS服务。要激活此模式，只需要在配置里指定CAS服务地址即可。若要禁用此模式，只需要将CAS服务地址设置为空即可。
+如果使用此策略，则可以进一步通过授权概述策略来控制访问策略规则。
+相关CAS属性配置，[请看这里](configuration.html)。
 
 
