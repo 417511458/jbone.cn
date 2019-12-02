@@ -212,6 +212,24 @@
 <h3 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h3><p>当webapp未启用版本控制时，对服务做的修改将会立即存入配置的注册表存储中，并且所有使用相同注册表的CAS节点都会立即捕捉到这些修改。<br>启用版本控制后，对服务修改将会在注册表中标记为<code>&quot;working change&quot;</code>。你可以通过导航到<code>Working changes</code>视图中查看<code>working changes</code>集合。当<code>working changes</code>展示后，就会点亮屏幕内容部分右上角的<code>Commit</code>选项。<br>点击<code>Commit</code>会打开个对话框展示将要提交的<code>working changes</code>。你必须输入提交信息才能完成提交。<br>这使你可以在单条提交记录中对相关更改进行分组，并在存储库里为它们提供有意义的信息。</p>
 <h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>把更改提交到存储库中后，将会在控制栏中出现<code>Publish</code>选项。选择<code>publish</code>会打开一个对话框展示关于发布到注册表存储库中的提交记录，并让你确认这是你想要采取的操作。此时，成功发布后，所有运行中的CAS节点都可以使用这些更改。</p>
 <h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>启用版本控制后，所有对服务的更改都可以在存储库日志中追踪到。你可以在<code>History</code>视图中查看所有存储到存储库中的提交记录。选择一个提交记录将会展示服务集合，以及与之对应的更改类型（<code>ADD</code>,<code>MODIFY</code>,<code>DELETE</code>）。<br>从<code>repository history</code>视图中，你可以将注册表恢复到任意一个提交记录。这首先作为<code>Working Change</code>完成，然后你就可以<code>Commit</code>和<code>Publish</code>。此外，可以使用服务个体菜单中的<code>“History”</code>选项从历史中的任何点恢复单个服务。<br>你还可以在服务上执行<code>diffs</code>，比较当前服务于与之前任意版本之间的更改。</p>
+<h2 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h2><p>有个配置项可以将webapp服务的注册表存储库配置到本地。常用选项是使用<code>JsonServiceRegistry</code>将本地注册表数据持久化到webapp服务。</p>
+<pre><code class="hljs properties"><span class="hljs-meta">cas.serviceRegistry.json.location</span>=<span class="hljs-string">file:/etc/cas/services</span></code></pre>
+<p>然后，可以在配置中设置在webapp服务运行期间可执行执行的<code>同步脚本</code>。</p>
+<pre><code class="hljs properties"><span class="hljs-meta">mgmt.syncScript</span>=<span class="hljs-string">/etc/cas/sync.sh</span></code></pre>
+<p>然后，这个脚本可以使用<code>rsync</code>或任何其他方式将服务注册表同步到CAS节点。<br>设置<code>同步脚本</code>后，会在webapp导航中添加一个<code>Synchronize</code>选项，点击这个选项就会执行同步脚本。如果启用了版本控制，这个脚本还会在<code>发布</code>更改时由服务器执行。<br>同步脚本需要返回<code>0</code>表示执行成功，以及任意大于<code>0</code>的数字表示发生异常。</p>
+<h2 id="表单数据"><a href="#表单数据" class="headerlink" title="表单数据"></a>表单数据</h2><p>在启动时，webapp会尝试连接配置的CAS服务的<code>status/discovery</code>端点。如果成功，从这个端点获取的数据将会用于填充表单中的以下字段选项：</p>
+<ul>
+<li>注册服务类型</li>
+<li>MFA提供者类型</li>
+<li>委托的身份验证客户端类型</li>
+<li>可用的发布属性<br>这将把选项列表缩小到您当前配置的CAS部署所支持的范围。<br>如果<code>status/discovery</code>端点没有启用或者webapp不能成功连接到这个端点，那么不管当前的部署是否支持，表单数据都会在CAS中的默认展示所有可用选项。</li>
+</ul>
+<h3 id="可用属性"><a href="#可用属性" class="headerlink" title="可用属性"></a>可用属性</h3><p>如果你不能使用<code>status/discovery</code>端点来填充发布中的可用属性列表，你可以在配置中定义StubAttributeRepository来手动设置。</p>
+<pre><code class="hljs properties"><span class="hljs-meta">cas.authn.attributeRepository.stub.attributes.uid</span>=<span class="hljs-string">uid</span>
+<span class="hljs-meta">cas.authn.attributeRepository.stub.attributes.givenName</span>=<span class="hljs-string">givenName</span>
+<span class="hljs-meta">cas.authn.attributeRepository.stub.attributes.eppn</span>=<span class="hljs-string">eppn</span></code></pre>
+
+
 
   
   
