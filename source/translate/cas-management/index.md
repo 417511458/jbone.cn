@@ -86,6 +86,34 @@ webapp必须要有`servicesRepo`目录的读写权限。版本控制是通过在
 从`repository history`视图中，你可以将注册表恢复到任意一个提交记录。这首先作为`Working Change`完成，然后你就可以`Commit`和`Publish`。此外，可以使用服务个体菜单中的`“History”`选项从历史中的任何点恢复单个服务。
 你还可以在服务上执行`diffs`，比较当前服务于与之前任意版本之间的更改。
 
+## 同步脚本
+有个配置项可以将webapp服务的注册表存储库配置到本地。常用选项是使用`JsonServiceRegistry`将本地注册表数据持久化到webapp服务。
+```properties
+cas.serviceRegistry.json.location=file:/etc/cas/services
+```
+然后，可以在配置中设置在webapp服务运行期间可执行执行的`同步脚本`。
+```properties
+mgmt.syncScript=/etc/cas/sync.sh
+```
+然后，这个脚本可以使用`rsync`或任何其他方式将服务注册表同步到CAS节点。
+设置`同步脚本`后，会在webapp导航中添加一个`Synchronize`选项，点击这个选项就会执行同步脚本。如果启用了版本控制，这个脚本还会在`发布`更改时由服务器执行。
+同步脚本需要返回`0`表示执行成功，以及任意大于`0`的数字表示发生异常。
 
+## 表单数据
+在启动时，webapp会尝试连接配置的CAS服务的`status/discovery`端点。如果成功，从这个端点获取的数据将会用于填充表单中的以下字段选项：
+* 注册服务类型
+* MFA提供者类型
+* 委托的身份验证客户端类型
+* 可用的发布属性
+这将把选项列表缩小到您当前配置的CAS部署所支持的范围。
+如果`status/discovery`端点没有启用或者webapp不能成功连接到这个端点，那么不管当前的部署是否支持，表单数据都会在CAS中的默认展示所有可用选项。
+
+### 可用属性
+如果你不能使用`status/discovery`端点来填充发布中的可用属性列表，你可以在配置中定义StubAttributeRepository来手动设置。
+```properties
+cas.authn.attributeRepository.stub.attributes.uid=uid
+cas.authn.attributeRepository.stub.attributes.givenName=givenName
+cas.authn.attributeRepository.stub.attributes.eppn=eppn
+```
 
 
