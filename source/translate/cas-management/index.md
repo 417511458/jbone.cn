@@ -211,6 +211,62 @@ CAS web管理系统可配置为匿名访问，匿名访问时请求的IP要和�
 ### 属性
 或者，授权生成器检查CAS验证响应和登录主体的属性，如果属性名与配置中定义的`adminRoles`的值匹配，则允许访问。
 
+### LDAP
+还可以通过以下模式，查询LDAP服务器来直接控制对CAS web管理系统的访问。
+
+#### 分组
+授权框架将搜索用户所属的组。检索到的组和角色与CAS web管理系统配置进行比较，以查找匹配项(如`ROLE_ADMIN`)。
+
+#### 属性
+授权框架会检查分配给用户的属性，寻找预定义的角色属性与访问配置进行比较（如`ROLE_ADMIN`）。
+
+在WAR overlay模式下需要添加以下依赖来启用本功能的支持：
+
+```xml
+
+<dependency>
+  <groupId>org.apereo.cas</groupId>
+  <artifactId>cas-management-webapp-support-ldap</artifactId>
+  <version>${cas.version}</version>
+</dependency>
+
+```
+相关CAS属性配置，[请看这里](configuration.html)。
+
+### 自定义
+你还可以为CAS web管理系统设计自己的授权生成器：
+
+```java
+
+package org.apereo.cas.support;
+
+@Configuration("myConfiguration")
+@EnableConfigurationProperties(CasConfigurationProperties.class)
+public class MyConfiguration {
+
+ /**
+  * Decide how roles and permissions should be stuffed into the authenticated profile.
+  */
+  @Bean
+  public AuthorizationGenerator authorizationGenerator() {
+      ...
+  }
+
+ /**
+  * Decide the profile should be compared to the required rules for access.
+  */
+  @Bean
+  public Authorizer managementWebappAuthorizer() {
+      ...
+  }
+
+}
+
+```
+
+
+
+
 
 
 
