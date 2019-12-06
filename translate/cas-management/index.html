@@ -274,7 +274,7 @@
 <li>使用包含角色、权限等的授权规则填充profile。</li>
 <li>将profile与所要求的规则和权限进行比较。</li>
 </ul>
-<h3 id="静态用户列表"><a href="#静态用户列表" class="headerlink" title="静态用户列表"></a>静态用户列表</h3><h4 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h4><p>默认情况下，访问权限由一个静态用户列表限制，这些用户的凭据可以在单个属性文件中指定，该属性文件在运行时受到监视和监视，以进行更改并自动重新加载。文件的格式模仿了<code>Spring Security</code>，其中存放了访问web管理系统的授权用户列表，即:</p>
+<h3 id="静态用户集合"><a href="#静态用户集合" class="headerlink" title="静态用户集合"></a>静态用户集合</h3><h4 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h4><p>默认情况下，访问权限由一个静态用户列表限制，这些用户的凭据可以在单个属性文件中指定，该属性文件在运行时受到监视和监视，以进行更改并自动重新加载。文件的格式模仿了<code>Spring Security</code>，其中存放了访问web管理系统的授权用户列表，即:</p>
 <pre><code class="hljs properties"><span class="hljs-comment"># casuser=notused,ROLE_ADMIN</span></code></pre>
 
 <p>文件的格式如下：</p>
@@ -292,12 +292,7 @@
     <span class="hljs-attr">"permissions"</span> : [ <span class="hljs-string">"CAN_DO_XYZ"</span> ]
   &#125;
 &#125;</code></pre>
-
-
-
-
-
-
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>或者，授权生成器检查CAS验证响应和登录主体的属性，如果属性名与配置中定义的<code>adminRoles</code>的值匹配，则允许访问。</p>
 
   
   
