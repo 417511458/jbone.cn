@@ -293,6 +293,49 @@
   &#125;
 &#125;</code></pre>
 <h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>或者，授权生成器检查CAS验证响应和登录主体的属性，如果属性名与配置中定义的<code>adminRoles</code>的值匹配，则允许访问。</p>
+<h3 id="LDAP"><a href="#LDAP" class="headerlink" title="LDAP"></a>LDAP</h3><p>还可以通过以下模式，查询LDAP服务器来直接控制对CAS web管理系统的访问。</p>
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><p>授权框架将搜索用户所属的组。检索到的组和角色与CAS web管理系统配置进行比较，以查找匹配项(如<code>ROLE_ADMIN</code>)。</p>
+<h4 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h4><p>授权框架会检查分配给用户的属性，寻找预定义的角色属性与访问配置进行比较（如<code>ROLE_ADMIN</code>）。</p>
+<p>在WAR overlay模式下需要添加以下依赖来启用本功能的支持：</p>
+<pre><code class="hljs xml">
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apereo.cas<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>cas-management-webapp-support-ldap<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>$&#123;cas.version&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+<p>相关CAS属性配置，<a href="configuration.html">请看这里</a>。</p>
+<h3 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h3><p>你还可以为CAS web管理系统设计自己的授权生成器：</p>
+<pre><code class="hljs java">
+<span class="hljs-keyword">package</span> org.apereo.cas.support;
+
+<span class="hljs-meta">@Configuration</span>(<span class="hljs-string">"myConfiguration"</span>)
+<span class="hljs-meta">@EnableConfigurationProperties</span>(CasConfigurationProperties<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+<span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">MyConfiguration</span> </span>&#123;
+
+ <span class="hljs-comment">/**
+  * Decide how roles and permissions should be stuffed into the authenticated profile.
+  */</span>
+  <span class="hljs-meta">@Bean</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> AuthorizationGenerator <span class="hljs-title">authorizationGenerator</span><span class="hljs-params">()</span> </span>&#123;
+      ...
+  &#125;
+
+ <span class="hljs-comment">/**
+  * Decide the profile should be compared to the required rules for access.
+  */</span>
+  <span class="hljs-meta">@Bean</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Authorizer <span class="hljs-title">managementWebappAuthorizer</span><span class="hljs-params">()</span> </span>&#123;
+      ...
+  &#125;
+
+&#125;</code></pre>
+
+
+
+
+
+
+
 
   
   
