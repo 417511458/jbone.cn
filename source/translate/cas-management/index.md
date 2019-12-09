@@ -263,6 +263,34 @@ public class MyConfiguration {
 }
 
 ```
+## 委托管理
+CAS web管理系统中的委托管理特性，只在启用版本控制时可用（看上面）。委托管理通过以下配置启用：
+
+```properties
+mgmt.delegated.enabled=true
+mgmt.delegated.userReposDir=/etc/cas/user-repos
+```
+`userReposDir`必须是webapp有读写权限的地址。
+
+### 用户权限
+委托用户定义在`user.json`中，就像这样：
+```json
+{
+  "casuser" : {
+    "@class" : "org.apereo.cas.mgmt.authz.json.UserAuthorizationDefinition",
+    "roles" : [ "ROLE_USER" ],
+    "permissions" : [ "DOMAIN1", "DOMAIN2"]
+  }
+}
+```
+上面的定义表示`casuser`作为委托用户，它有权限查看/编辑属于'DOMAIN1'和'DOMAIN2'以及子域名的服务。设置权限为`*`，就是授予它们访问注册表中所有服务的权限，并将用户设置为委托管理员。
+
+### 提交变更
+当委托用户对服务作了变更，它们在克隆仓库中作为"Working Change"完成，可以在`management.properties`中配置的`userReposDir`地址里用户登录ID下找到。当工作变更时，内容视图中的控制栏就会点亮"Submit"选项。点击"Submit"会弹出一个对话框，并提示用户输入关于这次变更的"change message"。
+
+用户提交的变更会将working change提交到用户仓库里，并在管理员仓库里新建一个"pull"。
+
+用户从导航进入"Submit"视图，这里将会展示它们所有的"Submit"以及对应的状态（"Pending"、"Accepted"、"Rejected"）。
 
 
 
