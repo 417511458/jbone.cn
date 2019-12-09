@@ -329,13 +329,22 @@
   &#125;
 
 &#125;</code></pre>
-
-
-
-
-
-
-
+<h2 id="委托管理"><a href="#委托管理" class="headerlink" title="委托管理"></a>委托管理</h2><p>CAS web管理系统中的委托管理特性，只在启用版本控制时可用（看上面）。委托管理通过以下配置启用：</p>
+<pre><code class="hljs properties"><span class="hljs-meta">mgmt.delegated.enabled</span>=<span class="hljs-string">true</span>
+<span class="hljs-meta">mgmt.delegated.userReposDir</span>=<span class="hljs-string">/etc/cas/user-repos</span></code></pre>
+<p><code>userReposDir</code>必须是webapp有读写权限的地址。</p>
+<h3 id="用户权限"><a href="#用户权限" class="headerlink" title="用户权限"></a>用户权限</h3><p>委托用户定义在<code>user.json</code>中，就像这样：</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"casuser"</span> : &#123;
+    <span class="hljs-attr">"@class"</span> : <span class="hljs-string">"org.apereo.cas.mgmt.authz.json.UserAuthorizationDefinition"</span>,
+    <span class="hljs-attr">"roles"</span> : [ <span class="hljs-string">"ROLE_USER"</span> ],
+    <span class="hljs-attr">"permissions"</span> : [ <span class="hljs-string">"DOMAIN1"</span>, <span class="hljs-string">"DOMAIN2"</span>]
+  &#125;
+&#125;</code></pre>
+<p>上面的定义表示<code>casuser</code>作为委托用户，它有权限查看/编辑属于’DOMAIN1’和’DOMAIN2’以及子域名的服务。设置权限为<code>*</code>，就是授予它们访问注册表中所有服务的权限，并将用户设置为委托管理员。</p>
+<h3 id="提交变更"><a href="#提交变更" class="headerlink" title="提交变更"></a>提交变更</h3><p>当委托用户对服务作了变更，它们在克隆仓库中作为”Working Change”完成，可以在<code>management.properties</code>中配置的<code>userReposDir</code>地址里用户登录ID下找到。当工作变更时，内容视图中的控制栏就会点亮”Submit”选项。点击”Submit”会弹出一个对话框，并提示用户输入关于这次变更的”change message”。</p>
+<p>用户提交的变更会将working change提交到用户仓库里，并在管理员仓库里新建一个”pull”。</p>
+<p>用户从导航进入”Submit”视图，这里将会展示它们所有的”Submit”以及对应的状态（”Pending”、”Accepted”、”Rejected”）。</p>
 
   
   
