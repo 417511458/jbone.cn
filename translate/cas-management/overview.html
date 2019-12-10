@@ -179,19 +179,19 @@
   
     <p><a href="https://apereo.github.io/cas-management/5.3.x/installation/Installing-ServicesMgmt-Webapp.html" target="_blank" rel="noopener">官文地址</a></p>
 <h2 id="CAS-web管理系统"><a href="#CAS-web管理系统" class="headerlink" title="CAS web管理系统"></a>CAS web管理系统</h2><p>CAS web管理系统不再是CAS server的一部分了，而是一个独立的内置Apache Tomcat容器的Spring Boot web应用。</p>
-<p>CAS web管理系统是一个可以完全独立于CAS，部署在不同环境上的管理界面。它可让CAS管理员和应用负责人委托访问，管理和修改应用的策略。CAS server本身的操作能力和CAS web管理系统部署状态无关；你可以在任意指定的时间下线维护应用或彻底删除。</p>
-<p class="tip"> <b>同步配置</b>  <br>切记：所有应用（CAS server和CAS web管理系统）必须使用相同的服务注册表配置来管理CAS服务。</p>
+<p>CAS web管理系统是一个纯粹的管理界面，它可以完全独立于CAS，部署在不同环境上。它可让CAS管理员和应用负责人委托访问，管理和修改他们的应用策略。CAS server本身的操作能力和CAS web管理系统部署状态无关；你可以在任意指定的时间下线维护或彻底删除应用。</p>
+<p class="tip"> <b>同步配置</b>  <br>切记：所有应用（CAS server和CAS web管理系统）<b>必须</b>使用相同的服务注册中心配置来管理CAS服务。</p>
 
-<p>注意对于某些类型的服务注册表的后端存储，需要部署web管理系统，因为它可作为处理后端存储的CRUD操作界面。如果没有web管理系统，你要找到替代的工具手动管理注册表的后端存储。</p>
+<p>注意对于特定后端存储类型的服务注册中心，必须部署web管理系统，因为它充当处理后端存储的CRUD操作界面。如果没有web管理系统，意味着你要找到替代的工具手动管理注册中心的后端存储。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><p><a href="https://github.com/apereo/cas-services-management-overlay" target="_blank" rel="noopener">这里</a>提供了一个overlay的模板。</p>
 <h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p><a href="https://github.com/apereo/cas-services-management--gradle-overlay" target="_blank" rel="noopener">这里</a>提供了一个overlay的模板。</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>CAS配置属性列表，<a href="configuration.html">请看这里</a> </p>
-<h2 id="服务注册表"><a href="#服务注册表" class="headerlink" title="服务注册表"></a>服务注册表</h2><p>服务的持久化存储必须和CAS server的持久化存储相同。CAS server配置的相同的服务注册表组件，包括模块和配置，需要和web管理系统的配置完全相同。请注意，控制特定服务注册表的配置属于CAS server，且以<code>cas</code>开头。</p>
-<h2 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h2><p>CAS中的服务管理器是基于特定注册表之上的组件，并充当协调器。虽然每个注册表实例都和存储技术紧密相连，而服务管理器对这个存储技术完全无关，只与注册表相连，并可能充当缓存层。大多数情况下，这个组件的配置和行为对于CAS发布者是完全透明的。</p>
-<h2 id="Default-Vs-Domain"><a href="#Default-Vs-Domain" class="headerlink" title="Default Vs. Domain"></a>Default Vs. Domain</h2><p>CAS里有两种可用的服务管理器：默认选择和另一个域名友好的。可通过CAS的配置属性来决定和控制这个选择。两种形式的服务管理器都可以使用CAS服务注册表支持的存储层（JSON，YMAL，JDBC，MongoDb，LDAP等等）。它们的区别在于如何加载和应用服务注册表到进来的请求中。</p>
-<p>服务管理器的选择大多是一个偏好的决定。注册表的大小可能决定选择使用哪个。小于100个服务的较小注册表可以使用默认管理器，而考虑到顺序是可能影响行为的重要因素，成百上千个的服务让人望而生畏。</p>
-<h3 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h3><p>默认管理器以单一有序表的形式加载注册表。集合的顺序取决于注册服务的<code>evaluationOrder</code>字段。当决定哪个服务发起当前请求时，默认管理器从集合头部开始，并尝试将传递的<code>service</code>参数与注册服务的serviceId字段匹配。它会遍历整个集合直到找到第一个匹配性，并返回这个服务实例。如果遍历完没有找到匹配项，将会拒绝这个请求并提示用户：<code>不允许使用CAS来认证您访问的目标应用。</code></p>
-<p>在组合serviceId表达式时需要注意以下几点：</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>相关CAS配置属性列表，<a href="configuration.html">请看这里</a> </p>
+<h2 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h2><p>服务的持久化存储必须和CAS server的持久化存储相同。为CAS server配置的服务注册中心组件（包括模块和配置），需要和web管理系统的配置完全相同。请注意，控制特定服务注册中心的配置属于CAS server，且以<code>cas</code>开头。</p>
+<h2 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h2><p>CAS中的服务管理器是基于特定注册中心之上的组件，并充当协调器。虽然每个注册中心实例都和存储技术紧密相连，而服务管理器对这个存储技术完全无关，只与注册中心相连，并可能充当缓存层。大多数情况下，这个组件的配置和行为对于CAS发布者是完全透明的。</p>
+<h2 id="Default-Vs-Domain"><a href="#Default-Vs-Domain" class="headerlink" title="Default Vs. Domain"></a>Default Vs. Domain</h2><p>CAS里有两种可用的服务管理器：默认管理器和域名友好的管理器。可通过CAS的配置属性来决定和选择服务管理器。两种形式的服务管理器都可以使用CAS服务注册中心支持的存储层（JSON，YMAL，JDBC，MongoDb，LDAP等等）。它们的区别在于如何加载服务注册中心并将其应用于传进来的请求中。</p>
+<p>服务管理器的选择大多是一个偏好的决定。注册中心的大小可能决定选择使用哪个。小于100个服务的较小注册中心可以使用默认管理器，但是成百上千个的服务让人望而生畏，因为顺序是影响行为的重要因素。</p>
+<h3 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h3><p>默认管理器以单一有序表的形式加载注册中心。集合的顺序取决于注册服务的<code>evaluationOrder</code>字段。当决定哪个服务发起当前请求时，默认管理器从集合头部开始，并尝试将传递的<code>service</code>参数与注册服务的serviceId字段匹配。它会遍历整个集合直到找到第一个匹配项，并返回这个服务实例。如果遍历完没有找到匹配项，将会拒绝这个请求并提示用户：<code>不允许使用CAS来认证您访问的目标应用。</code></p>
+<p>在组合<code>serviceId</code>表达式时需要注意以下几点：</p>
 <ul>
 <li>必须是一个有效的Java正则表达式。</li>
 <li>域名分隔符<code>.</code>通常需要转义。如果域名中的<code>.</code>没有转义(<code>\.</code>)可能会得到意想不到的域名匹配。（译者注：<code>.</code>在正则表达式里表示匹配任意单字符）</li>
@@ -200,8 +200,8 @@
 <p class="tip"> 译者提示：<br>
  配置serviceId之前可以先使用Java正则表达式在本地匹配测试，以防匹配有误。</p>
 
-<h3 id="Domain"><a href="#Domain" class="headerlink" title="Domain"></a>Domain</h3><p>域管理器将服务加载到多个集合中，并把这些集合存储到set中，根据它们尝试匹配的域建立索引。</p>
-<p>管理器首先从请求的<code>service</code>参数里提取域。然后从该域索引的一组集合中查找，并像默认管理器那样应用这个小集合。有一个特殊的在加载服务后创建的<code>default</code>集合。这个集合包含一个可以匹配多个域的<code>serviceUrl</code>表达式。如果接收到的请求的域没有在域索引中匹配到，就会使用这个默认集合来处理请求。</p>
+<h3 id="Domain"><a href="#Domain" class="headerlink" title="Domain"></a>Domain</h3><p>Domain管理器将服务加载到多个集合中，并把这些集合存储到set中，根据它们尝试匹配的域建立索引。</p>
+<p>管理器首先从请求的<code>service</code>参数里提取域。然后从该域索引的列表中查找列表，并像默认管理器那样应用这个较小的列表。有一个在加载服务后创建的特殊的<code>default</code>集合。这个集合包含一个可以匹配多个域的<code>serviceUrl</code>表达式。如果接收到的请求的域没有在域索引中匹配到，就会使用这个默认集合来处理请求。</p>
 <p>像默认管理器一样有一些注意的点：</p>
 <ul>
 <li>必须是有效的Java正则表达式</li>
@@ -209,7 +209,7 @@
 <li>如果域中的<code>.</code>没有转义，可能会得到意想不到的域匹配</li>
 <li>如果<code>serviceId</code>只能匹配一个域，那么<code>.</code>就不需要转义。这条规则可以放宽，因为当查找域集合时，使用的是<code>equals expression</code>而不是<code>matching test</code>。这意味着只有这个域能与集合中的域匹配。（译者注：精确匹配）</li>
 </ul>
-<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p>注册表中的服务可以通过导航面板中的<code>Search</code>选项进行搜索。服务的全文检索通过<code>Apache Lucene</code>支持。在搜索结果页面上输入关键字点击<code>Search</code>执行搜索。数据展示出来后可以点击表格头部进行排序。高级搜索可以在这里通过<code>Lucene QueryParser</code>语法搜索。</p>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p>注册中心中的服务可以通过导航面板中的<code>Search</code>选项进入搜索。服务的全文检索通过<code>Apache Lucene</code>实现。在搜索结果页面上输入关键字点击<code>Search</code>执行搜索。数据展示出来后可以点击表格头部进行排序。还可以在这里通过<code>Lucene QueryParser</code>语法进行高级搜索。</p>
 <p>通常情况下，如果搜索时限定服务的特定字段，搜索将会执行的更快、结果更精确。</p>
 <p>json格式的服务中使用的<code>keys</code>可以用作查询中的字段名：</p>
 <pre><code class="hljs properties"><span class="hljs-attr">name</span>: <span class="hljs-string">Apereo</span></code></pre>
@@ -219,31 +219,31 @@
 
 <p>还可以使用组合查询：</p>
 <pre><code class="hljs properties"><span class="hljs-attr">name</span>: <span class="hljs-string">Apereo AND multifactorPolicy.bypassEnabled: true</span></code></pre>
-<h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><p>web管理系统可以对服务注册表的进行版本控制。启用版本控制请确认设置了以下配置：</p>
-<pre><code class="hljs properties"><span class="hljs-meta">mgmt.enableVersionControl</span>=<span class="hljs-string">true</span>
-<span class="hljs-meta">mgmt.servicesRepo</span>=<span class="hljs-string">/etc/cas/services-repo</span></code></pre>
-<p>webapp必须要有<code>servicesRepo</code>目录的读写权限。版本控制是通过在Git仓库中将注册表存储为json文件来处理的。webapp启动后，如果指定的仓库不存在，会从配置的注册表存储中创建仓库，</p>
+<h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><p>web管理系统可以对服务注册中心的进行版本控制。启用版本控制请确认设置了以下配置：</p>
+<pre><code class="hljs properties"><span class="hljs-meta">mgmt.versionControl.enabled</span>=<span class="hljs-string">truel</span>
+<span class="hljs-meta">mgmt.versionContros.ervicesRepo</span>=<span class="hljs-string">/etc/cas/services-repo</span></code></pre>
+<p>webapp必须要有<code>servicesRepo</code>目录的读写权限。版本控制是通过在Git仓库中将注册中心存储为json文件来处理的。webapp启动后，如果指定的仓库不存在，会从配置的注册中心存储中创建仓库，</p>
 <p>
-译者注：6.0.X版本已改成`mgmt.versionControl.enabled`
+译者注：原文有误，6.0.X版本已改成`mgmt.versionControl.enabled`
 </p>
 ### 提交
-当webapp未启用版本控制时，对服务做的修改将会立即存入配置的注册表存储中，并且所有使用相同注册表的CAS节点都会立即捕捉到这些修改。
+当webapp未启用版本控制时，对服务做的修改将会立即存入配置的注册中心存储中，并且所有使用相同注册中心的CAS节点都会立即捕捉到这些修改。
 
-<p>启用版本控制后，对服务修改将会在注册表中标记为<code>&quot;working change&quot;</code>。你可以通过导航到<code>Working changes</code>视图中查看<code>working changes</code>集合。当<code>working changes</code>展示后，就会点亮屏幕内容部分右上角的<code>Commit</code>选项。</p>
+<p>启用版本控制后，对服务修改将会在注册中心中标记为<code>&quot;working change&quot;</code>。你可以通过导航到<code>Working changes</code>视图中查看<code>working changes</code>集合。当<code>working changes</code>展示后，就会点亮屏幕内容部分右上角的<code>Commit</code>选项。</p>
 <p>点击<code>Commit</code>会打开个对话框展示将要提交的<code>working changes</code>。你必须输入提交信息才能完成提交。</p>
-<p>这使你可以在单条提交记录中对相关更改进行分组，并在存储库里为它们提供有意义的信息。</p>
-<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>把更改提交到存储库中后，将会在控制栏中出现<code>Publish</code>选项。选择<code>publish</code>会打开一个对话框展示关于发布到注册表存储库中的提交记录，并让你确认这是你想要采取的操作。此时，成功发布后，所有运行中的CAS节点都可以使用这些更改。</p>
+<p>这让你可以在单条提交记录中对相关更改进行分组，并在存储库里为它们提供有意义的信息。</p>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>把更改提交到存储库中后，将会在控制栏中出现<code>Publish</code>选项。选择<code>publish</code>会打开一个对话框展示关于发布到注册中心存储库中的提交记录，并让你确认这是你想要采取的操作。此时，成功发布后，所有运行中的CAS节点都可以使用这些更改。</p>
 <h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>启用版本控制后，所有对服务的更改都可以在存储库日志中追踪到。你可以在<code>History</code>视图中查看所有存储到存储库中的提交记录。选择一个提交记录将会展示服务集合，以及与之对应的更改类型（<code>ADD</code>,<code>MODIFY</code>,<code>DELETE</code>）。</p>
-<p>从<code>repository history</code>视图中，你可以将注册表恢复到任意一个提交记录。这首先作为<code>Working Change</code>完成，然后你就可以<code>Commit</code>和<code>Publish</code>。此外，可以使用服务个体菜单中的<code>“History”</code>选项从历史中的任何点恢复单个服务。</p>
+<p>从<code>repository history</code>视图中，你可以将注册中心恢复到任意一个提交记录。这首先作为<code>Working Change</code>完成，然后你就可以<code>Commit</code>和<code>Publish</code>。此外，可以使用服务个体菜单中的<code>“History”</code>选项从历史中的任何点恢复单个服务。</p>
 <p>你还可以在服务上执行<code>diffs</code>，比较当前服务于与之前任意版本之间的更改。</p>
-<h2 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h2><p>有个配置项可以将webapp服务的注册表存储库配置到本地。常用选项是使用<code>JsonServiceRegistry</code>将本地注册表数据持久化到webapp服务。</p>
+<h2 id="同步脚本"><a href="#同步脚本" class="headerlink" title="同步脚本"></a>同步脚本</h2><p>有个配置项可以将webapp服务的注册中心存储库配置到本地。常用选项是使用<code>JsonServiceRegistry</code>将本地注册中心数据持久化到webapp服务。</p>
 <pre><code class="hljs properties"><span class="hljs-meta">cas.serviceRegistry.json.location</span>=<span class="hljs-string">file:/etc/cas/services</span></code></pre>
 
 <p>然后，可以在配置中设置在webapp服务运行期间可执行执行的<code>同步脚本</code>。</p>
-<pre><code class="hljs properties"><span class="hljs-meta">mgmt.syncScript</span>=<span class="hljs-string">/etc/cas/sync.sh</span></code></pre>
+<pre><code class="hljs properties"><span class="hljs-meta">mgmt.versionControl.syncScript</span>=<span class="hljs-string">/etc/cas/sync.sh</span></code></pre>
 
-<p>然后，这个脚本可以使用<code>rsync</code>或任何其他方式将服务注册表同步到CAS节点。</p>
-<p>设置<code>同步脚本</code>后，会在webapp导航中添加一个<code>Synchronize</code>选项，点击这个选项就会执行同步脚本。如果启用了版本控制，这个脚本还会在<code>发布</code>更改时由服务器执行。</p>
+<p>然后，这个脚本可以使用<code>rsync</code>或任何其他方式将服务注册中心同步到CAS节点。</p>
+<p>设置<code>同步脚本</code>后，会在webapp导航中增加一个<code>Synchronize</code>选项，点击这个选项就会执行同步脚本。如果启用了版本控制，这个脚本还会在<code>发布</code>更改时由服务器执行。</p>
 <p>同步脚本需要返回<code>0</code>表示执行成功，以及任意大于<code>0</code>的数字表示发生异常。</p>
 <h2 id="表单数据"><a href="#表单数据" class="headerlink" title="表单数据"></a>表单数据</h2><p>在启动时，webapp会尝试连接配置的CAS服务的<code>status/discovery</code>端点。如果成功，从这个端点获取的数据将会用于填充表单中的以下字段选项：</p>
 <ul>
@@ -261,7 +261,7 @@
 
 <h2 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h2><p>可以配置管理webapp的以下访问策略：</p>
 <h3 id="CAS服务"><a href="#CAS服务" class="headerlink" title="CAS服务"></a>CAS服务</h3><p>CAS web管理系统的身份认证可以配置为CAS服务。要激活此模式，只需要在配置里指定CAS服务地址即可。若要禁用此模式，只需要将CAS服务地址设置为空即可。</p>
-<p>如果使用此策略，则可以进一步通过授权概述策略来控制访问策略规则。</p>
+<p>如果使用此策略，则可以进一步通过概述的授权策略来控制访问策略规则。</p>
 <p>相关CAS属性配置，<a href="configuration.html">请看这里</a>。</p>
 <h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p>CAS web管理系统可配置为匿名访问，匿名访问时请求的IP要和预定义的IP正则表达式匹配。若要禁用此策略，将CAS服务设置为空即可。如果使用此策略，因为解析的身份是简单的匿名用户，所以访问策略和授权规则都不再应用。</p>
 <p class="tip"> 注意：<br>
@@ -348,7 +348,7 @@
     <span class="hljs-attr">"permissions"</span> : [ <span class="hljs-string">"DOMAIN1"</span>, <span class="hljs-string">"DOMAIN2"</span>]
   &#125;
 &#125;</code></pre>
-<p>上面的定义表示<code>casuser</code>作为委托用户，它有权限查看/编辑属于’DOMAIN1’和’DOMAIN2’以及子域名的服务。设置权限为<code>*</code>，就是授予它们访问注册表中所有服务的权限，并将用户设置为委托管理员。</p>
+<p>上面的定义表示<code>casuser</code>作为委托用户，它有权限查看/编辑属于’DOMAIN1’和’DOMAIN2’以及子域名的服务。设置权限为<code>*</code>，就是授予它们访问注册中心中所有服务的权限，并将用户设置为委托管理员。</p>
 <h3 id="提交变更"><a href="#提交变更" class="headerlink" title="提交变更"></a>提交变更</h3><p>当委托用户对服务作了变更，它们在克隆仓库中作为”Working Change”完成，可以在<code>management.properties</code>中配置的<code>userReposDir</code>地址里用户登录ID下找到。当工作变更时，内容视图中的控制栏就会点亮”Submit”选项。点击”Submit”会弹出一个对话框，并提示用户输入关于这次变更的”change message”。</p>
 <p>用户提交的变更会将working change提交到用户仓库里，并在管理员仓库里新建一个”pull”。</p>
 <p>用户从导航进入”Submit”视图，这里将会展示它们所有的”Submit”以及对应的状态（”Pending”、”Accepted”、”Rejected”）。</p>
@@ -360,7 +360,7 @@
 <li><code>蓝色</code>：修改</li>
 <li><code>红色</code>：删除</li>
 </ul>
-<p>在变更的字段下面会有一个<code>restore</code>图标。点击这个图标会将这个字段变更为它在注册表中的当前值，以便进行比较。再次点击就会恢复到变更的值。</p>
+<p>在变更的字段下面会有一个<code>restore</code>图标。点击这个图标会将这个字段变更为它在注册中心中的当前值，以便进行比较。再次点击就会恢复到变更的值。</p>
 <p>查看变更之后，整个<code>pull</code>可以作为一个整体<code>接收</code>或<code>拒绝</code>。当<code>pull</code>被接受时，它会立即被提交到仓库，并在控制栏中点亮<code>Publish</code>选项。</p>
 <p>当拒绝<code>pull</code>时，你将有机会在拒绝对话框中列出拒绝更改的原因。<br>提交用户可以看到这个文本，并可以选择从他们的仓库中还原他们的<code>pull</code>，或者做出变更再次提交以供考虑。</p>
 <h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><p>如果在部署中定义了可用邮件服务器并设置了通知属性，则可以创建和发送电子邮件通知。</p>
@@ -390,7 +390,7 @@
 <span class="hljs-meta">mgmt.notifications.accept.subject</span>=<span class="hljs-string">Request &#123;0&#125; has been accepted</span>
 <span class="hljs-meta">mgmt.notifications.accept.cc</span>=<span class="hljs-string">admin-list@domain</span></code></pre>
 
-<p>每条消息的<code>subject</code>要有<code>{0}</code>参数。这个参数用于展示提交的ID。</p>
+<p>每条消息的<code>subject</code>要有<code>{0}</code>参数，用于展示提交的ID。</p>
 <p><code>accept</code>消息的<code>text</code>要有<code>{0}</code>参数，用于展示提交的ID。</p>
 <p><code>reject</code>消息的<code>text</code>要有<code>{0}</code>参数来展示提交的ID，以及<code>{1}</code>参数来展示管理员提供的拒绝原因。</p>
 <p>为了将邮件发送给提交用户，你要确保在登录webapp时CAS发布了<code>email</code>属性。</p>
