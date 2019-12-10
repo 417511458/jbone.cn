@@ -363,7 +363,38 @@
 <p>在变更的字段下面会有一个<code>restore</code>图标。点击这个图标会将这个字段变更为它在注册表中的当前值，以便进行比较。再次点击就会恢复到变更的值。</p>
 <p>查看变更之后，整个<code>pull</code>可以作为一个整体<code>接收</code>或<code>拒绝</code>。当<code>pull</code>被接受时，它会立即被提交到仓库，并在控制栏中点亮<code>Publish</code>选项。</p>
 <p>当拒绝<code>pull</code>时，你将有机会在拒绝对话框中列出拒绝更改的原因。<br>提交用户可以看到这个文本，并可以选择从他们的仓库中还原他们的<code>pull</code>，或者做出变更再次提交以供考虑。</p>
-<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3>
+<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><p>如果在部署中定义了可用邮件服务器并设置了通知属性，则可以创建和发送电子邮件通知。</p>
+<p>定义邮件服务器要添加以下配置：</p>
+<pre><code class="hljs properties"><span class="hljs-meta">spring.mail.host</span>=<span class="hljs-string">localhost</span>
+<span class="hljs-meta">spring.mail.port</span>=<span class="hljs-string">25</span>
+<span class="hljs-meta">spring.mail.username</span>=<span class="hljs-string"></span>
+<span class="hljs-meta">spring.mail.password</span>=<span class="hljs-string"></span>
+<span class="hljs-meta">spring.mail.testConnection</span>=<span class="hljs-string">false</span>
+<span class="hljs-meta">spring.mail.properties.mail.smtp.auth</span>=<span class="hljs-string">false</span>
+<span class="hljs-meta">spring.mail.properties.mail.smtp.starttls.enable</span>=<span class="hljs-string">false</span></code></pre>
+
+<p>只有在<code>management.properties</code>中定义了<code>提交pull</code>、<code>接受pull</code>和<code>拒绝pull</code>的文本后，才会发送电子邮件。</p>
+<pre><code class="hljs properties"><span class="hljs-meta">mgmt.notifications.submit.text</span>=<span class="hljs-string">Your submitted changes have been forwarded to a CAS Administrator for approval. You will be notified by email once again when your request has been processed.\n\nYou can review the status of this request through the CAS Management Appication by navigating to the "Submit Requests" screen.\n\n If you have further questions or require assistance, please contact help@domain.</span>
+<span class="hljs-meta">mgmt.notifications.submit.from</span>=<span class="hljs-string">casmanager@domain</span>
+<span class="hljs-meta">mgmt.notifications.submit.subject</span>=<span class="hljs-string">Request &#123;0&#125; has been submitted for approval</span>
+<span class="hljs-meta">mgmt.notifications.submit.cc</span>=<span class="hljs-string">admin-list@domain</span>
+<span class="hljs-meta">mgmt.notifications.submit.bcc</span>=<span class="hljs-string"></span>
+
+<span class="hljs-meta">mgmt.notifications.reject.text</span>=<span class="hljs-string">Your request &#123;0&#125; to the CAS Service Registry has been rejected for the following reason:\n\n&#123;1&#125;\n\n Please login into the CAS Management Application and "Revert" your submit.  You then have the option to make any recommended changes and submit your request again.\n\nIf you need further help with this request, please contact help@domain.</span>
+<span class="hljs-meta">mgmt.notifications.reject.from</span>=<span class="hljs-string">casmanager@domain</span>
+<span class="hljs-meta">mgmt.notifications.reject.subject</span>=<span class="hljs-string">Request &#123;0&#125; has been rejected</span>
+<span class="hljs-meta">mgmt.notifications.reject.cc</span>=<span class="hljs-string">admin-list@domain</span>
+
+<span class="hljs-meta">mgmt.notifications.accept.text</span>=<span class="hljs-string">Your request &#123;0&#125; has been accepted and added to the CAS Service Registry, and should be effective immediately in CAS.\n\nIf you do not see the behavior you expected, please submit a request to ithelp@ucdavis.edu.  Do not submit your request a second time.</span>
+<span class="hljs-meta">mgmt.notifications.accept.from</span>=<span class="hljs-string">casmanager@domain</span>
+<span class="hljs-meta">mgmt.notifications.accept.subject</span>=<span class="hljs-string">Request &#123;0&#125; has been accepted</span>
+<span class="hljs-meta">mgmt.notifications.accept.cc</span>=<span class="hljs-string">admin-list@domain</span></code></pre>
+
+<p>每条消息的<code>subject</code>要有<code>{0}</code>参数。这个参数用于展示提交的ID。</p>
+<p><code>accept</code>消息的<code>text</code>要有<code>{0}</code>参数，用于展示提交的ID。</p>
+<p><code>reject</code>消息的<code>text</code>要有<code>{0}</code>参数来展示提交的ID，以及<code>{1}</code>参数来展示管理员提供的拒绝原因。</p>
+<p>为了将邮件发送给提交用户，你要确保在登录webapp时CAS发布了<code>email</code>属性。</p>
+
   
   
   <div class="footer">
