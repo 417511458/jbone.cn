@@ -345,6 +345,17 @@
 <h3 id="提交变更"><a href="#提交变更" class="headerlink" title="提交变更"></a>提交变更</h3><p>当委托用户对服务作了变更，它们在克隆仓库中作为”Working Change”完成，可以在<code>management.properties</code>中配置的<code>userReposDir</code>地址里用户登录ID下找到。当工作变更时，内容视图中的控制栏就会点亮”Submit”选项。点击”Submit”会弹出一个对话框，并提示用户输入关于这次变更的”change message”。</p>
 <p>用户提交的变更会将working change提交到用户仓库里，并在管理员仓库里新建一个”pull”。</p>
 <p>用户从导航进入”Submit”视图，这里将会展示它们所有的”Submit”以及对应的状态（”Pending”、”Accepted”、”Rejected”）。</p>
+<h3 id="Pull-Requests"><a href="#Pull-Requests" class="headerlink" title="Pull Requests"></a>Pull Requests</h3><p>管理员可以从导航栏的<code>Pull Requests</code>视图中查看委托用户所有的<code>pulls</code>。当有等待审核的<code>pulls</code>时，带有请求数量的徽章将会展示在导航栏中。</p>
+<p>在<code>Pull Requests</code>视图中，管理员可以点击<code>pull</code>名字或记录行菜单的<code>View Change</code>查看提交的<code>pull</code>的所有变更。对于每个变更你都可以以json格式的形式查看变更的<code>diff</code>。</p>
+<p>变更过的服务也可以在webapp GUI中查看。在此模式中，表单处于<code>仅查看</code>模式，无法进行修改。<br>更改后的字段将以斜体显示，且用不同的颜色表示更改的类型:</p>
+<ul>
+<li><code>绿色</code>：新增</li>
+<li><code>蓝色</code>：修改</li>
+<li><code>红色</code>：删除</li>
+</ul>
+<p>在变更的字段下面会有一个<code>restore</code>图标。点击这个图标会将这个字段变更为它在注册表中的当前值，以便进行比较。再次点击就会恢复到变更的值。</p>
+<p>查看变更之后，整个<code>pull</code>可以作为一个整体<code>接收</code>或<code>拒绝</code>。当<code>pull</code>被接受时，它会立即被提交到仓库，并在控制栏中点亮<code>Publish</code>选项。</p>
+<p>当拒绝<code>pull</code>时，你将有机会在拒绝对话框中列出拒绝更改的原因。<br>提交用户可以看到这个文本，并可以选择从他们的仓库中还原他们的<code>pull</code>，或者做出变更再次提交以供考虑。</p>
 
   
   
