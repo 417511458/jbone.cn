@@ -312,10 +312,44 @@ mgmt.delegated.userReposDir=/etc/cas/user-repos
 提交用户可以看到这个文本，并可以选择从他们的仓库中还原他们的`pull`，或者做出变更再次提交以供考虑。
 
 ### 通知
+如果在部署中定义了可用邮件服务器并设置了通知属性，则可以创建和发送电子邮件通知。
 
+定义邮件服务器要添加以下配置：
 
+```properties
+spring.mail.host=localhost
+spring.mail.port=25
+spring.mail.username=
+spring.mail.password=
+spring.mail.testConnection=false
+spring.mail.properties.mail.smtp.auth=false
+spring.mail.properties.mail.smtp.starttls.enable=false
+```
 
+只有在`management.properties`中定义了`提交pull`、`接受pull`和`拒绝pull`的文本后，才会发送电子邮件。
 
+```properties
+mgmt.notifications.submit.text=Your submitted changes have been forwarded to a CAS Administrator for approval. You will be notified by email once again when your request has been processed.\n\nYou can review the status of this request through the CAS Management Appication by navigating to the "Submit Requests" screen.\n\n If you have further questions or require assistance, please contact help@domain.
+mgmt.notifications.submit.from=casmanager@domain
+mgmt.notifications.submit.subject=Request {0} has been submitted for approval
+mgmt.notifications.submit.cc=admin-list@domain
+mgmt.notifications.submit.bcc=
 
+mgmt.notifications.reject.text=Your request {0} to the CAS Service Registry has been rejected for the following reason:\n\n{1}\n\n Please login into the CAS Management Application and "Revert" your submit.  You then have the option to make any recommended changes and submit your request again.\n\nIf you need further help with this request, please contact help@domain.
+mgmt.notifications.reject.from=casmanager@domain
+mgmt.notifications.reject.subject=Request {0} has been rejected
+mgmt.notifications.reject.cc=admin-list@domain
 
+mgmt.notifications.accept.text=Your request {0} has been accepted and added to the CAS Service Registry, and should be effective immediately in CAS.\n\nIf you do not see the behavior you expected, please submit a request to ithelp@ucdavis.edu.  Do not submit your request a second time.
+mgmt.notifications.accept.from=casmanager@domain
+mgmt.notifications.accept.subject=Request {0} has been accepted
+mgmt.notifications.accept.cc=admin-list@domain
+```
 
+每条消息的`subject`要有`{0}`参数。这个参数用于展示提交的ID。
+
+`accept`消息的`text`要有`{0}`参数，用于展示提交的ID。
+
+`reject`消息的`text`要有`{0}`参数来展示提交的ID，以及`{1}`参数来展示管理员提供的拒绝原因。
+
+为了将邮件发送给提交用户，你要确保在登录webapp时CAS发布了`email`属性。
