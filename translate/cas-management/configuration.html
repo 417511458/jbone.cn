@@ -177,7 +177,12 @@
 
 -->
   
-    
+    <p>CAS web管理系统的配置主要由<code>/etc/cas/config/management.(yml|properties)</code>文件控制。请注意，CAS支持的所有配置策略也应同样适用于这里，以定义、传递和解析配置的方式。当然，主要的区别是文件的名字。</p>
+<h2 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h2><ul>
+<li>由CAS平台直接控制的配置和属性总是以<code>mgmt</code>前缀开头。所有通过其他底层框架提供给CAS的其他的配置，它们可能有自己的模式和语法，注意这种区别。</li>
+<li>无法识别的属性会被CAS和/或CAS所依赖的框架拒绝。这意味着如果你以某种方式拼错属性或者不遵循点符号语法等，你的配置将会被CAS完全拒绝，它所控制的功能可能永远不会以你想要的方式激活。</li>
+</ul>
+<h2 id="索引设置"><a href="#索引设置" class="headerlink" title="索引设置"></a>索引设置</h2>
   
   
   <div class="footer">
