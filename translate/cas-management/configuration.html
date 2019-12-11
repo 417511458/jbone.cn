@@ -182,7 +182,93 @@
 <li>由CAS平台直接控制的配置和属性总是以<code>mgmt</code>前缀开头。所有通过其他底层框架提供给CAS的其他的配置，它们可能有自己的模式和语法，注意这种区别。</li>
 <li>无法识别的属性会被CAS和/或CAS所依赖的框架拒绝。这意味着如果你以某种方式拼错属性或者不遵循点符号语法等，你的配置将会被CAS完全拒绝，它所控制的功能可能永远不会以你想要的方式激活。</li>
 </ul>
-<h2 id="索引设置"><a href="#索引设置" class="headerlink" title="索引设置"></a>索引设置</h2>
+<h2 id="索引设置"><a href="#索引设置" class="headerlink" title="索引设置"></a>索引设置</h2><p>能够接受多个值的配置通常用索引记录，如<code>mgmt.some.setting[0]=value</code>。索引<code>[0]</code>表示由采用者递增，以允许使用不同的多个配置块：</p>
+<pre><code class="hljs properties"><span class="hljs-comment"># mgmt.some.setting[0]=value1</span>
+<span class="hljs-comment"># mgmt.some.setting[1]=value2</span></code></pre>
+
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><pre><code class="hljs properties"><span class="hljs-comment"># mgmt.adminRoles[0]=ROLE_ADMIN</span>
+<span class="hljs-comment"># mgmt.userRoles[0]=ROLE_USER</span>
+<span class="hljs-comment">
+# mgmt.serverName=https://localhost:8443</span>
+<span class="hljs-comment"># mgmt.defaultLocale=en</span>
+<span class="hljs-comment">
+# mgmt.authzIpRegex=</span>
+<span class="hljs-comment"># mgmt.authzAttributes[0]=</span>
+<span class="hljs-comment"># mgmt.userPropertiesFile=classpath:user-details.properties</span>
+<span class="hljs-comment">
+# mgmt.versionControl.servicesRepo=/etc/cas/services-repo</span>
+<span class="hljs-comment"># mgmt.versionControl.enabled=false</span>
+<span class="hljs-comment"># mgmt.versionControl.syncScript=</span>
+<span class="hljs-comment">
+
+# mgmt.delegated.enabled=false</span>
+<span class="hljs-comment"># mgmt.delegated.userReposDir=/etc/cas/user-repos</span>
+<span class="hljs-comment"># mgmt.enableDiscoveryEndpointCall=true</span></code></pre>
+
+<blockquote>
+<p>译者注：原文中的以上配置有些错误，已在本文改正。</p>
+</blockquote>
+<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><p><strong>配置键</strong></p>
+<ul>
+<li><code>mgmt.notifications.submit</code></li>
+<li><code>mgmt.notifications.accept</code></li>
+<li><code>mgmt.notifications.reject</code></li>
+</ul>
+<p>以下属性适用于上面<strong>配置键</strong>的通知配置：</p>
+<pre><code class="hljs properties"><span class="hljs-comment"># $&#123;configurationKey&#125;.attributeName=mail</span>
+<span class="hljs-comment"># $&#123;configurationKey&#125;.text=</span>
+<span class="hljs-comment"># $&#123;configurationKey&#125;.from=</span>
+<span class="hljs-comment"># $&#123;configurationKey&#125;.subject=</span>
+<span class="hljs-comment"># $&#123;configurationKey&#125;.cc=</span>
+<span class="hljs-comment"># $&#123;configurationKey&#125;.bcc=</span></code></pre>
+
+<h3 id="LDAP"><a href="#LDAP" class="headerlink" title="LDAP"></a>LDAP</h3><pre><code class="hljs properties"><span class="hljs-comment"># mgmt.ldap.ldapUrl = ldap://localhost:389</span>
+<span class="hljs-comment"># mgmt.ldap.bindDn =</span>
+<span class="hljs-comment"># mgmt.ldap.bindCredential =</span>
+<span class="hljs-comment"># mgmt.ldap.useSsl = true</span>
+<span class="hljs-comment">
+# mgmt.ldap.trustCertificates =</span>
+<span class="hljs-comment"># mgmt.ldap.keystore = </span>
+<span class="hljs-comment"># mgmt.ldap.keystorePassword</span>
+<span class="hljs-comment"># mgmt.ldap.keystoreType = </span>
+<span class="hljs-comment">
+# mgmt.ldap.minPoolSize = 3</span>
+<span class="hljs-comment"># mgmt.ldap.maxPoolSize = 10</span>
+<span class="hljs-comment"># mgmt.ldap.poolPassivator = BIND</span>
+<span class="hljs-comment"># mgmt.ldap.validateOnCheckout = true</span>
+<span class="hljs-comment"># mgmt.ldap.validatePeriodically = true </span>
+<span class="hljs-comment"># mgmt.ldap.validateTimeout = PT5S</span>
+<span class="hljs-comment"># mgmt.ldap.validatePeriod = PT5M </span>
+<span class="hljs-comment">
+# mgmt.ldap.failFast = true</span>
+<span class="hljs-comment"># mgmt.ldap.idleTime = PT10M</span>
+<span class="hljs-comment"># mgmt.ldap.prunePeriod = PT2H</span>
+<span class="hljs-comment"># mgmt.ldap.blockWaitTime = PT3S</span>
+<span class="hljs-comment"># mgmt.ldap.connectionStrategy =</span>
+<span class="hljs-comment"># mgmt.ldap.useStartTls = </span>
+<span class="hljs-comment"># mgmt.ldap.connectTimeout = PT5S</span>
+<span class="hljs-comment"># mgmt.ldap.responseTimeout = PT5S</span>
+<span class="hljs-comment"># mgmt.ldap.providerClass = </span>
+<span class="hljs-comment"># mgmt.ldap.allowMultipleDns = false</span>
+<span class="hljs-comment"># mgmt.ldap.saslRealm = </span>
+<span class="hljs-comment"># mgmt.ldap.saslMechanism = </span>
+<span class="hljs-comment"># mgmt.ldap.saslAuthorizationId = </span>
+<span class="hljs-comment"># mgmt.ldap.saslSecurityStrength = </span>
+<span class="hljs-comment"># mgmt.ldap.saslMutualAuth = </span>
+<span class="hljs-comment"># mgmt.ldap.saslQualityOfProtection =</span></code></pre>
+
+<h4 id="LDAP授权"><a href="#LDAP授权" class="headerlink" title="LDAP授权"></a>LDAP授权</h4><pre><code class="hljs properties"><span class="hljs-comment"># mgmt.ldap.ldapAuthz.roleAttribute = uugid</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.rolePrefix = ROLE_</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.allowMultipleResults</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.groupAttribute</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.groupPrefix =</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.groupFilter</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.groupBaseDn</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.baseDn</span>
+<span class="hljs-comment"># mgmt.ldap.ldapAuthz.searchFilter</span></code></pre>
+
+
+
   
   
   <div class="footer">
