@@ -14,7 +14,7 @@ order: 1
 译文 | 原文 | 贡献者 | 状态
 ---|---|---|---
 [CAS Management概述](overview.html)  |  [原文地址](https://apereo.github.io/cas-management/5.3.x/installation/Installing-ServicesMgmt-Webapp.html) | [马军伟](https://github.com/417511458) | ✔️
-[CAS Management配置](configuration.html) | [原文地址](https://apereo.github.io/cas-management/5.3.x/installation/Configuration-Properties.html) | [马军伟](https://github.com/417511458) | 进行中
+[CAS Management配置](configuration.html) | [原文地址](https://apereo.github.io/cas-management/5.3.x/installation/Configuration-Properties.html) | [马军伟](https://github.com/417511458) | ✔️
 
 
 
