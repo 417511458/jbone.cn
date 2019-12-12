@@ -1,0 +1,9 @@
+---
+title: 响应类型
+date: 2019-11-29 08:49:43
+type: translate-cas
+description: CAS服务管理 - 配置服务响应类型
+keywords: CAS服务管理，官方文档，翻译，配置服务响应类型
+order: 6
+---
+
