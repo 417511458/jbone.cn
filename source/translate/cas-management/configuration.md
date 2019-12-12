@@ -8,7 +8,7 @@ type: translate-cas-management
 order: 3
 ---
 
-CAS web管理系统的配置主要由`/etc/cas/config/management.(yml|properties)`文件控制。请注意，CAS支持的所有配置策略也应同样适用于这里，以定义、传递和解析配置的方式。当然，主要的区别是文件的名字。
+CAS web管理系统的配置主要由`/etc/cas/config/management.(yml|properties)`文件控制。请注意，CAS支持的所有配置策略也同样适用于这里。
 
 ## 命名约定
 * 由CAS平台直接控制的配置和属性总是以`mgmt`前缀开头。所有通过其他底层框架提供给CAS的其他的配置，它们可能有自己的模式和语法，注意这种区别。
