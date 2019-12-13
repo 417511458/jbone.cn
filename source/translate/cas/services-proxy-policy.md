@@ -7,3 +7,8 @@ keywords: CAS服务管理，官方文档，翻译，代理策略
 order: 4
 ---
 
+<br />
+
+**[本文暂没人认领，我要加入翻译>>>](/translate/join.html)**
+
+<br />

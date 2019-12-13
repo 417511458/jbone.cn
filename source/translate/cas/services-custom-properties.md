@@ -7,3 +7,8 @@ keywords: CAS服务管理，官方文档，翻译，自定义属性
 order: 5
 ---
 
+<br />
+
+**[本文暂没人认领，我要加入翻译>>>](/translate/join.html)**
+
+<br />

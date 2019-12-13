@@ -7,3 +7,8 @@ keywords: CAS服务管理，官方文档，翻译，配置服务响应类型
 order: 6
 ---
 
+<br />
+
+**[本文暂没人认领，我要加入翻译>>>](/translate/join.html)**
+
+<br />
