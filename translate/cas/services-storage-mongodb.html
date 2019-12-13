@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>CAS 官方文档翻译 — Jbone</title>
+    <title>存储 - MongoDb — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/cas/index.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/cas/services-storage-mongodb.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="CAS 官方文档翻译 — Jbone">
-    <meta property="og:description" content="CAS 官方文档翻译">
-    <meta property="og:keywords" content="CAS服务管理，官方文档">
+    <meta property="og:title" content="存储 - MongoDb — Jbone">
+    <meta property="og:description" content="CAS服务管理 - 配置存储 - MongoDb">
+    <meta property="og:keywords" content="CAS服务管理，官方文档，翻译，配置存储 - MongoDb">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -138,7 +138,7 @@
             
         
     <li>
-      <a href="/translate/cas/index.html" class="sidebar-link current">CAS 官方文档翻译</a>
+      <a href="/translate/cas/index.html" class="sidebar-link">CAS 官方文档翻译</a>
     </li>
   
     
@@ -284,7 +284,7 @@
             
         
     <li>
-      <a href="/translate/cas/services-storage-mongodb.html" class="sidebar-link">存储 - MongoDb</a>
+      <a href="/translate/cas/services-storage-mongodb.html" class="sidebar-link current">存储 - MongoDb</a>
     </li>
   
     
@@ -388,7 +388,7 @@
     
   
   
-    <h1>CAS 官方文档翻译</h1>
+    <h1>存储 - MongoDb</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -396,180 +396,10 @@
 
 -->
   
-    <p>本专题是对CAS官方文档的翻译。</p>
-<h3 id="票据"><a href="#票据" class="headerlink" title="票据"></a>票据</h3><h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><table>
-<thead>
-<tr>
-<th>译文</th>
-<th>原文</th>
-<th>贡献者</th>
-<th>状态</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="services-overview.html">概述</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-web-management.html">web管理系统</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Installing-ServicesMgmt-Webapp.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-access-strategy.html">访问策略</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Access-Strategy.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-proxy-policy.html">代理策略</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Proxy-Policy.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-custom-properties.html">自定义属性</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Custom-Properties.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-response-type.html">响应类型</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Response-Type.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-http-security-headers.html">HTTP安全标头</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Http-Security-Headers.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-contacts-and-owners.html">负责人和联系方式</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Contacts.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-expiration-policy.html">过期策略</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Expiration-Policy.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-required-auth.html">认证要求</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Required-AuthN.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-environments.html">环境</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Environments.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-replication.html">同步</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Replication.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-inmemory.html">存储 - 内存</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/InMemory-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-json.html">存储 - JSON</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/JSON-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-yaml.html">存储 - YAML</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/YAML-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-mongodb.html">存储 - MongoDb</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/MongoDb-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-ldap.html">存储 - LDAP</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/LDAP-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-jpa.html">存储 - JPA</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/JPA-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-redis.html">存储 - Redis</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Redis-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-dynamodb.html">存储 - DynamoDb</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/DynamoDb-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-cosmosdb.html">存储 - CosmosDb</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/CosmosDb-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-couchbase.html">存储 - Couchbase</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Couchbase-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-couchdb.html">存储 - CouchDb</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/CouchDb-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-rest.html">存储 - REST</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/REST-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-<tr>
-<td><a href="services-storage-custom.html">存储 - 自定义</a></td>
-<td><a href="https://apereo.github.io/cas/6.0.x/services/Custom-Service-Management.html" target="_blank" rel="noopener">原文地址</a></td>
-<td>-</td>
-<td>未开始</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>以上<code>-</code>表示当前文章暂时没人翻译，欢迎认领自己感兴趣的专题，加入翻译！<br>如果您发现已翻译的文章有错或有更好的翻译方式，欢迎指出！</p>
-</blockquote>
+    <br />
+
+<p><strong><a href="/translate/join.html">本文暂没人认领，我要加入翻译&gt;&gt;&gt;</a></strong></p>
 <br />
-
-<p><strong><a href="/translate/join.html">我也要加入翻译&gt;&gt;&gt;</a></strong></p>
-<br />
-
-
-
-
-
-
 
   
   
@@ -580,7 +410,7 @@
 
 
     发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/cas/index.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/cas/services-storage-mongodb.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
