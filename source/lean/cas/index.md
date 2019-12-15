@@ -1,7 +1,7 @@
 ---
 title: CAS
 type: lean_cas
-order: 2
+order: 1
 ---
 
 # 文档更新中...
