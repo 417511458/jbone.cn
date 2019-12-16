@@ -175,11 +175,15 @@
 -->
   
     <p>通常情况下，我们的单点登录认证中心要支持多个服务的统一认证。我们的实现步骤一般是先配置服务注册中心方案、然后配置授权服务、最后重启服务。</p>
-<p>按以上步骤执行完，大部分都可以得到预期的服务管理目的。而有时候在登录的时候会遇到这种提示：<code>未认证授权的服务</code>。对于刚接触CAS的人来说（包括我），看到这个提示往往不知道该如何处理。出现这个错误的原因有很多，比如服务加载失败、服务更新失败、<code>serviceID</code>正则表达式写错等等，其实归根结底是一个原因：<code>在登录过程中校验授权服务时，没有找到匹配的服务</code>。</p>
+<p>按以上步骤执行完，大部分都可以得到预期的服务管理目的。而有时候在登录的时候会遇到这种提示：<code>未认证授权的服务</code>。对于刚接触CAS的人来说，看到这个提示往往不知道该如何处理。出现这个错误的原因有很多，比如服务加载失败、服务更新失败、<code>serviceID</code>正则表达式写错等等，其实归根结底是一个原因：<code>在登录过程中校验授权服务时，没有找到匹配的服务</code>。</p>
 <p>为什么没有匹配到授权服务？</p>
-<p>应该怎么解决？</p>
 <p>内部的服务管理机制是什么样的？</p>
-<p>本文将深入剖析CAS服务管理原理，包括服务管理整体架构、服务初始化过程、服务更新策略、服务校验策略、以及服务管理工具等。</p>
+<p>应该怎么解决？</p>
+<p>本文将深入剖析CAS服务管理原理，包括服务管理整体架构、服务初始化过程、服务更新机制、服务校验过程、以及服务管理工具等。通过本文至少可以有以下收获：</p>
+<ol>
+<li>全面深入的理解CAS中的服务管理原理；</li>
+<li>可以快速处理实操过程中CAS服务管理相关问题；</li>
+</ol>
 <h2 id="CAS服务管理整体架构"><a href="#CAS服务管理整体架构" class="headerlink" title="CAS服务管理整体架构"></a>CAS服务管理整体架构</h2><p><img src="images/service-management-architecture.png" alt="CAS服务管理架构图"></p>
 <p>如上图所示，CAS服务管理的整体架构可以分为三层：</p>
 <ul>
@@ -233,7 +237,43 @@
 <li>服务正则表达式一定要拼写正确，否则可能会匹配不到，或者匹配错误。建议配置前现在本地用Java正则表达式测试以下。</li>
 <li>如果页面出现<code>未认证授权的服务</code>提示，一定是服务匹配问题，要从这方面找原因和解决方案。</li>
 </ol>
-<h2 id="服务管理工具"><a href="#服务管理工具" class="headerlink" title="服务管理工具"></a>服务管理工具</h2>
+<h2 id="服务管理工具"><a href="#服务管理工具" class="headerlink" title="服务管理工具"></a>服务管理工具</h2><p>CAS官方推出的服务管理工具是：<code>CAS Management</code>。我们这里主要介绍CAS Management的功能和实现原理。</p>
+<blockquote>
+<p>了解完服务的加载、更新机制后，如果有个性化需求，我们也可以实现自己的服务管理工具。</p>
+</blockquote>
+<p>CAS Management在实现了服务管理功能基础上，还有两个核心亮点：服务版本控制和委托用户管理。</p>
+<blockquote>
+<p>服务管理基础功能就不介绍了，已经包含在了服务版本控制流程内。</p>
+</blockquote>
+<h3 id="服务版本控制"><a href="#服务版本控制" class="headerlink" title="服务版本控制"></a>服务版本控制</h3><p>服务的版本控制是通过在本地建立一个git仓库，然后通过操作这个git仓库，发布后同步到CAS Server服务注册中心中，最后通过服务管理的更新机制，同步到CAS Server中。</p>
+<p>服务的版本控制的好处显而易见：</p>
+<ol>
+<li>保留了服务的历史状态，并可以随时回退到任意历史版本；</li>
+<li>服务有了中间态，可有效控制服务的发布状态。</li>
+</ol>
+<p><img src="images/service-management-versioncontrol.png" alt="服务管理版本控制"></p>
+<p>服务版本控制流程：</p>
+<ol>
+<li>CAS Management启动后会做两件事情：<ul>
+<li>在本地创建一个git仓库，并以此作为JSON注册中心，创建VersionControlServicesManager；</li>
+<li>创建CAS Server服务管理器：DefaultServicesManager或DomainServicesManager;</li>
+</ul>
+</li>
+<li>管理员增加或编辑服务后，通过操作界面中的<code>提交</code>按钮提交本次变更；</li>
+<li>提交后就会点亮<code>发布</code>按钮，<code>发布</code>后会将仓库中的服务通过CAS Server服务管理器同步到CAS Server服务注册中心；</li>
+<li>最后CAS Server通过更新机制，同步到CAS Server服务管理器中。</li>
+</ol>
+<h3 id="委托用户管理"><a href="#委托用户管理" class="headerlink" title="委托用户管理"></a>委托用户管理</h3><p>CAS Management的委托用户管理功能类似github上的PR，在以上服务版本控制的前面多出了PR的步骤，即：</p>
+<ol>
+<li>委托用户编辑服务并提交PR；</li>
+<li>管理员接受或拒绝委托用户的PR；</li>
+<li>如果管理员接受，就会走以上的服务管理版本控制流程；</li>
+<li>如果管理员拒绝，则会打回到委托用户，重新编辑。</li>
+</ol>
+<h2 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h2><p>马军伟，草根码农一枚，jbone项目作者。</p>
+<p>关注领域：微服务、高并发编程、单点登录等。</p>
+<p>Github：<a href="https://github.com/417511458" target="_blank" rel="noopener">https://github.com/417511458</a><br>Gitee: <a href="https://gitee.com/majunwei2017" target="_blank" rel="noopener">https://gitee.com/majunwei2017</a><br>主页：<a href="http://jbone.cn">http://jbone.cn</a><br>QQ: 417511458<br>公众号：writebugs</p>
+
   
   
   <div class="footer">
