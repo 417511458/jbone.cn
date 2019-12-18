@@ -27,6 +27,12 @@
                 <li><h3>服务管理</h3></li>
             <% } %>
         <% } %>
+
+        <% if (type === 'learn-cas') { %>
+            <% if (fileName === 'deep-service-management') { %>
+                <li><h3>实现原理</h3></li>
+            <% } %>
+        <% } %>
     <li>
       <a href="<%- url_for(p.path) %>" class="sidebar-link<%- page.title === p.title ? ' current' : '' %><%- p.is_new ? ' new' : '' %>"><%- p.title %></a>
     </li>

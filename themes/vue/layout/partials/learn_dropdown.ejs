@@ -1,7 +1,9 @@
 <li class="nav-dropdown-container learn">
   <a class="nav-link<%- page.path.match(/\/(lean(?!\/team.html$)|cas|spring-cloud)(\/|$)/) ? ' current' : '' %>">学习</a><span class="arrow"></span>
   <ul class="nav-dropdown">
-    <li><a href="<%- url_for("/lean/cas/") %>" class="nav-link<%- page.path.match(/\/lean(\/|$)/) ? ' current' : '' %>">CAS</a></li>
+    <li><a href="<%- url_for("/learn/cas/") %>" class="nav-link<%- page.path.match(/\/lean(\/|$)/) ? ' current' : '' %>">CAS</a></li>
+    <!--
     <li><a href="<%- url_for("/lean/spring-cloud/") %>" class="nav-link<%- page.path.match(/\/spring-cloud(\/|$)/) ? ' current' : '' %>">Spring Cloud</a></li>
+    -->
   </ul>
 </li>

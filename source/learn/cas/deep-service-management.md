@@ -1,8 +1,8 @@
 ---
-title: 深入理解CAS服务管理原理
-type: lean_cas
-order: 2
-description: 深入理解CAS服务管理原理
+title: CAS服务管理实现原理
+type: learn-cas
+order: 201
+description: CAS服务管理实现原理
 keywords: CAS，服务管理，原理
 ---
 
@@ -133,9 +133,13 @@ CAS Management的委托用户管理功能类似github上的PR，在以上服务�
 关注领域：微服务、高并发编程、单点登录等。
 
 Github：https://github.com/417511458
+
 Gitee: https://gitee.com/majunwei2017
+
 主页：http://jbone.cn
+
 QQ: 417511458
+
 公众号：writebugs
 
 
