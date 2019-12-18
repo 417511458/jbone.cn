@@ -405,6 +405,36 @@
 <li>皮肤控制 - 为特定服务定义备用的CAS皮肤。</li>
 </ul>
 <p>相关CAS属性配置，<a href="https://apereo.github.io/cas/6.0.x/configuration/Configuration-Properties.html#service-registry" target="_blank" rel="noopener">请看这里</a>。</p>
+<h2 id="服务管理web系统"><a href="#服务管理web系统" class="headerlink" title="服务管理web系统"></a>服务管理web系统</h2><p>服务管理webapp是一个独立的web应用程序，它提供了管理服务注册中心数据的GUI，可以独立于CAS部署。web管理系统必须和CAS server共享相同的注册中心配置，以便所有系统都可以加载相同的服务数据。想了解更多关于管理webapp的信息，<a href="../cas-management/overview.html">请看这里</a>。</p>
+<h2 id="注册服务"><a href="#注册服务" class="headerlink" title="注册服务"></a>注册服务</h2><p>注册服务提供了以下元数据：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>必填的唯一标识符。这必须是一个有效的数字。</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>必填的名字（少于等于255个字符）。</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>服务的可选自由文本描述。（少于等于255个字符）。</td>
+</tr>
+<tr>
+<td><code>informationUrl</code></td>
+<td>指向服务信息指南的可选自由文本链接。</td>
+</tr>
+<tr>
+<td><code>privacyUrl</code></td>
+<td>指向服务隐私策略的可选自由文本链接。</td>
+</tr>
+</tbody></table>
 
   
   
