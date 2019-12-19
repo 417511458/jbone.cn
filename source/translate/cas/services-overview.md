@@ -30,4 +30,23 @@ CAS服务管理设施可让CAS服务管理员声明和配置服务（CAS客户�
 `description` | 服务的可选自由文本描述。（少于等于255个字符）。
 `informationUrl` | 指向服务信息指南的可选自由文本链接。
 `privacyUrl` | 指向服务隐私策略的可选自由文本链接。
+`logo` | 可选的，服务的logo图片路径。该图片会与`description`和`name`一起展示在登录页面。图片路径可以是CAS应用的图片目录的相对路径，也可以是完整的URL。
+`serviceId` | 必填的，描述逻辑服务的正则表达式。逻辑服务定义了一个或多个服务所在的URL。url的匹配定义必须要格外小心，因为它可能造成安全漏洞。
+`theme` | 可选的，当服务请求票据时，可以用于自定义CAS UI的主题名。[查看这里，了解更多](https://apereo.github.io/cas/6.0.x/ux/User-Interface-Customization.html)
+`proxyPolicy` | 确定服务是否可以代理身份认证。[查看这里，了解更多](services-proxy-policy.html)。
+`evaluationOrder` | 确定已注册服务的相对估值顺序。这个标记在两个服务的URL表达式覆盖相同服务的场景中尤其重要；估值顺序决定首先评估哪个注册信息，并充当内部排序因子。
+`requiredHandlers` | 一组身份认证处理器名字，这些身份认证处理器必须成功的认证证书后才能访问服务。如果定义了身份认证处理器，就只选择选定的处理器来认证这个注册服务的请求。[查看这里，了解更多](services-required-auth.html)。
+`attributeReleasePolicy` | 描述可发布到应用的属性集的策略。以及其他需要清除一些属性的其他过滤逻辑。[查看这里，了解更多关于属性发布和过滤的详细信息](https://apereo.github.io/cas/6.0.x/integration/Attribute-Release.html)。
+`logoutType` | 定义启动注销协议后怎么处理本服务。可接受的值有`LogoutType.BACK_CHANNEL`、`LogoutType.FRONT_CHANNEL`和`LogoutType.NONE`。[查看这里，了解更多关于logout的信息](https://apereo.github.io/cas/6.0.x/installation/Logout-Single-Signout.html)。
 
+
+
+
+responseType	Defines how CAS should respond to requests for this service. See this guide for more details.
+usernameAttributeProvider	The provider configuration which dictates what value as the “username” should be sent back to the application. See this guide for more details on attribute release and filters.
+accessStrategy	The strategy configuration that outlines and access rules for this service. It describes whether the service is allowed, authorized to participate in SSO, or can be granted access from the CAS perspective based on a particular attribute-defined role, aka RBAC. See this guide for more details on attribute release and filters.
+publicKey	The public key associated with this service that is used to authorize the request by encrypting certain elements and attributes in the CAS validation protocol response, such as the PGT or the credential. See this guide for more details on attribute release and filters.
+logoutUrl	URL endpoint for this service to receive logout requests. See this guide for more details
+properties	Extra metadata associated with this service in form of key/value pairs. This is used to inject custom fields into the service definition, to be used later by extension modules to define additional behavior on a per-service basis. See this guide for more info please.
+multifactorPolicy	The policy that describes the configuration required for this service authentication, typically for multifactor authentication.
+contacts	Specify the collection of contacts associated with service that own the application. See this guide for more info.
