@@ -1,8 +1,8 @@
 ---
 title: Spring Cloud
-type: lean_spring_cloud
+type: learn-spring-cloud
 order: 2
 ---
 
-# 文档更新中...
+本专题主要记录Spring Cloud相关的学习笔记和总结。
 
