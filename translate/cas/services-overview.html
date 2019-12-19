@@ -486,7 +486,40 @@
 <td><code>privacyUrl</code></td>
 <td>指向服务隐私策略的可选自由文本链接。</td>
 </tr>
+<tr>
+<td><code>logo</code></td>
+<td>可选的，服务的logo图片路径。该图片会与<code>description</code>和<code>name</code>一起展示在登录页面。图片路径可以是CAS应用的图片目录的相对路径，也可以是完整的URL。</td>
+</tr>
+<tr>
+<td><code>serviceId</code></td>
+<td>必填的，描述逻辑服务的正则表达式。逻辑服务定义了一个或多个服务所在的URL。url的匹配定义必须要格外小心，因为它可能造成安全漏洞。</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>可选的，当服务请求票据时，可以用于自定义CAS UI的主题名。<a href="https://apereo.github.io/cas/6.0.x/ux/User-Interface-Customization.html" target="_blank" rel="noopener">查看这里，了解更多</a></td>
+</tr>
+<tr>
+<td><code>proxyPolicy</code></td>
+<td>确定服务是否可以代理身份认证。<a href="services-proxy-policy.html">查看这里，了解更多</a>。</td>
+</tr>
+<tr>
+<td><code>evaluationOrder</code></td>
+<td>确定已注册服务的相对估值顺序。这个标记在两个服务的URL表达式覆盖相同服务的场景中尤其重要；估值顺序决定首先评估哪个注册信息，并充当内部排序因子。</td>
+</tr>
+<tr>
+<td><code>requiredHandlers</code></td>
+<td>一组身份认证处理器名字，这些身份认证处理器必须成功的认证证书后才能访问服务。如果定义了身份认证处理器，就只选择选定的处理器来认证这个注册服务的请求。<a href="services-required-auth.html">查看这里，了解更多</a>。</td>
+</tr>
+<tr>
+<td><code>attributeReleasePolicy</code></td>
+<td>描述可发布到应用的属性集的策略。以及其他需要清除一些属性的其他过滤逻辑。<a href="https://apereo.github.io/cas/6.0.x/integration/Attribute-Release.html" target="_blank" rel="noopener">查看这里，了解更多关于属性发布和过滤的详细信息</a>。</td>
+</tr>
+<tr>
+<td><code>logoutType</code></td>
+<td>定义启动注销协议后怎么处理本服务。可接受的值有<code>LogoutType.BACK_CHANNEL</code>、<code>LogoutType.FRONT_CHANNEL</code>和<code>LogoutType.NONE</code>。<a href="https://apereo.github.io/cas/6.0.x/installation/Logout-Single-Signout.html" target="_blank" rel="noopener">查看这里，了解更多关于logout的信息</a>。</td>
+</tr>
 </tbody></table>
+<p>responseType    Defines how CAS should respond to requests for this service. See this guide for more details.<br>usernameAttributeProvider    The provider configuration which dictates what value as the “username” should be sent back to the application. See this guide for more details on attribute release and filters.<br>accessStrategy    The strategy configuration that outlines and access rules for this service. It describes whether the service is allowed, authorized to participate in SSO, or can be granted access from the CAS perspective based on a particular attribute-defined role, aka RBAC. See this guide for more details on attribute release and filters.<br>publicKey    The public key associated with this service that is used to authorize the request by encrypting certain elements and attributes in the CAS validation protocol response, such as the PGT or the credential. See this guide for more details on attribute release and filters.<br>logoutUrl    URL endpoint for this service to receive logout requests. See this guide for more details<br>properties    Extra metadata associated with this service in form of key/value pairs. This is used to inject custom fields into the service definition, to be used later by extension modules to define additional behavior on a per-service basis. See this guide for more info please.<br>multifactorPolicy    The policy that describes the configuration required for this service authentication, typically for multifactor authentication.<br>contacts    Specify the collection of contacts associated with service that own the application. See this guide for more info.</p>
 
   
   
