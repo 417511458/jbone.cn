@@ -1,7 +1,7 @@
 ---
 title: 联系人和所有者
 date: 2019-11-29 08:49:43
-type: translate-cas
+type: translate-cas-services
 description: CAS服务管理 - 配置负责人和联系方式
 keywords: CAS服务管理，官方文档，翻译，配置负责人和联系方式
 order: 8

@@ -1,17 +1,14 @@
 ---
-title: CAS 官方文档翻译
+title: CAS 官方文档翻译 - Services
 date: 2019-11-29 08:49:43
-type: translate-cas
+type: translate-cas-services
 description: CAS 官方文档翻译
 keywords: CAS服务管理，官方文档
 order: 0
 ---
 
-本专题是对CAS官方文档的翻译。
+本专题是对CAS官方文档中Services部分的翻译。
 
-### 票据
-
-### 服务
 译文 | 原文 | 贡献者 | 状态
 ---|---|---|---
 [概述](services-overview.html)  |  [原文地址](https://apereo.github.io/cas/6.0.x/services/Service-Management.html) | [马军伟](https://github.com/417511458) | 已完成
@@ -41,7 +38,7 @@ order: 0
 [存储 - 自定义](services-storage-custom.html) | [原文地址](https://apereo.github.io/cas/6.0.x/services/Custom-Service-Management.html) | - | 未开始
 
 
-> 以上`-`表示当前文章暂时没人翻译，欢迎认领自己感兴趣的专题，加入翻译！
+> `-`表示当前文章暂时没人翻译，欢迎认领自己感兴趣的专题，加入翻译！
 > 如果您发现已翻译的文章有错或有更好的翻译方式，欢迎指出！
 
 
