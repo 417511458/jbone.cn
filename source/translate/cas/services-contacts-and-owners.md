@@ -1,5 +1,5 @@
 ---
-title: 负责人和联系方式
+title: 联系人和所有者
 date: 2019-11-29 08:49:43
 type: translate-cas
 description: CAS服务管理 - 配置负责人和联系方式

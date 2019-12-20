@@ -14,7 +14,7 @@ order: 0
 ### 服务
 译文 | 原文 | 贡献者 | 状态
 ---|---|---|---
-[概述](services-overview.html)  |  [原文地址](https://apereo.github.io/cas/6.0.x/services/Service-Management.html) | [马军伟](https://github.com/417511458) | 未开始
+[概述](services-overview.html)  |  [原文地址](https://apereo.github.io/cas/6.0.x/services/Service-Management.html) | [马军伟](https://github.com/417511458) | 已完成
 [web管理系统](services-web-management.html) | [原文地址](https://apereo.github.io/cas/6.0.x/services/Installing-ServicesMgmt-Webapp.html) | - | 未开始
 [访问策略](services-access-strategy.html) | [原文地址](https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Access-Strategy.html) | - | 未开始
 [代理策略](services-proxy-policy.html) | [原文地址](https://apereo.github.io/cas/6.0.x/services/Configuring-Service-Proxy-Policy.html) | - | 未开始
