@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>存储 - LDAP — Jbone</title>
+    <title>Rest — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/cas/services-storage-ldap.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/cas-services/services-storage-rest.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="存储 - LDAP — Jbone">
-    <meta property="og:description" content="CAS服务管理 - 配置存储 - LDAP">
-    <meta property="og:keywords" content="CAS服务管理，官方文档，翻译，配置存储 - LDAP">
+    <meta property="og:title" content="Rest — Jbone">
+    <meta property="og:description" content="CAS服务管理 - 配置存储 - Rest">
+    <meta property="og:keywords" content="CAS服务管理，官方文档，翻译，配置存储 - Rest">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -45,7 +45,7 @@
 
     <script>
       Vue.config.productionTip = false
-      window.PAGE_TYPE = "translate-cas"
+      window.PAGE_TYPE = "translate-cas-services"
     </script>
 
     <!-- 百度统计 -->
@@ -79,7 +79,7 @@
 </li>
 -->
 <li class="nav-dropdown-container learn">
-  <a class="nav-link current">学习</a><span class="arrow"></span>
+  <a class="nav-link">学习</a><span class="arrow"></span>
   <ul class="nav-dropdown">
     <li><a href="/learn/cas/" class="nav-link">CAS</a></li>
     <li><a href="/learn/spring-cloud/" class="nav-link">Spring Cloud</a></li>
@@ -102,7 +102,7 @@
 <li class="nav-dropdown-container ecosystem">
   <a class="nav-link">技术翻译</a><span class="arrow"></span>
   <ul class="nav-dropdown">
-    <li><a href="/translate/cas/" class="nav-link current">CAS</a></li>
+    <li><a href="/translate/cas-services/" class="nav-link current">CAS Services</a></li>
     <li><a href="/translate/cas-management/" class="nav-link">CAS Management</a></li>
     <li><a href="/translate/join.html" class="nav-link"><b>我也要加入翻译</b></a></li>
   </ul>
@@ -138,20 +138,7 @@
 
         
     <li>
-      <a href="/translate/cas/index.html" class="sidebar-link">CAS 官方文档翻译</a>
-    </li>
-  
-    
-    
-        
-            
-                <li><h3>服务管理</h3></li>
-            
-        
-
-        
-    <li>
-      <a href="/translate/cas/services-overview.html" class="sidebar-link">概述</a>
+      <a href="/translate/cas-services/index.html" class="sidebar-link">CAS 官方文档翻译 - Services</a>
     </li>
   
     
@@ -162,7 +149,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-web-management.html" class="sidebar-link">Web管理系统</a>
+      <a href="/translate/cas-services/services-overview.html" class="sidebar-link">概述</a>
     </li>
   
     
@@ -173,7 +160,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-access-strategy.html" class="sidebar-link">访问策略</a>
+      <a href="/translate/cas-services/services-web-management.html" class="sidebar-link">Web管理系统</a>
     </li>
   
     
@@ -184,7 +171,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-proxy-policy.html" class="sidebar-link">代理策略</a>
+      <a href="/translate/cas-services/services-access-strategy.html" class="sidebar-link">访问策略</a>
     </li>
   
     
@@ -195,7 +182,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-custom-properties.html" class="sidebar-link">自定义属性</a>
+      <a href="/translate/cas-services/services-proxy-policy.html" class="sidebar-link">代理策略</a>
     </li>
   
     
@@ -206,7 +193,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-response-type.html" class="sidebar-link">响应类型</a>
+      <a href="/translate/cas-services/services-custom-properties.html" class="sidebar-link">自定义属性</a>
     </li>
   
     
@@ -217,7 +204,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-http-security-headers.html" class="sidebar-link">HTTP安全标头</a>
+      <a href="/translate/cas-services/services-response-type.html" class="sidebar-link">响应类型</a>
     </li>
   
     
@@ -228,7 +215,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-contacts-and-owners.html" class="sidebar-link">负责人和联系方式</a>
+      <a href="/translate/cas-services/services-http-security-headers.html" class="sidebar-link">HTTP安全标头</a>
     </li>
   
     
@@ -239,7 +226,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-expiration-policy.html" class="sidebar-link">过期策略</a>
+      <a href="/translate/cas-services/services-contacts-and-owners.html" class="sidebar-link">联系人和所有者</a>
     </li>
   
     
@@ -250,7 +237,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-required-auth.html" class="sidebar-link">认证要求</a>
+      <a href="/translate/cas-services/services-expiration-policy.html" class="sidebar-link">过期策略</a>
     </li>
   
     
@@ -261,7 +248,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-environments.html" class="sidebar-link">环境</a>
+      <a href="/translate/cas-services/services-required-auth.html" class="sidebar-link">认证要求</a>
     </li>
   
     
@@ -272,7 +259,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-replication.html" class="sidebar-link">同步</a>
+      <a href="/translate/cas-services/services-environments.html" class="sidebar-link">环境</a>
     </li>
   
     
@@ -283,7 +270,20 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-inmemory.html" class="sidebar-link">存储 - 内存</a>
+      <a href="/translate/cas-services/services-replication.html" class="sidebar-link">同步</a>
+    </li>
+  
+    
+    
+        
+            
+                <li><h3>服务存储</h3></li>
+            
+        
+
+        
+    <li>
+      <a href="/translate/cas-services/services-storage-inmemory.html" class="sidebar-link">InMemory XML</a>
     </li>
   
     
@@ -294,7 +294,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-json.html" class="sidebar-link">存储 - JSON</a>
+      <a href="/translate/cas-services/services-storage-json.html" class="sidebar-link">JSON</a>
     </li>
   
     
@@ -305,7 +305,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-yaml.html" class="sidebar-link">存储 - YAML</a>
+      <a href="/translate/cas-services/services-storage-yaml.html" class="sidebar-link">YAML</a>
     </li>
   
     
@@ -316,7 +316,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-mongodb.html" class="sidebar-link">存储 - MongoDb</a>
+      <a href="/translate/cas-services/services-storage-mongodb.html" class="sidebar-link">MongoDb</a>
     </li>
   
     
@@ -327,7 +327,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-ldap.html" class="sidebar-link current">存储 - LDAP</a>
+      <a href="/translate/cas-services/services-storage-ldap.html" class="sidebar-link">LDAP</a>
     </li>
   
     
@@ -338,7 +338,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-jpa.html" class="sidebar-link">存储 - JPA</a>
+      <a href="/translate/cas-services/services-storage-jpa.html" class="sidebar-link">JPA</a>
     </li>
   
     
@@ -349,7 +349,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-redis.html" class="sidebar-link">存储 - Redis</a>
+      <a href="/translate/cas-services/services-storage-redis.html" class="sidebar-link">Redis</a>
     </li>
   
     
@@ -360,7 +360,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-dynamodb.html" class="sidebar-link">存储 - DynamoDb</a>
+      <a href="/translate/cas-services/services-storage-cosmosdb.html" class="sidebar-link">CosmosDb</a>
     </li>
   
     
@@ -371,7 +371,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-cosmosdb.html" class="sidebar-link">存储 - CosmosDb</a>
+      <a href="/translate/cas-services/services-storage-dynamodb.html" class="sidebar-link">DynamoDb</a>
     </li>
   
     
@@ -382,7 +382,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-couchbase.html" class="sidebar-link">存储 - Couchbase</a>
+      <a href="/translate/cas-services/services-storage-couchbase.html" class="sidebar-link">Couchbase</a>
     </li>
   
     
@@ -393,7 +393,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-couchdb.html" class="sidebar-link">存储 - CouchDb</a>
+      <a href="/translate/cas-services/services-storage-couchdb.html" class="sidebar-link">CouchDb</a>
     </li>
   
     
@@ -404,7 +404,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-rest.html" class="sidebar-link">存储 - Rest</a>
+      <a href="/translate/cas-services/services-storage-rest.html" class="sidebar-link current">Rest</a>
     </li>
   
     
@@ -415,7 +415,7 @@
 
         
     <li>
-      <a href="/translate/cas/services-storage-custom.html" class="sidebar-link">存储 - 自定义</a>
+      <a href="/translate/cas-services/services-storage-custom.html" class="sidebar-link">自定义</a>
     </li>
   
 </ul>
@@ -426,7 +426,7 @@
 </div>
 
 
-<div class="content translate-cas with-sidebar ">
+<div class="content translate-cas-services with-sidebar ">
   
     
       
@@ -438,7 +438,7 @@
     
   
   
-    <h1>存储 - LDAP</h1>
+    <h1>Rest</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -462,7 +462,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/cas/services-storage-ldap.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/cas-services/services-storage-rest.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
