@@ -38,12 +38,10 @@ CAS服务管理设施可让CAS服务管理员声明和配置服务（CAS客户�
 `requiredHandlers` | 一组身份认证处理器名字，这些身份认证处理器必须成功的认证证书后才能访问服务。如果定义了身份认证处理器，就只选择选定的处理器来认证这个注册服务的请求。[查看这里，了解更多](services-required-auth.html)。
 `attributeReleasePolicy` | 描述可发布到应用的属性集的策略。以及其他需要清除一些属性的其他过滤逻辑。[查看这里，了解更多关于属性发布和过滤的详细信息](https://apereo.github.io/cas/6.0.x/integration/Attribute-Release.html)。
 `logoutType` | 定义启动注销协议后怎么处理本服务。可接受的值有`LogoutType.BACK_CHANNEL`、`LogoutType.FRONT_CHANNEL`和`LogoutType.NONE`。[查看这里，了解更多关于logout的信息](https://apereo.github.io/cas/6.0.x/installation/Logout-Single-Signout.html)。
+`responseType` | 定义CAS响应服务请求的类型。[查看这里，了解更多](services-response-type.html)。
+`usernameAttributeProvider` | 提供者配置，该配置指定什么值作为`username`发送回应用。[查看这里，了解更多关于属性发布和过滤的详细信息](https://apereo.github.io/cas/6.0.x/integration/Attribute-Release.html)。
 
 
-
-
-responseType	Defines how CAS should respond to requests for this service. See this guide for more details.
-usernameAttributeProvider	The provider configuration which dictates what value as the “username” should be sent back to the application. See this guide for more details on attribute release and filters.
 accessStrategy	The strategy configuration that outlines and access rules for this service. It describes whether the service is allowed, authorized to participate in SSO, or can be granted access from the CAS perspective based on a particular attribute-defined role, aka RBAC. See this guide for more details on attribute release and filters.
 publicKey	The public key associated with this service that is used to authorize the request by encrypting certain elements and attributes in the CAS validation protocol response, such as the PGT or the credential. See this guide for more details on attribute release and filters.
 logoutUrl	URL endpoint for this service to receive logout requests. See this guide for more details
