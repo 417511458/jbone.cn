@@ -176,21 +176,237 @@
 
 -->
   
-    <h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h3><p>这里只下载基础模块，其他按需下载。</p>
-<pre><code class="hljs shell">
-git clone https://github.com/417511458/jbone.git
+    <p>jbone是一个项目群，包含公共项目和业务线项目。</p>
+<p>公共项目是公共jar包或各系统都要用到的项目，是必须要安装的项目，如系统管理、单点登录等；</p>
+<p>业务线项目是为了满足某业务需求的项目，是根据个人需要选择安装的项目，如CMS、电子商城等。</p>
+<blockquote>
+<p>第一次安装jbone务必按照以下方式执行，以免采坑。摸清楚之后随意。</p>
+</blockquote>
+<h2 id="安装Redis"><a href="#安装Redis" class="headerlink" title="安装Redis"></a>安装Redis</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><pre><code class="hljs shell">wget http://download.redis.io/releases/redis-5.0.3.tar.gz</code></pre>
+<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code class="hljs shell">tar xzf redis-5.0.3.tar.gz</code></pre>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code class="hljs shell">cd redis-5.0.3
+make</code></pre>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在<code>redis.conf</code>中加入以下配置：</p>
+<pre><code class="hljs shell">requirepass jbone
+daemonize yes</code></pre>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><pre><code class="hljs shell">cd redis-5.0.3/src/
+./redis-server ../redis.conf</code></pre>
+<h2 id="安装RabbitMq"><a href="#安装RabbitMq" class="headerlink" title="安装RabbitMq"></a>安装RabbitMq</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><pre><code class="hljs shell">brew install rabbitmq</code></pre>
+<h3 id="启动-1"><a href="#启动-1" class="headerlink" title="启动"></a>启动</h3><pre><code class="hljs shell">/usr/local/Cellar/rabbitmq/3.7.10/sbin
+./rabbitmq-server -detached</code></pre>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><pre><code class="hljs shell">brew install nginx</code></pre>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><p>在nginx.conf中加入以下配置：</p>
+<pre><code class="hljs shell">upstream register &#123;       
+      server 127.0.0.1:10001;
+&#125;
+upstream smadmin &#123;
+      server 127.0.0.1:10002;
+&#125;
+upstream gateway &#123;
+      server 127.0.0.1:10005;
+&#125;
+upstream sso &#123;
+      server 127.0.0.1:30001;
+&#125;
+upstream ssomanagement &#123;
+      server 127.0.0.1:30002;
+&#125;
+upstream sysadmin &#123;
+      server 127.0.0.1:20002;
+&#125;
+upstream cmsadmin &#123;
+      server 127.0.0.1:50002;
+&#125;
+upstream cmsportal &#123;
+      server 127.0.0.1:50003;
+&#125;
+    server &#123;
+        listen       80;
+        server_name  localhost;
+        location / &#123;
+            root   html;
+            index  index.html index.htm;
+        &#125;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  sso.local.jbone.cn;
+        location / &#123;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-Ip $remote_addr;
+             proxy_set_header X-Forwarded-For $remote_addr;
+             proxy_pass http://sso/;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  ssomanagement.local.jbone.cn;
+        location / &#123;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-Ip $remote_addr;
+             proxy_set_header X-Forwarded-For $remote_addr;
+             proxy_pass http://ssomanagement/;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  gateway.local.jbone.cn;
+        location / &#123;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-Ip $remote_addr;
+             proxy_set_header X-Forwarded-For $remote_addr;
+             proxy_pass http://gateway/;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  smadmin.local.jbone.cn;
+        location / &#123;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-Ip $remote_addr;
+             proxy_set_header X-Forwarded-For $remote_addr;
+             proxy_pass http://smadmin/;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  sysadmin.local.jbone.cn;
+        location / &#123;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-Ip $remote_addr;
+             proxy_set_header X-Forwarded-For $remote_addr;
+             proxy_pass http://sysadmin/;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  cmsadmin.local.jbone.cn;
+        location / &#123;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-Ip $remote_addr;      
+             proxy_set_header X-Forwarded-For $remote_addr;
+             proxy_pass http://cmsadmin/;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  cmsportal.local.jbone.cn;
+        location / &#123;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-Ip $remote_addr;
+             proxy_set_header X-Forwarded-For $remote_addr;
+             proxy_pass http://cmsportal/;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+    &#125;
+server &#123;
+        listen       80;
+        server_name  register.local.jbone.cn;
+        
+
+        location / &#123;
+             proxy_pass http://register;
+             proxy_redirect off;
+             root index.html;
+        &#125;
+
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+
+    &#125;</code></pre>
+
+<h3 id="启动-2"><a href="#启动-2" class="headerlink" title="启动"></a>启动</h3><pre><code class="hljs shell">./nginx</code></pre>
+
+<h2 id="配置本地Host"><a href="#配置本地Host" class="headerlink" title="配置本地Host"></a>配置本地Host</h2><pre><code class="hljs properties"><span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">sso.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">ssomanagement.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">sysadmin.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">cmsadmin.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">cmsportal.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">smadmin.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">gateway.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">register.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">zipkinserver.local.jbone.cn</span>
+<span class="hljs-meta">127.0.0.1</span> <span class="hljs-string">smmonitor.local.jbone.cn</span></code></pre>
+
+
+<h2 id="安装公共项目"><a href="#安装公共项目" class="headerlink" title="安装公共项目"></a>安装公共项目</h2><h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h3><pre><code class="hljs shell">git clone https://github.com/417511458/jbone.git
 git clone https://github.com/417511458/jbone-system.git
-git clone https://github.com/417511458/jbone-sso.git</code></pre>
+git clone https://github.com/417511458/jbone-system-admin.git
+git clone https://github.com/417511458/jbone-sso.git
+git clone https://github.com/417511458/jbone-service-management.git</code></pre>
 
-<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><p>按顺序install，注意要从根目录install</p>
-<pre><code class="hljs shell">
-mvn install</code></pre>
-
+<h3 id="导入IDE"><a href="#导入IDE" class="headerlink" title="导入IDE"></a>导入IDE</h3><p>将下载的源码导入到自己的IDE中</p>
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><p>按以下顺序一次安装：</p>
 <ul>
 <li>jbone</li>
 <li>jbone-system</li>
 <li>jbone-sso</li>
 </ul>
+<pre><code class="hljs shell">mvn install</code></pre>
+
+<blockquote>
+<p>注意：公共jar项目都发布到maven中央仓库了，如果不修改公共jar包，可以不在本地install。</p>
+</blockquote>
+<h2 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h2><p>按以下顺序来启动项目：</p>
+<ol>
+<li>先启动Mysql、Redis、RabbitMq、Nginx等;</li>
+<li>启动服务治理部分;</li>
+<li>启动其他项目。</li>
+</ol>
+<h3 id="启动服务注册中心"><a href="#启动服务注册中心" class="headerlink" title="启动服务注册中心"></a>启动服务注册中心</h3><p>本地运行<code>jbone-sm-register</code>的启动类，或放在<code>tomcat</code>中运行。</p>
+<h3 id="启动系统管理服务"><a href="#启动系统管理服务" class="headerlink" title="启动系统管理服务"></a>启动系统管理服务</h3><p>本地运行<code>jbone-system-server</code>的启动类，或放在<code>tomcat</code>中运行。</p>
+<h3 id="启动SSO"><a href="#启动SSO" class="headerlink" title="启动SSO"></a>启动SSO</h3><p>放在<code>tomcat</code>中运行。</p>
+<p>注意<code>sso-server</code>的端口号为<code>30001</code>，<code>sso-management</code>的端口号为<code>30002</code>。</p>
+<h3 id="启动系统管理后台"><a href="#启动系统管理后台" class="headerlink" title="启动系统管理后台"></a>启动系统管理后台</h3><p>本地运行<code>jbone-system-admin</code>的启动类，或放在<code>tomcat</code>中运行。</p>
+<h3 id="访问测试"><a href="#访问测试" class="headerlink" title="访问测试"></a>访问测试</h3><p>在浏览器访问<code>http://sysadmin.local.jbone.cn</code>，重定向到登录页面。</p>
+<p>输入默认用户名密码<code>jbone/jbone</code>，登录成功后跳转到系统页面，即为成功。</p>
 
   
   
