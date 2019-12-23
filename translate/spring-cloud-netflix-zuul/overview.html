@@ -196,7 +196,38 @@
 
 -->
   
-    
+    <p>路由是微服务架构中不可缺少的一个组成部分。例如，<code>/</code>可能映射到您的web应用、<code>/api/users/</code>映射到用户服务、以及<code>/api/shop</code>映射到店铺服务。Zuul是来自Netflix的基于JVM的路由器和服务端负载均衡器。</p>
+<p>Netflix使用Zuul做以下事情：</p>
+<ul>
+<li><p>身份认证</p>
+</li>
+<li><p>洞察（Insights）  <em>不知道有没有更好的翻译，待优化</em></p>
+</li>
+<li><p>压力测试</p>
+</li>
+<li><p>金丝雀测试（Canary Testing）</p>
+</li>
+<li><p>动态路由</p>
+</li>
+<li><p>服务迁移</p>
+</li>
+<li><p>降载</p>
+</li>
+<li><p>安全</p>
+</li>
+<li><p>静态响应处理</p>
+</li>
+<li><p>主动流量管理</p>
+</li>
+</ul>
+<p>Zuul的规则引擎可以用任何JVM语言来编写规则和过滤器，并内置支持Java和Groovy。</p>
+<blockquote>
+<p><code>zuul.max.host.connections</code>的配置已经替换成了<code>zuul.host.maxTotalConnections</code>和<code>zuul.host.maxPerRouteConnections</code>，默认值分别是<code>200</code>和<code>20</code>。</p>
+</blockquote>
+<blockquote>
+<p>所有路由的默认Hystrix隔离模式（<code>ExecutionIsolationStrategy</code>）是<code>SEMAPHORE</code>。如果隔离模式首选<code>THREAD</code>，则可以将<code>zuul.ribbonIsolationStrategy</code>改为<code>THREAD</code>。</p>
+</blockquote>
+
   
   
   <div class="footer">
