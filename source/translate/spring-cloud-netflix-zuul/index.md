@@ -9,10 +9,12 @@ order: 0
 
 本专题是对Spring Cloud Netflix官方文档中Zuul部分的翻译。
 
+> Spring Cloud Netflix Zuul版本：2.1.3.RELEASE
+
 译文 | 原文 | 贡献者 | 状态
 ---|---|---|---
-[概述](overview.html)  |  [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.2.0.RELEASE/reference/html/#router-and-filter-zuul) | [马军伟](https://github.com/417511458) | 完成
-[如何包含Zuul](how-to-include.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.2.0.RELEASE/reference/html/#router-and-filter-zuul) | [马军伟](https://github.com/417511458) | 未开始
+[概述](overview.html)  |  [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_router_and_filter_zuul) | [马军伟](https://github.com/417511458) | 完成
+[如何集成Zuul](how-to-include.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_router_and_filter_zuul) | [马军伟](https://github.com/417511458) | 未开始
 
 <br />
 
