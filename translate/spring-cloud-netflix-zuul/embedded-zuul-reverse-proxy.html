@@ -4,15 +4,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>概述 — Jbone</title>
+    <title>嵌入式Zuul反向代理 — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/overview.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/embedded-zuul-reverse-proxy.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="概述 — Jbone">
+    <meta property="og:title" content="嵌入式Zuul反向代理 — Jbone">
     <meta property="og:description" content="Spring Cloud Zuul官方文档翻译">
     <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，翻译">
 
@@ -156,7 +156,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/overview.html" class="sidebar-link current">概述</a>
+      <a href="/translate/spring-cloud-netflix-zuul/overview.html" class="sidebar-link">概述</a>
     </li>
   
     
@@ -174,7 +174,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/embedded-zuul-reverse-proxy.html" class="sidebar-link">嵌入式Zuul反向代理</a>
+      <a href="/translate/spring-cloud-netflix-zuul/embedded-zuul-reverse-proxy.html" class="sidebar-link current">嵌入式Zuul反向代理</a>
     </li>
   
 </ul>
@@ -197,7 +197,7 @@
     
   
   
-    <h1>概述</h1>
+    <h1>嵌入式Zuul反向代理</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -205,36 +205,10 @@
 
 -->
   
-    <p>路由是微服务架构中不可缺少的一个组成部分。例如，<code>/</code>可能映射到您的web应用、<code>/api/users/</code>映射到用户服务、以及<code>/api/shop</code>映射到店铺服务。Zuul是来自Netflix的基于JVM的路由器和服务端负载均衡器。</p>
-<p>Netflix使用Zuul做以下事情：</p>
-<ul>
-<li><p>身份认证</p>
-</li>
-<li><p>洞察（Insights）  <em>不知道有没有更好的翻译，待优化</em></p>
-</li>
-<li><p>压力测试</p>
-</li>
-<li><p>金丝雀测试（Canary Testing）</p>
-</li>
-<li><p>动态路由</p>
-</li>
-<li><p>服务迁移</p>
-</li>
-<li><p>降载</p>
-</li>
-<li><p>安全</p>
-</li>
-<li><p>静态响应处理</p>
-</li>
-<li><p>主动流量管理</p>
-</li>
-</ul>
-<p>Zuul的规则引擎可以用任何JVM语言来编写规则和过滤器，并内置支持Java和Groovy。</p>
+    <p>Spring Cloud创建了一个嵌入式Zuul代理。以简化UI应用希望对一个或多个后端服务进行代理访问的常用案例的开发。这个特性对用户界面代理到所需的后端服务非常有用，从而避免了对所有后端独立管理CORS和身份认证核心问题的需要。</p>
+<p>要启用这个代理服务，在Spring Boot主类上加上<code>@EnableZuulProxy</code>注解即可。加上之后会将本地调用转发到适当的服务。按照惯例，ID为<code>users</code>的服务接收来自<code>/users</code>（去掉前缀）代理的请求。代理服务使用<code>Ribbon</code>通过服务发现定位要转发的实例。所有请求都在<code>hystrix</code>命令中执行，所以故障会统计在<code>Hystrix</code>指标中。一旦打开断路器，代理服务就不会尝试与服务联系。</p>
 <blockquote>
-<p><code>zuul.max.host.connections</code>的配置已经替换成了<code>zuul.host.maxTotalConnections</code>和<code>zuul.host.maxPerRouteConnections</code>，默认值分别是<code>200</code>和<code>20</code>。</p>
-</blockquote>
-<blockquote>
-<p>所有路由的默认Hystrix隔离模式（<code>ExecutionIsolationStrategy</code>）是<code>SEMAPHORE</code>。如果隔离模式首选<code>THREAD</code>，则可以将<code>zuul.ribbonIsolationStrategy</code>改为<code>THREAD</code>。</p>
+<p>Zuul启动器不包含服务发现客户端，所以，对于基于服务ID的路由，您还需要提供一个服务发现客户端（Eureka是一种选择）。</p>
 </blockquote>
 
   
@@ -248,7 +222,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/overview.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/embedded-zuul-reverse-proxy.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
