@@ -13,6 +13,87 @@ Spring Cloud创建了一个嵌入式Zuul代理。以简化UI应用希望对一�
 
 > Zuul启动器不包含服务发现客户端，所以，对于基于服务ID的路由，您还需要提供一个服务发现客户端（Eureka是一种选择）。
 
+要跳过自动添加服务的过程，将需要忽略的服务ID匹配模式集合设置到`zuul.ignored-services`中。服务如果匹配到忽略的模式，但在路由关系图中明确配置了该服务，将不会忽略，如下例所示：
+
+**application.yml.** 
+
+```yaml
+ zuul:
+  ignoredServices: '*'
+  routes:
+    users: /myusers/**
+```
+
+上面的示例中，**除了**`users`，其他的都将会被忽略。
+
+要增加或更改代理路由，您可以添加外部配置，如下所示：
+
+**application.yml.** 
+
+```yaml
+ zuul:
+  routes:
+    users: /myusers/**
+```
+
+上面示例的含义是`/myusers`的HTTP调用会被转发的`users`服务（如`/myusers/101`会被转发到`/101`）。
+
+要更细粒度的控制路由，您可以分别指定`path`和`serviceId`，如下所示：
+
+**application.yml.** 
+
+```yaml
+ zuul:
+  routes:
+    users:
+      path: /myusers/**
+      serviceId: users_service
+```
+
+上面示例的含义是`myusers`的HTTP调用会被转发到`users_service`服务。路由必须具有一个可以指定为`ant-style`模式的`path`，因此`/myusers/*`仅匹配一级，而`/myusers/**`则是多级匹配。
+
+后端地址可以指定为`serviceId`（针对来自服务发现的服务），也可以指定为`url`（针对物理位置），如下例所示：
+
+**application.yml.** 
+
+```yaml
+ zuul:
+  routes:
+    users:
+      path: /myusers/**
+      url: https://example.com/users_service
+```
+
+这些简单的`url-routes`不会以`HystrixCommand`的方式执行，也不会使用`Ribbon`对多个URLs做负载均衡。为了实现这个目标，您可以指定一个静态服务列表的`serviceId`，如下所示：
+
+**application.yml.** 
+
+```yaml
+zuul:
+  routes:
+    echo:
+      path: /myusers/**
+      serviceId: myusers-service
+      stripPrefix: true
+
+hystrix:
+  command:
+    myusers-service:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: ...
+
+myusers-service:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: https://example1.com,http://example2.com
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
+```
+
 
 
 
