@@ -210,6 +210,67 @@
 <blockquote>
 <p>Zuul启动器不包含服务发现客户端，所以，对于基于服务ID的路由，您还需要提供一个服务发现客户端（Eureka是一种选择）。</p>
 </blockquote>
+<p>要跳过自动添加服务的过程，将需要忽略的服务ID匹配模式集合设置到<code>zuul.ignored-services</code>中。服务如果匹配到忽略的模式，但在路由关系图中明确配置了该服务，将不会忽略，如下例所示：</p>
+<p><strong>application.yml.</strong> </p>
+<pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
+ <span class="hljs-attr">ignoredServices:</span> <span class="hljs-string">'*'</span>
+ <span class="hljs-attr">routes:</span>
+   <span class="hljs-attr">users:</span> <span class="hljs-string">/myusers/**</span></code></pre>
+
+<p>上面的示例中，<strong>除了</strong><code>users</code>，其他的都将会被忽略。</p>
+<p>要增加或更改代理路由，您可以添加外部配置，如下所示：</p>
+<p><strong>application.yml.</strong> </p>
+<pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
+ <span class="hljs-attr">routes:</span>
+   <span class="hljs-attr">users:</span> <span class="hljs-string">/myusers/**</span></code></pre>
+
+<p>上面示例的含义是<code>/myusers</code>的HTTP调用会被转发的<code>users</code>服务（如<code>/myusers/101</code>会被转发到<code>/101</code>）。</p>
+<p>要更细粒度的控制路由，您可以分别指定<code>path</code>和<code>serviceId</code>，如下所示：</p>
+<p><strong>application.yml.</strong> </p>
+<pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
+ <span class="hljs-attr">routes:</span>
+   <span class="hljs-attr">users:</span>
+     <span class="hljs-attr">path:</span> <span class="hljs-string">/myusers/**</span>
+     <span class="hljs-attr">serviceId:</span> <span class="hljs-string">users_service</span></code></pre>
+
+<p>上面示例的含义是<code>myusers</code>的HTTP调用会被转发到<code>users_service</code>服务。路由必须具有一个可以指定为<code>ant-style</code>模式的<code>path</code>，因此<code>/myusers/*</code>仅匹配一级，而<code>/myusers/**</code>则是多级匹配。</p>
+<p>后端地址可以指定为<code>serviceId</code>（针对来自服务发现的服务），也可以指定为<code>url</code>（针对物理位置），如下例所示：</p>
+<p><strong>application.yml.</strong> </p>
+<pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
+ <span class="hljs-attr">routes:</span>
+   <span class="hljs-attr">users:</span>
+     <span class="hljs-attr">path:</span> <span class="hljs-string">/myusers/**</span>
+     <span class="hljs-attr">url:</span> <span class="hljs-string">https://example.com/users_service</span></code></pre>
+
+<p>这些简单的<code>url-routes</code>不会以<code>HystrixCommand</code>的方式执行，也不会使用<code>Ribbon</code>对多个URLs做负载均衡。为了实现这个目标，您可以指定一个静态服务列表的<code>serviceId</code>，如下所示：</p>
+<p><strong>application.yml.</strong> </p>
+<pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
+  <span class="hljs-attr">routes:</span>
+    <span class="hljs-attr">echo:</span>
+      <span class="hljs-attr">path:</span> <span class="hljs-string">/myusers/**</span>
+      <span class="hljs-attr">serviceId:</span> <span class="hljs-string">myusers-service</span>
+      <span class="hljs-attr">stripPrefix:</span> <span class="hljs-literal">true</span>
+
+<span class="hljs-attr">hystrix:</span>
+  <span class="hljs-attr">command:</span>
+    <span class="hljs-attr">myusers-service:</span>
+      <span class="hljs-attr">execution:</span>
+        <span class="hljs-attr">isolation:</span>
+          <span class="hljs-attr">thread:</span>
+            <span class="hljs-attr">timeoutInMilliseconds:</span> <span class="hljs-string">...</span>
+
+<span class="hljs-attr">myusers-service:</span>
+  <span class="hljs-attr">ribbon:</span>
+    <span class="hljs-attr">NIWSServerListClassName:</span> <span class="hljs-string">com.netflix.loadbalancer.ConfigurationBasedServerList</span>
+    <span class="hljs-attr">listOfServers:</span> <span class="hljs-string">https://example1.com,http://example2.com</span>
+    <span class="hljs-attr">ConnectTimeout:</span> <span class="hljs-number">1000</span>
+    <span class="hljs-attr">ReadTimeout:</span> <span class="hljs-number">3000</span>
+    <span class="hljs-attr">MaxTotalHttpConnections:</span> <span class="hljs-number">500</span>
+    <span class="hljs-attr">MaxConnectionsPerHost:</span> <span class="hljs-number">100</span></code></pre>
+
+
+
+
 
   
   
