@@ -210,7 +210,7 @@
 <blockquote>
 <p>Zuul启动器不包含服务发现客户端，所以，对于基于服务ID的路由，您还需要提供一个服务发现客户端（Eureka是一种选择）。</p>
 </blockquote>
-<p>要跳过自动添加服务的过程，将需要忽略的服务ID匹配模式集合设置到<code>zuul.ignored-services</code>中。服务如果匹配到忽略的模式，但在路由关系图中明确配置了该服务，将不会忽略，如下例所示：</p>
+<p>要跳过自动添加服务的过程，需要将忽略的服务ID匹配模式集合设置到<code>zuul.ignored-services</code>中。服务如果匹配到忽略的模式，但在路由关系图中明确配置了该服务，该服务将不会被忽略，如下例所示：</p>
 <p><strong>application.yml.</strong> </p>
 <pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
  <span class="hljs-attr">ignoredServices:</span> <span class="hljs-string">'*'</span>
