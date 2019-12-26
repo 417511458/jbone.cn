@@ -15,7 +15,7 @@ order: 0
 ---|---|---|---
 [概述](overview.html)  |  [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_router_and_filter_zuul) | [马军伟](https://github.com/417511458) | 完成
 [如何集成Zuul](how-to-include.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_router_and_filter_zuul) | [马军伟](https://github.com/417511458) | 完成
-[嵌入式Zuul反向代理](embedded-zuul-reverse-proxy.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#netflix-zuul-reverse-proxy) | [马军伟](https://github.com/417511458) | 进行中
+[嵌入式Zuul反向代理](embedded-zuul-reverse-proxy.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#netflix-zuul-reverse-proxy) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
