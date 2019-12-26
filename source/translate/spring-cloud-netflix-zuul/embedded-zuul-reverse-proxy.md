@@ -94,6 +94,61 @@ myusers-service:
     MaxConnectionsPerHost: 100
 ```
 
+另外一个方法是指定`service-route`并给`serviceId`配置`Ribbon`客户端（这样做需要禁用`Ribbon`中的`Eureka` - [了解更多](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#spring-cloud-ribbon-without-eureka)），如下例所示：
+
+**application.yml.** 
+
+```yaml
+zuul:
+  routes:
+    users:
+      path: /myusers/**
+      serviceId: users
+
+ribbon:
+  eureka:
+    enabled: false
+
+users:
+  ribbon:
+    listOfServers: example.com,google.com
+```
+
+您可以使用`regexmapper`在`serviceId`和`routes`之间提供约定。它使用正则表达式命名组从`serviceId`提取变量，并将这些变量注入到路由匹配模式中，如下例所示：
+
+**ApplicationConfiguration.java.**
+
+```java
+@Bean
+public PatternServiceRouteMapper serviceRouteMapper() {
+    return new PatternServiceRouteMapper(
+        "(?<name>^.+)-(?<version>v.+$)",
+        "${version}/${name}");
+}
+```
+
+上面示例的含义是`myusers-v1`的`serviceId`被映射到路由`/v1/myusers/**`。这里可以接受任意正则表达式，但所有命名组必须同时出现在`servicePattern`和`routePattern`中。如果`servicePattern`不匹配`serviceId`，则使用默认行为。在上面的示例中，`myusers`的`serviceId`会被映射到`/myusers/**`路由（没检测到版本）。默认情况下这个功能是禁用的，且仅适用于服务发现的服务。
+
+设置`zuul.prefix`的值，给所有映射加前缀，如`/api`。默认情况下，请求在转发之前，代理前缀将从请求中剥离（您可以通过`zuul.stripPrefix=false`关闭该功能）。您还可以关闭从单个路由中剥离特定于服务的前缀。如下例所示：
+
+**application.yml.*
+
+```yaml
+ zuul:
+  routes:
+    users:
+      path: /myusers/**
+      stripPrefix: false
+```
+
+> `zuul.stripPrefix`仅适用于`zuul.prefix`中设置的前缀。它对给定路由`path`中定义的前缀没有任何影响。
+  
+上面的示例中，请求`/myusers/101`会被转发到`users`服务的`/myusers/101`。
+
+
+
+
+
 
 
 
