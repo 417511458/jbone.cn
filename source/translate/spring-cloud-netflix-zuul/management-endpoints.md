@@ -27,7 +27,7 @@ order: 8
 }
 ```
 
-通过给`/routes`端点添加`?format=details`查询字符串，可以访问路由详情。加上只有可以输出以下内容：
+通过给`/routes`端点添加`?format=details`查询字符串，可以访问路由详情。加上之后会输出以下内容：
 
 **GET /routes/details.**
 
@@ -48,7 +48,7 @@ order: 8
 
 `/routes`的`POST`请求强制刷新现有路由（例如，当服务目录发生变更时）。您可以将`endpoints.routes.enabled`设置为`false`来禁用该端点。
 
-> 路由应对自动响应服务目录的变更，但对`/routes`进行`POST`请求是强制立即变更的一种方式。
+> 路由应该自动响应服务目录的变更，但对`/routes`进行`POST`请求是一种强制立即变更的方式。
 
 ## Filters 端点
 
