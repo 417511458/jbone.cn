@@ -255,7 +255,7 @@
   /stores/**: "http://localhost:8081"
 &#125;</code></pre>
 
-<p>通过给<code>/routes</code>端点添加<code>?format=details</code>查询字符串，可以访问路由详情。加上只有可以输出以下内容：</p>
+<p>通过给<code>/routes</code>端点添加<code>?format=details</code>查询字符串，可以访问路由详情。加上之后会输出以下内容：</p>
 <p><strong>GET /routes/details.</strong></p>
 <pre><code class="hljs json">&#123;
   <span class="hljs-attr">"/stores/**"</span>: &#123;
@@ -272,7 +272,7 @@
 
 <p><code>/routes</code>的<code>POST</code>请求强制刷新现有路由（例如，当服务目录发生变更时）。您可以将<code>endpoints.routes.enabled</code>设置为<code>false</code>来禁用该端点。</p>
 <blockquote>
-<p>路由应对自动响应服务目录的变更，但对<code>/routes</code>进行<code>POST</code>请求是强制立即变更的一种方式。</p>
+<p>路由应该自动响应服务目录的变更，但对<code>/routes</code>进行<code>POST</code>请求是一种强制立即变更的方式。</p>
 </blockquote>
 <h2 id="Filters-端点"><a href="#Filters-端点" class="headerlink" title="Filters 端点"></a>Filters 端点</h2><p><code>/filters</code>端点的<code>GET</code>请求按过滤器类型返回Zuul过滤器的map集合。对于map中的每种过滤器类型，都将获取到该类型的所有过滤器及其详情。</p>
 
