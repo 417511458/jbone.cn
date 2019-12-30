@@ -19,6 +19,7 @@ order: 0
 [Zuul Http Client](zuul-http-client.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_zuul_http_client) | [马军伟](https://github.com/417511458) | 完成
 [Cookies和敏感头信息](cookies-and-sensitive-headers.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_cookies_and_sensitive_headers) | [马军伟](https://github.com/417511458) | 完成
 [忽略头信息](ignored-headers.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_ignored_headers) | [马军伟](https://github.com/417511458) | 完成
+[管理端点](management-endpoints.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_management_endpoints) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
