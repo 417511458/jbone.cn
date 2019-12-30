@@ -232,7 +232,7 @@
 
 -->
   
-    <p>除了路由敏感头信息之外，您还可以通过<code>zuul.ignoredHeaders</code>来设置全局的和下游服务交互期间（请求和响应）需要丢弃的值。默认情况下，如果不使用<code>Spring Security</code>，那么这些值都是空的。否则，它们将初始化为由<code>Spring Security</code>指定的众所周知的<code>security</code>头信息（例如，涉及缓存）。在本案例中，假定下游服务也可能添加这些头信息，但是我们希望从代理中获取。要避免使用<code>Spring Security</code>时丢弃这些众所周知的<code>security</code>头信息，您可以将<code>zuul.ignoreSecurityHeaders</code>设置为<code>false</code>。如果您在<code>Spring Security</code>中禁用了<code>HTTP Security</code>响应头，并且希望下游服务提供该值，这样做非常有用。</p>
+    <p>除了路由敏感头信息之外，您还可以通过<code>zuul.ignoredHeaders</code>来设置全局的和下游服务交互期间（请求和响应）需要丢弃的值。默认情况下，如果不使用<code>Spring Security</code>，那么这些值都是空的。如果使用了<code>Spring Security</code>，它们将初始化为由<code>Spring Security</code>指定的众所周知的<code>security</code>头信息（例如，涉及缓存）。在本案例中，假定下游服务也可能添加这些头信息，但是我们希望从代理中获取。要在使用<code>Spring Security</code>时不丢弃这些众所周知的<code>security</code>头信息，您可以将<code>zuul.ignoreSecurityHeaders</code>设置为<code>false</code>。如果您在<code>Spring Security</code>中禁用了<code>HTTP Security</code>响应头，并且希望下游服务提供该值，这样做非常有用。</p>
 
   
   
