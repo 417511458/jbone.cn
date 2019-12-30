@@ -1,10 +1,10 @@
 ---
-title: 管理端点
+title: 7.管理端点
 date: 2019-11-29 08:49:43
 type: translate-spring-cloud-netflix-zuul
 description: Spring Cloud Zuul官方文档翻译
 keywords: Spring Cloud Zuul，Spring Cloud 网关，翻译
-order: 8
+order: 7
 ---
 
 默认情况下，如果你将`@EnableZuulProxy`和`Spring Boot Actuator`结合使用。则会启用两个附加端点:
