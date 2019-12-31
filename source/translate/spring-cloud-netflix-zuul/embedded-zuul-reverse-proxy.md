@@ -1,5 +1,5 @@
 ---
-title: 3.嵌入式反向代理
+title: 3.嵌入式Zuul反向代理
 date: 2019-11-29 08:49:43
 type: translate-spring-cloud-netflix-zuul
 description: Spring Cloud Zuul官方文档翻译
