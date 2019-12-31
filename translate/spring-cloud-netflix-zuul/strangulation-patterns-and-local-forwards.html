@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>4.Zuul Http Client — Jbone</title>
+    <title>8.抑制模式和本地转发 — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/zuul-http-client.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/strangulation-patterns-and-local-forwards.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="4.Zuul Http Client — Jbone">
+    <meta property="og:title" content="8.抑制模式和本地转发 — Jbone">
     <meta property="og:description" content="Spring Cloud Zuul官方文档翻译">
-    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Zuul Http Client">
+    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Strangulation Patterns and Local Forwards">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -183,7 +183,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/zuul-http-client.html" class="sidebar-link current">4.Zuul Http Client</a>
+      <a href="/translate/spring-cloud-netflix-zuul/zuul-http-client.html" class="sidebar-link">4.Zuul Http Client</a>
     </li>
   
     
@@ -219,7 +219,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/strangulation-patterns-and-local-forwards.html" class="sidebar-link">8.抑制模式和本地转发</a>
+      <a href="/translate/spring-cloud-netflix-zuul/strangulation-patterns-and-local-forwards.html" class="sidebar-link current">8.抑制模式和本地转发</a>
     </li>
   
 </ul>
@@ -242,7 +242,7 @@
     
   
   
-    <h1>4.Zuul Http Client</h1>
+    <h1>8.抑制模式和本地转发</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -250,7 +250,7 @@
 
 -->
   
-    <p>Zuul使用的默认HTTP客户端现在是<code>Apache HTTP Client</code>，而不是弃用的<code>Ribbon RestClient</code>。想要使用<code>RestClient</code>或<code>okhttp3.OkHttpClient</code>，需要分别设置<code>ribbon.restclient.enabled=true</code>或<code>ribbon.okhttp.enabled=true</code>。如果您想要自定义<code>Apache HTTP client</code>或<code>OK HTTP client</code>，请提供<code>ClosableHttpClient</code>或<code>OkHttpClient</code>类型的bean。</p>
+    <p>当迁移现有应用或API时，常用方式是<code>抑制</code>老端点，慢慢地将这些老端点替换成不同的实现。对于该场景，Zuul代理是一个而非常有用的工具，因为您可以使用它去处理来自老端点的所有流量，并将其中的一些请求重定向到新端点。</p>
 
   
   
@@ -263,7 +263,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/zuul-http-client.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/strangulation-patterns-and-local-forwards.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
