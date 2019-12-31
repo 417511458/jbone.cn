@@ -20,6 +20,7 @@ order: 0
 [5.Cookies和敏感头信息](cookies-and-sensitive-headers.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_cookies_and_sensitive_headers) | [马军伟](https://github.com/417511458) | 完成
 [6.忽略头信息](ignored-headers.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_ignored_headers) | [马军伟](https://github.com/417511458) | 完成
 [7.管理端点](management-endpoints.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_management_endpoints) | [马军伟](https://github.com/417511458) | 完成
+[8.抑制模式和本地转发](strangulation-patterns-and-local-forwards.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_strangulation_patterns_and_local_forwards) | [马军伟](https://github.com/417511458) | 进行中
 
 <br />
 
