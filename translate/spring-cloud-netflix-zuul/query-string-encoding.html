@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>5.Cookies和敏感头信息 — Jbone</title>
+    <title>10.查询字符串编码 — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/cookies-and-sensitive-headers.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/query-string-encoding.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="5.Cookies和敏感头信息 — Jbone">
+    <meta property="og:title" content="10.查询字符串编码 — Jbone">
     <meta property="og:description" content="Spring Cloud Zuul官方文档翻译">
-    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Cookes and sensitive headers">
+    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Query String Encoding">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -192,7 +192,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/cookies-and-sensitive-headers.html" class="sidebar-link current">5.Cookies和敏感头信息</a>
+      <a href="/translate/spring-cloud-netflix-zuul/cookies-and-sensitive-headers.html" class="sidebar-link">5.Cookies和敏感头信息</a>
     </li>
   
     
@@ -237,7 +237,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/query-string-encoding.html" class="sidebar-link">10.查询字符串编码</a>
+      <a href="/translate/spring-cloud-netflix-zuul/query-string-encoding.html" class="sidebar-link current">10.查询字符串编码</a>
     </li>
   
 </ul>
@@ -260,7 +260,7 @@
     
   
   
-    <h1>5.Cookies和敏感头信息</h1>
+    <h1>10.查询字符串编码</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -268,30 +268,15 @@
 
 -->
   
-    <p>您可以在同一系统中的服务间共享头信息，但是您可能不想让敏感头信息泄露到下游外部服务。您可以在路由配置部分指定要忽略的头信息集合。<code>Cookies</code>发挥着重要的作用，因为它们在浏览器中具有定义明确的语义，并且它们始终是被认为敏感的。如果您代理的使用者是浏览器，那么下游服务的cookies也会给用户带来问题，因为它们都混在一起了（所有下游服务看起来都像是来自同一个地方）。</p>
-<p>如果您对服务的设计很谨慎，（例如，如果只有一个下游服务设置cookies），您可以让它们从后端一直透传到调用者。另外，如果您的代理设置了cookies，并且您的所有后端服务都属于同一系统的一部分，那么很自然的就可以简单的共享它们（并且，例如，使用<code>Spring Session</code>将它们连接到一些共享状态）。除此之外，下游服务设置的cookies对于调用者都没用，所以建议您（至少）将<code>Set-Cookie</code>和<code>Cookie</code>设置为不属于您域的路由的敏感头信息。即使对于属于您域的路由，在让cookies在它们和代理之间流动之前，也请尝试仔细思考其含义。（译者注：这里的<code>它们</code>是指路由和下游服务，<code>代理</code>指浏览器）</p>
-<p>可以以逗号分隔的形式配置每个路由的敏感头信息集合，如下例所示：</p>
+    <p>在处理传入的请求时，会对查询参数进行解码，以便它们可以在<code>Zuul</code>过滤器中进行修改。然后将它们重新编码，在路由过滤器中重建后端请求。如果（例如）使用Javascript的<code>encodeURIComponent()</code>方法对其进行编码，结果可能和原始输入不同。尽管这在大多数情况下不会有什么问题，但有些web服务器对复杂查询字符串的编码很挑剔。</p>
+<p>要强制查询字符串的原始编码，可以设置<code>ZuulProperties</code>的特殊标志，以便使用<code>HttpServletRequest :: getQueryString</code>方法按原样获取查询字符串，如下例所示：</p>
 <p><strong>application.yml.</strong></p>
 <pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
- <span class="hljs-attr">routes:</span>
-   <span class="hljs-attr">users:</span>
-     <span class="hljs-attr">path:</span> <span class="hljs-string">/myusers/**</span>
-     <span class="hljs-attr">sensitiveHeaders:</span> <span class="hljs-string">Cookie,Set-Cookie,Authorization</span>
-     <span class="hljs-attr">url:</span> <span class="hljs-string">https://downstream</span></code></pre>
+ <span class="hljs-attr">forceOriginalQueryStringEncoding:</span> <span class="hljs-literal">true</span></code></pre>
 
 <blockquote>
-<p>以上是<code>sensitiveHeaders</code>的默认值，因此如果您不想改变这个配置，则不需要设置。这是Spring Clound Netflix 1.1中的新特性（1.0中，用户不能控制头信息，并且所有cookies都是双向流动的）。</p>
+<p>这个特殊标志只适用于<code>SimpleHostRoutingFilter</code>。同时，您失去了使用<code>RequestContext.getCurrentContext().setRequestQueryParams(someOverriddenParameters)</code>轻松覆盖查询参数的能力。因为此时的查询字符串是直接从原始<code>HttpServletRequest</code>中获取的。</p>
 </blockquote>
-<p><code>sensitiveHeaders</code>是一个黑名单，且默认值非空。因此，要使Zuul传递所有头信息（被忽略的除外），您必须明确的将该配置设置为空。如果您想将cookie或授权头信息传递到后端，则必须要这么做。下面的示例展示了如何使用<code>sensitiveHeaders</code>：</p>
-<p><strong>application.yml.</strong></p>
-<pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
- <span class="hljs-attr">routes:</span>
-   <span class="hljs-attr">users:</span>
-     <span class="hljs-attr">path:</span> <span class="hljs-string">/myusers/**</span>
-     <span class="hljs-attr">sensitiveHeaders:</span>
-     <span class="hljs-attr">url:</span> <span class="hljs-string">https://downstream</span></code></pre>
-
-<p>您还可以通过<code>zuul.sensitiveHeaders</code>设置敏感头信息。如果在路由上设置了<code>sensitiveHeaders</code>，路由上的<code>sensitiveHeaders</code>将会覆盖全局的<code>sensitiveHeaders</code>。</p>
 
   
   
@@ -304,7 +289,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/cookies-and-sensitive-headers.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/query-string-encoding.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
