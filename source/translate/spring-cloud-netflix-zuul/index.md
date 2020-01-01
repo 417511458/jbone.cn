@@ -21,6 +21,7 @@ order: 0
 [6.忽略头信息](ignored-headers.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_ignored_headers) | [马军伟](https://github.com/417511458) | 完成
 [7.管理端点](management-endpoints.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_management_endpoints) | [马军伟](https://github.com/417511458) | 完成
 [8.抑制模式和本地转发](strangulation-patterns-and-local-forwards.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_strangulation_patterns_and_local_forwards) | [马军伟](https://github.com/417511458) | 完成
+[9.通过Zuul上传文件](uploading-files-through-zuul.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_uploading_files_through_zuul) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
