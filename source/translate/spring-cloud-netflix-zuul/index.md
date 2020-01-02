@@ -23,6 +23,7 @@ order: 0
 [8.抑制模式和本地转发](strangulation-patterns-and-local-forwards.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_strangulation_patterns_and_local_forwards) | [马军伟](https://github.com/417511458) | 完成
 [9.通过Zuul上传文件](uploading-files-through-zuul.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_uploading_files_through_zuul) | [马军伟](https://github.com/417511458) | 完成
 [10.查询字符串编码](query-string-encoding.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_query_string_encoding) | [马军伟](https://github.com/417511458) | 完成
+[11.请求URI编码](request-uri-encoding.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_request_uri_encoding) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
