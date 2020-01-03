@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>Spring Cloud Netflix Zuul官方文档翻译 — Jbone</title>
+    <title>13.禁用Zuul Filters — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/index.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/disable-zuul-filters.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Spring Cloud Netflix Zuul官方文档翻译 — Jbone">
-    <meta property="og:description" content="Spring Cloud Netflix Zuul官方文档翻译">
-    <meta property="og:keywords" content="Spring Cloud Netflix Zuul，Spring Cloud 网关，翻译，embedded zuul reverse proxy">
+    <meta property="og:title" content="13.禁用Zuul Filters — Jbone">
+    <meta property="og:description" content="Spring Cloud Zuul官方文档翻译">
+    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Disable Zuul Filters">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -147,7 +147,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/index.html" class="sidebar-link current">Spring Cloud Netflix Zuul官方文档翻译</a>
+      <a href="/translate/spring-cloud-netflix-zuul/index.html" class="sidebar-link">Spring Cloud Netflix Zuul官方文档翻译</a>
     </li>
   
     
@@ -264,7 +264,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/disable-zuul-filters.html" class="sidebar-link">13.禁用Zuul Filters</a>
+      <a href="/translate/spring-cloud-netflix-zuul/disable-zuul-filters.html" class="sidebar-link current">13.禁用Zuul Filters</a>
     </li>
   
 </ul>
@@ -287,7 +287,7 @@
     
   
   
-    <h1>Spring Cloud Netflix Zuul官方文档翻译</h1>
+    <h1>13.禁用Zuul Filters</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -295,114 +295,7 @@
 
 -->
   
-    <p>本专题是对Spring Cloud Netflix官方文档中Zuul部分的翻译。</p>
-<blockquote>
-<p>Spring Cloud Netflix Zuul版本：2.1.3.RELEASE</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>译文</th>
-<th>原文</th>
-<th>贡献者</th>
-<th>状态</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="overview.html">1.概述</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_router_and_filter_zuul" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="how-to-include.html">2.如何集成Zuul</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_router_and_filter_zuul" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="embedded-zuul-reverse-proxy.html">3.嵌入式Zuul反向代理</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#netflix-zuul-reverse-proxy" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="zuul-http-client.html">4.Zuul Http Client</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_zuul_http_client" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="cookies-and-sensitive-headers.html">5.Cookies和敏感头信息</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_cookies_and_sensitive_headers" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="ignored-headers.html">6.忽略头信息</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_ignored_headers" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="management-endpoints.html">7.管理端点</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_management_endpoints" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="strangulation-patterns-and-local-forwards.html">8.抑制模式和本地转发</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_strangulation_patterns_and_local_forwards" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="uploading-files-through-zuul.html">9.通过Zuul上传文件</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_uploading_files_through_zuul" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="query-string-encoding.html">10.查询字符串编码</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_query_string_encoding" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="request-uri-encoding.html">11.请求URI编码</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_request_uri_encoding" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="plain-embedded-zuul.html">12.纯嵌入式Zuul</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_plain_embedded_zuul" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-<tr>
-<td><a href="disable-zuul-filter.html">13.禁用Zuul Filters</a></td>
-<td><a href="https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_disable_zuul_filters" target="_blank" rel="noopener">原文地址</a></td>
-<td><a href="https://github.com/417511458" target="_blank" rel="noopener">马军伟</a></td>
-<td>完成</td>
-</tr>
-</tbody></table>
-<br />
-
-<blockquote>
-<p><code>-</code>表示当前文章暂时没人翻译，欢迎认领自己感兴趣的专题，加入翻译！</p>
-<p>如果您发现已翻译的文章有错或有更好的表达方式，欢迎指出！</p>
-</blockquote>
-<br />
-
-<p><strong><a href="/translate/join.html">我也要加入翻译&gt;&gt;&gt;</a></strong></p>
-<br />
-
-
-
-
-
-
+    <p>Zuul为Spring Cloud附带了许多<code>ZuulFilter</code>beans，并且这些beans在<code>proxy</code>模式和<code>server</code>模式下都是默认启用的。在<a href="https://github.com/spring-cloud/spring-cloud-netflix/tree/master/spring-cloud-netflix-zuul/src/main/java/org/springframework/cloud/netflix/zuul/filters" target="_blank" rel="noopener">Zuul过滤器包</a>中查看您可以启用的过滤器集合。如果您想禁用某个过滤器，请设置<code>zuul.&lt;SimpleClassName&gt;.&lt;filterType&gt;.disable=true</code>。按照惯例，<code>filters</code>后面的包是Zuul过滤器的类型。例如，想禁用<code>org.springframework.cloud.netflix.zuul.filters.post.SendResponseFilter</code>，需要设置<code>zuul.SendResponseFilter.post.disable=true</code>。</p>
 
   
   
@@ -415,7 +308,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/index.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/disable-zuul-filters.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
