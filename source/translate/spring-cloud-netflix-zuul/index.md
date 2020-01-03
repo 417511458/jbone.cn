@@ -3,7 +3,7 @@ title: Spring Cloud Netflix Zuul官方文档翻译
 date: 2019-11-29 08:49:43
 type: translate-spring-cloud-netflix-zuul
 description: Spring Cloud Netflix Zuul官方文档翻译
-keywords: Spring Cloud Netflix Zuul，Spring Cloud 网关，翻译，embedded zuul reverse proxy
+keywords: Spring Cloud Netflix Zuul，Spring Cloud 网关，翻译
 order: 0
 ---
 
@@ -27,6 +27,7 @@ order: 0
 [12.纯嵌入式Zuul](plain-embedded-zuul.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_plain_embedded_zuul) | [马军伟](https://github.com/417511458) | 完成
 [13.禁用Zuul Filters](disable-zuul-filter.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_disable_zuul_filters) | [马军伟](https://github.com/417511458) | 完成
 [14.为路由提供Hystrix Fallbacks](providing-hystrix-fallbacks-for-routes.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#hystrix-fallbacks-for-routes) | [马军伟](https://github.com/417511458) | 完成
+[15.Zuul Timeouts](zuul-timeouts.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_zuul_timeouts) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
