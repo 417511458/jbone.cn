@@ -28,6 +28,7 @@ order: 0
 [13.禁用Zuul Filters](disable-zuul-filter.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_disable_zuul_filters) | [马军伟](https://github.com/417511458) | 完成
 [14.为路由提供Hystrix Fallbacks](providing-hystrix-fallbacks-for-routes.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#hystrix-fallbacks-for-routes) | [马军伟](https://github.com/417511458) | 完成
 [15.Zuul Timeouts](zuul-timeouts.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_zuul_timeouts) | [马军伟](https://github.com/417511458) | 完成
+[16.重写Location头信息](rewriting-the-location-header.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#zuul-redirect-location-rewrite) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
