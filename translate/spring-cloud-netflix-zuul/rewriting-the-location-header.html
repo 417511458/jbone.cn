@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>7.管理端点 — Jbone</title>
+    <title>16.重写Location头信息 — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/management-endpoints.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/rewriting-the-location-header.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="7.管理端点 — Jbone">
+    <meta property="og:title" content="16.重写Location头信息 — Jbone">
     <meta property="og:description" content="Spring Cloud Zuul官方文档翻译">
-    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，management endpoints">
+    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Rewriting The Location Header">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -210,7 +210,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/management-endpoints.html" class="sidebar-link current">7.管理端点</a>
+      <a href="/translate/spring-cloud-netflix-zuul/management-endpoints.html" class="sidebar-link">7.管理端点</a>
     </li>
   
     
@@ -291,7 +291,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/rewriting-the-location-header.html" class="sidebar-link">16.重写Location头信息</a>
+      <a href="/translate/spring-cloud-netflix-zuul/rewriting-the-location-header.html" class="sidebar-link current">16.重写Location头信息</a>
     </li>
   
 </ul>
@@ -314,7 +314,7 @@
     
   
   
-    <h1>7.管理端点</h1>
+    <h1>16.重写Location头信息</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -322,40 +322,22 @@
 
 -->
   
-    <p>默认情况下，如果你将<code>@EnableZuulProxy</code>和<code>Spring Boot Actuator</code>结合使用。则会启用两个附加端点:</p>
-<ul>
-<li>Routes</li>
-<li>Filters</li>
-</ul>
-<blockquote>
-<p>译者注:<br>必须是和<code>Spring Boot Actuator</code>结合使用才会启用这两个管理端点，且访问路径的<code>contextPath</code>和<code>Spring Boot Actuator</code>的<code>contextPath</code>一致。</p>
-</blockquote>
-<h2 id="Routes-端点"><a href="#Routes-端点" class="headerlink" title="Routes 端点"></a>Routes 端点</h2><p><code>/routes</code>端点的<code>GET</code>请求返回路由映射集合：</p>
-<p><strong>GET /routes.</strong></p>
-<pre><code class="hljs json">&#123;
-  /stores/**: "http://localhost:8081"
+    <p>如果Zuul面对的是web应用，当web应用通过HTTP的<code>3XX</code>状态码来重定向时，您可能需要重写<code>Location</code>头信息。否则，浏览器将重定向到web应用的URL，而不是Zuul URL。您可以配置Zuul过滤器<code>LocationRewriteFilter</code>将<code>Location</code>头信息重写为Zuul的URL。另外它还添加了特定于路由的前缀。以下示例使用Spring Configuration文件添加过滤器：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> org.springframework.cloud.netflix.zuul.filters.post.LocationRewriteFilter;
+...
+
+<span class="hljs-meta">@Configuration</span>
+<span class="hljs-meta">@EnableZuulProxy</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ZuulConfig</span> </span>&#123;
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> LocationRewriteFilter <span class="hljs-title">locationRewriteFilter</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> LocationRewriteFilter();
+    &#125;
 &#125;</code></pre>
 
-<p>通过给<code>/routes</code>端点添加<code>?format=details</code>查询字符串，可以访问路由详情。加上之后会输出以下内容：</p>
-<p><strong>GET /routes/details.</strong></p>
-<pre><code class="hljs json">&#123;
-  <span class="hljs-attr">"/stores/**"</span>: &#123;
-    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"stores"</span>,
-    <span class="hljs-attr">"fullPath"</span>: <span class="hljs-string">"/stores/**"</span>,
-    <span class="hljs-attr">"location"</span>: <span class="hljs-string">"http://localhost:8081"</span>,
-    <span class="hljs-attr">"path"</span>: <span class="hljs-string">"/**"</span>,
-    <span class="hljs-attr">"prefix"</span>: <span class="hljs-string">"/stores"</span>,
-    <span class="hljs-attr">"retryable"</span>: <span class="hljs-literal">false</span>,
-    <span class="hljs-attr">"customSensitiveHeaders"</span>: <span class="hljs-literal">false</span>,
-    <span class="hljs-attr">"prefixStripped"</span>: <span class="hljs-literal">true</span>
-  &#125;
-&#125;</code></pre>
-
-<p><code>/routes</code>的<code>POST</code>请求强制刷新现有路由（例如，当服务目录发生变更时）。您可以将<code>endpoints.routes.enabled</code>设置为<code>false</code>来禁用该端点。</p>
 <blockquote>
-<p>路由应该自动响应服务目录的变更，但对<code>/routes</code>进行<code>POST</code>请求是一种强制立即变更的方式。</p>
+<p><strong>警告</strong><br>使用这个过滤器时一定要谨慎。这个过滤器作用于所有<code>3XX</code>响应码的<code>Location</code>头信息，可能不适用于所有场景，例如将用户重定向到外部URL时。</p>
 </blockquote>
-<h2 id="Filters-端点"><a href="#Filters-端点" class="headerlink" title="Filters 端点"></a>Filters 端点</h2><p><code>/filters</code>端点的<code>GET</code>请求按过滤器类型返回Zuul过滤器的map集合。对于map中的每种过滤器类型，都将获取到该类型的所有过滤器及其详情。</p>
 
   
   
@@ -368,7 +350,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/management-endpoints.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/rewriting-the-location-header.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
