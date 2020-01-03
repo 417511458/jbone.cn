@@ -295,7 +295,7 @@
 
 -->
   
-    <p>Zuul为Spring Cloud附带了许多<code>ZuulFilter</code>beans，并且这些beans在<code>proxy</code>模式和<code>server</code>模式下都是默认启用的。在<a href="https://github.com/spring-cloud/spring-cloud-netflix/tree/master/spring-cloud-netflix-zuul/src/main/java/org/springframework/cloud/netflix/zuul/filters" target="_blank" rel="noopener">Zuul过滤器包</a>中查看您可以启用的过滤器集合。如果您想禁用某个过滤器，请设置<code>zuul.&lt;SimpleClassName&gt;.&lt;filterType&gt;.disable=true</code>。按照惯例，<code>filters</code>后面的包是Zuul过滤器的类型。例如，想禁用<code>org.springframework.cloud.netflix.zuul.filters.post.SendResponseFilter</code>，需要设置<code>zuul.SendResponseFilter.post.disable=true</code>。</p>
+    <p>Zuul为Spring Cloud附带了许多<code>ZuulFilter</code>，并且这些<code>ZuulFilter</code>在<code>proxy</code>模式和<code>server</code>模式下都是默认启用的。在<a href="https://github.com/spring-cloud/spring-cloud-netflix/tree/master/spring-cloud-netflix-zuul/src/main/java/org/springframework/cloud/netflix/zuul/filters" target="_blank" rel="noopener">Zuul过滤器包</a>中查看您可以启用的过滤器集合。如果您想禁用某个过滤器，请设置<code>zuul.&lt;SimpleClassName&gt;.&lt;filterType&gt;.disable=true</code>。按照惯例，<code>filters</code>后面的包是Zuul过滤器的类型。例如，想禁用<code>org.springframework.cloud.netflix.zuul.filters.post.SendResponseFilter</code>，需要设置<code>zuul.SendResponseFilter.post.disable=true</code>。</p>
 
   
   
