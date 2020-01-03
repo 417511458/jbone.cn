@@ -25,6 +25,7 @@ order: 0
 [10.查询字符串编码](query-string-encoding.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_query_string_encoding) | [马军伟](https://github.com/417511458) | 完成
 [11.请求URI编码](request-uri-encoding.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_request_uri_encoding) | [马军伟](https://github.com/417511458) | 完成
 [12.纯嵌入式Zuul](plain-embedded-zuul.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_plain_embedded_zuul) | [马军伟](https://github.com/417511458) | 完成
+[13.禁用Zuul Filters](disable-zuul-filter.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_disable_zuul_filters) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
