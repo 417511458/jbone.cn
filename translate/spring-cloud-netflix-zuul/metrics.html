@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>17.启用跨源请求 — Jbone</title>
+    <title>18.Metrics — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/enabling-cross-origin-requests.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/metrics.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="17.启用跨源请求 — Jbone">
+    <meta property="og:title" content="18.Metrics — Jbone">
     <meta property="og:description" content="Spring Cloud Zuul官方文档翻译">
-    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Enabling Cross Origin Requests">
+    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Metrics">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -300,7 +300,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/enabling-cross-origin-requests.html" class="sidebar-link current">17.启用跨源请求</a>
+      <a href="/translate/spring-cloud-netflix-zuul/enabling-cross-origin-requests.html" class="sidebar-link">17.启用跨源请求</a>
     </li>
   
     
@@ -309,7 +309,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/metrics.html" class="sidebar-link">18.Metrics</a>
+      <a href="/translate/spring-cloud-netflix-zuul/metrics.html" class="sidebar-link current">18.Metrics</a>
     </li>
   
 </ul>
@@ -332,7 +332,7 @@
     
   
   
-    <h1>17.启用跨源请求</h1>
+    <h1>18.Metrics</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -340,19 +340,7 @@
 
 -->
   
-    <p>默认情况下，Zuul会将所有跨源请求(<code>CORS</code>)路由到服务中。如果您想修改Zuul的这一默认处理请求方式，您可以通过自定义<code>WebMvcConfigurer</code>来实现：</p>
-<pre><code class="hljs java"><span class="hljs-meta">@Bean</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> WebMvcConfigurer <span class="hljs-title">corsConfigurer</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebMvcConfigurer() &#123;
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addCorsMappings</span><span class="hljs-params">(CorsRegistry registry)</span> </span>&#123;
-            registry.addMapping(<span class="hljs-string">"/path-1/**"</span>)
-                    .allowedOrigins(<span class="hljs-string">"https://allowed-origin.com"</span>)
-                    .allowedMethods(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"POST"</span>);
-        &#125;
-    &#125;;
-&#125;</code></pre>
-
-<p>以上示例中，我们允许来自<code>https://allowed-origin.com</code>的<code>GET</code>和<code>POST</code>方法向<code>path-1</code>开头的端点发送跨域请求。您可以将<code>CORS</code>配置应用于特定的路径模式，或者使用<code>/**</code>将<code>CORS</code>配置应用于整个应用程序。您可以基于此配置来自定义属性：<code>allowedOrigins</code>,<code>allowedMethods</code>,<code>allowedHeaders</code>,<code>exposedHeaders</code>,<code>allowCredentials</code>和<code>maxAge</code>。</p>
+    <p>Zuul会在Actuator metrics端点下，为路由请求时可能发生的故障提供度量指标。这些度量指标可以通过<code>/actuator/metrics</code>查看。这些度量指标的名字格式为<code>ZUUL::EXCEPTION:errorCause:statusCode</code>。</p>
 
   
   
@@ -365,7 +353,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/enabling-cross-origin-requests.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/metrics.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
