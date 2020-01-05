@@ -30,6 +30,7 @@ order: 0
 [15.Zuul Timeouts](zuul-timeouts.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_zuul_timeouts) | [马军伟](https://github.com/417511458) | 完成
 [16.重写Location头信息](rewriting-the-location-header.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#zuul-redirect-location-rewrite) | [马军伟](https://github.com/417511458) | 完成
 [17.启用跨源请求](enabling-cross-origin-requests.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_enabling_cross_origin_requests) | [马军伟](https://github.com/417511458) | 完成
+[18.Metrics](metrics.html) | [原文地址](https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.1.3.RELEASE/single/spring-cloud-netflix.html#_metrics) | [马军伟](https://github.com/417511458) | 完成
 
 <br />
 
