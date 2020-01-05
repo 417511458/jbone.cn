@@ -4,17 +4,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>15.Zuul Timeouts — Jbone</title>
+    <title>19.Zuul开发者指南 — Jbone</title>
     <meta charset="utf-8">
     <meta name="description" content="Jbone - Spring Cloud微服务架构综合应用实践和基础开发框架">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/zuul-timeouts.html">
+    <link rel="alternate" hreflang="x-default" href="https://jbone.cn/translate/spring-cloud-netflix-zuul/zuul-developer-guide.html">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="15.Zuul Timeouts — Jbone">
+    <meta property="og:title" content="19.Zuul开发者指南 — Jbone">
     <meta property="og:description" content="Spring Cloud Zuul官方文档翻译">
-    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Zuul Timeouts">
+    <meta property="og:keywords" content="Spring Cloud Zuul，Spring Cloud 网关，Zuul Developer Guide">
 
     <meta property="og:image" content="https://jbone.cn//images/logo.png">
 
@@ -282,7 +282,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/zuul-timeouts.html" class="sidebar-link current">15.Zuul Timeouts</a>
+      <a href="/translate/spring-cloud-netflix-zuul/zuul-timeouts.html" class="sidebar-link">15.Zuul Timeouts</a>
     </li>
   
     
@@ -318,7 +318,7 @@
 
         
     <li>
-      <a href="/translate/spring-cloud-netflix-zuul/zuul-developer-guide.html" class="sidebar-link">19.Zuul开发者指南</a>
+      <a href="/translate/spring-cloud-netflix-zuul/zuul-developer-guide.html" class="sidebar-link current">19.Zuul开发者指南</a>
     </li>
   
 </ul>
@@ -341,7 +341,7 @@
     
   
   
-    <h1>15.Zuul Timeouts</h1>
+    <h1>19.Zuul开发者指南</h1>
   
 <!--
   <div class="ad-pagetop" style="display:hidden">
@@ -349,11 +349,11 @@
 
 -->
   
-    <p>如果您要为Zuul代理的请求配置<code>socket</code>超时时间和<code>read</code>超时时间，根据您的配置有以下两个选择：</p>
-<ul>
-<li>如果Zuul使用服务发现，您需要使用Ribbon的属性<code>ribbon.ReadTimeout</code>和<code>ribbon.SocketTimeout</code>来配置这些超时时间。</li>
-<li>如果您通过指定URLs来配置Zuul路由，您需要使用<code>zuul.host.connect-timeout-millis</code>和<code>zuul.host.socket-timeout-millis</code>。</li>
-</ul>
+    <p>有关Zuul工作原理的概述，请看<a href="https://github.com/Netflix/zuul/wiki/How-it-Works" target="_blank" rel="noopener">Zuul Wiki</a>。</p>
+<h2 id="Zuul-Servlet"><a href="#Zuul-Servlet" class="headerlink" title="Zuul Servlet"></a>Zuul Servlet</h2><p>Zuul是以Servlet实现的。对于一般情况，Zuul被嵌入到<code>Spring Dispatch</code>机制中。这使得Spring MVC可以控制路由。在这种情况下，Zuul缓冲请求。如果在经过Zuul时不需要缓冲请求（例如，上传大文件），Servlet也安装在Spring Dispatcher之外。默认情况下，这个servlet的地址是<code>/zuul</code>。可以通过<code>zuul.servlet-path</code>属性拉修改这个地址。</p>
+<blockquote>
+<p>译者注：<br>Zuul Servlet是一个公共实现，默认情况下，Spring Cloud会初始化两个入口，<code>ZuulController</code>和<code>ZuulServlet</code>。对于一般请求都是通过<code>ZuulController</code>；对于特殊需求（如上传大文件）可通过<code>ZuulServlet</code>。</p>
+</blockquote>
 
   
   
@@ -366,7 +366,7 @@
         <p><b>原创文章，欢迎转载！但请务必保留全文，并说明出处!</b></p>
         <br />
         发现错误？想参与编辑？
-    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/zuul-timeouts.md" rel="noopener" target="_blank">
+    <a href="https://github.com/417511458/jbone.cn/blob/master/source/translate/spring-cloud-netflix-zuul/zuul-developer-guide.md" rel="noopener" target="_blank">
       在 GitHub 上编辑此页！
     </a>
   </div>
