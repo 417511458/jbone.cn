@@ -350,10 +350,216 @@
 -->
   
     <p>有关Zuul工作原理的概述，请看<a href="https://github.com/Netflix/zuul/wiki/How-it-Works" target="_blank" rel="noopener">Zuul Wiki</a>。</p>
-<h2 id="Zuul-Servlet"><a href="#Zuul-Servlet" class="headerlink" title="Zuul Servlet"></a>Zuul Servlet</h2><p>Zuul是以Servlet实现的。对于一般情况，Zuul被嵌入到<code>Spring Dispatch</code>机制中。这使得Spring MVC可以控制路由。在这种情况下，Zuul缓冲请求。如果在经过Zuul时不需要缓冲请求（例如，上传大文件），Servlet也安装在Spring Dispatcher之外。默认情况下，这个servlet的地址是<code>/zuul</code>。可以通过<code>zuul.servlet-path</code>属性拉修改这个地址。</p>
+<h2 id="Zuul-Servlet"><a href="#Zuul-Servlet" class="headerlink" title="Zuul Servlet"></a>Zuul Servlet</h2><p>Zuul是以Servlet方式实现的。对于一般情况，Zuul被嵌入到<code>Spring Dispatch</code>机制中。这使得Spring MVC可以控制路由。在这种情况下，Zuul缓冲请求。如果在经过Zuul时不需要缓冲请求（例如，上传大文件），在Spring Dispatcher之外也安装了Zuul Servlet。默认情况下，这个servlet的地址是<code>/zuul</code>。可以通过<code>zuul.servlet-path</code>属性拉修改这个地址。</p>
 <blockquote>
 <p>译者注：<br>Zuul Servlet是一个公共实现，默认情况下，Spring Cloud会初始化两个入口，<code>ZuulController</code>和<code>ZuulServlet</code>。对于一般请求都是通过<code>ZuulController</code>；对于特殊需求（如上传大文件）可通过<code>ZuulServlet</code>。</p>
 </blockquote>
+<h2 id="Zuul-RequestContext"><a href="#Zuul-RequestContext" class="headerlink" title="Zuul RequestContext"></a>Zuul RequestContext</h2><p>Zuul使用<code>RequestContext</code>在过滤器之间传递信息。其数据保存在每个特定请求的<code>ThreadLocal</code>里。有关路由的请求地址、错误、以及真正的<code>HttpServletRequest</code>和<code>HttpServletResponse</code>的信息都存储在这里。<code>RequestContext</code>继承自<code>ConcurrentHashMap</code>，所以可以将任意信息存储在上下文中。<code>FilterConstants</code>中包含了由Spring Cloud Netflix安装的过滤器使用的<code>key</code>。</p>
+<h2 id="EnableZuulProxy-vs-EnableZuulServer"><a href="#EnableZuulProxy-vs-EnableZuulServer" class="headerlink" title="@EnableZuulProxy vs. @EnableZuulServer"></a><code>@EnableZuulProxy</code> vs. <code>@EnableZuulServer</code></h2><p>根据启用Zuul所使用的注解方式的不同，Spring Cloud Netflix 安装了不同的若干过滤器。<code>@EnableZuulProxy</code>是<code>@EnableZuulServer</code>的超集。换句话说，<code>@EnableZuulProxy</code>包含由<code>@EnableZuulServer</code>安装的所有过滤器。<code>Proxy</code>中附加的过滤器启用了路由功能。如果您想用<code>空白</code>的Zuul，请使用<code>@EnableZuulServer</code>。（译者注：这里的<code>空白</code>指的是不含路由功能）</p>
+<h2 id="EnableZuulServer过滤器"><a href="#EnableZuulServer过滤器" class="headerlink" title="@EnableZuulServer过滤器"></a><code>@EnableZuulServer</code>过滤器</h2><p><code>@EnableZuulServer</code>创建了一个<code>SimpleRouteLocator</code>,它从Spring Boot配置文件中加载路由定义。</p>
+<p>安装了以下过滤器（就像普通的Spring Beans）：</p>
+<ul>
+<li>Pre过滤器<ul>
+<li><code>ServletDetectionFilter</code>：检测请求是否通过Spring Dispatcher。使用<code>FilterConstants.IS_DISPATCHER_SERVLET_REQUEST_KEY</code>来设置一个boolean值。</li>
+<li><code>FormBodyWrapperFilter</code>：解析表单数据并为下游请求重新编码。</li>
+<li><code>DebugFilter</code>：如果设置了<code>debug</code>请求参数，那么会将<code>RequestContext.setDebugRouting()</code> 和 <code>RequestContext.setDebugRequest()</code>设置为<code>true</code>。</li>
+<li><code>SendForwardFilter</code>：使用Servlet<code>RequestDispatcher</code>转发请求。转发地址存储在<code>RequestContext</code>的<code>FilterConstants.FORWARD_TO_KEY</code>属性里。这对于转发到当前应用中的端点非常有用。</li>
+</ul>
+</li>
+<li>Post过滤器<ul>
+<li><code>SendResponseFilter</code>：将代理请求的响应写到当前响应里。</li>
+</ul>
+</li>
+<li>Error过滤器<ul>
+<li><code>SendErrorFilter</code>：如果<code>RequestContext.getThrowable()</code>非空，则转发到<code>/error</code>（默认值）。您可以通过<code>error.path</code>属性修改默认转发路径（<code>/error</code>）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="EnableZuulProxy过滤器"><a href="#EnableZuulProxy过滤器" class="headerlink" title="@EnableZuulProxy过滤器"></a><code>@EnableZuulProxy</code>过滤器</h2><p>创建了一个<code>DiscoveryClientRouteLocator</code>，它从<code>DiscoveryClient</code>（如<code>Eureka</code>）以及配置文件加载路由定义。从<code>DiscoveryClient</code>为每个<code>serviceId</code>创建一个路由。随着新服务的添加，路由将会被刷新。</p>
+<p>除了安装了前面描述的过滤器之外（译者注：<code>@EnableZuulServer</code>过滤器），还安装了以下过滤器（就像普通的Spring Beans）：</p>
+<ul>
+<li>Pre过滤器：<ul>
+<li><code>PreDecorationFilter</code>：根据提供的<code>RouteLocator</code>来确定路由的位置和方式。它还为下游请求设置了各种与代理相关的头信息。</li>
+</ul>
+</li>
+<li>Route过滤器：<ul>
+<li><code>RibbonRoutingFilter</code>：使用<code>Ribbon</code>、<code>Hystrix</code>、以及可插拔的<code>HTTP客户端</code>发送请求。通过<code>RequestContext</code>的<code>FilterConstants.SERVICE_ID_KEY</code>属性来获取ServiceId。该过滤器可使用不同的HTTP客户端：<ul>
+<li>Apache <code>HttpClient</code>：默认客户端。</li>
+<li>Squareup <code>OkHttpClient</code> v3：通过添加<code>com.squareup.okhttp3:okhttp</code>包，并设置<code>ribbon.okhttp.enabled=true</code>来启用。</li>
+<li>Netflix Ribbon HTTP client: 通过设置<code>ribbon.restclient.enabled=true</code>来启用。该客户端有一些限制，其中包括不支持<code>PATCH</code>方法，但它内置了重试功能。</li>
+</ul>
+</li>
+<li><code>SimpleHostRoutingFilter</code>：通过Apache HttpClient向预先确定的URLs发送请求。这里的URLs通过<code>RequestContext.getRouteHost()</code>获取。</li>
+</ul>
+</li>
+</ul>
+<h2 id="自定义Zuul过滤器实例"><a href="#自定义Zuul过滤器实例" class="headerlink" title="自定义Zuul过滤器实例"></a>自定义Zuul过滤器实例</h2><p>以下大部分<code>如何写</code>的实例都在 <a href="https://github.com/spring-cloud-samples/sample-zuul-filters" target="_blank" rel="noopener">Sample Zuul Filters</a> 项目中。该仓库中还有一些操纵请求体和响应体的实例。</p>
+<p>本章节包含以下示例：</p>
+<ul>
+<li>如何写Pre Filter</li>
+<li>如何写Route Filter</li>
+<li>如何写Post Filter</li>
+</ul>
+<h3 id="如何写Pre-Filter"><a href="#如何写Pre-Filter" class="headerlink" title="如何写Pre Filter"></a>如何写Pre Filter</h3><p>Pre过滤器在<code>RequestContext</code>中设置数据，以便下游过滤器使用。Pre过滤器主要的使用场景是为<code>route</code>过滤器设置所需的信息。以下示例展示了一个Zuul pre过滤器：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QueryParamPreFilter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ZuulFilter</span> </span>&#123;
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">filterOrder</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> PRE_DECORATION_FILTER_ORDER - <span class="hljs-number">1</span>; <span class="hljs-comment">// run before PreDecoration</span>
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">filterType</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> PRE_TYPE;
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">shouldFilter</span><span class="hljs-params">()</span> </span>&#123;
+		RequestContext ctx = RequestContext.getCurrentContext();
+		<span class="hljs-keyword">return</span> !ctx.containsKey(FORWARD_TO_KEY) <span class="hljs-comment">// a filter has already forwarded</span>
+				&amp;&amp; !ctx.containsKey(SERVICE_ID_KEY); <span class="hljs-comment">// a filter has already determined serviceId</span>
+	&#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        RequestContext ctx = RequestContext.getCurrentContext();
+		HttpServletRequest request = ctx.getRequest();
+		<span class="hljs-keyword">if</span> (request.getParameter(<span class="hljs-string">"sample"</span>) != <span class="hljs-keyword">null</span>) &#123;
+		    <span class="hljs-comment">// put the serviceId in `RequestContext`</span>
+    		ctx.put(SERVICE_ID_KEY, request.getParameter(<span class="hljs-string">"foo"</span>));
+    	&#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+&#125;</code></pre>
+
+<p>上面的过滤器从<code>sample</code>请求参数填充<code>SERVICE_ID_KEY</code>。在实践中，您不应该进行这样的直接映射。相反，应该通过<code>sample</code>的值来查找service ID。</p>
+<p>由于填充了<code>SERVICE_ID_KEY</code>，那么就不执行<code>PreDecorationFilter</code>了，而会执行<code>RibbonRoutingFilter</code>。</p>
+<blockquote>
+<p>如果您想路由到完整的URL，请使用<code>ctx.setRouteHost(url)</code>。</p>
+</blockquote>
+<p>要修改路由过滤器转发的路径，请设置<code>REQUEST_URI_KEY</code>。</p>
+<h3 id="如何写Route-Filter"><a href="#如何写Route-Filter" class="headerlink" title="如何写Route Filter"></a>如何写Route Filter</h3><p>Route过滤器运行在Pre过滤器之后，并向其它服务发送请求。这里的大部分工作是将请求和响应数据与客户端所需的模型相互转换。下面的例子展示了一个Route过滤器：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OkHttpRoutingFilter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ZuulFilter</span> </span>&#123;
+	<span class="hljs-meta">@Autowired</span>
+	<span class="hljs-keyword">private</span> ProxyRequestHelper helper;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">filterType</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> ROUTE_TYPE;
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">filterOrder</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> SIMPLE_HOST_ROUTING_FILTER_ORDER - <span class="hljs-number">1</span>;
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">shouldFilter</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> RequestContext.getCurrentContext().getRouteHost() != <span class="hljs-keyword">null</span>
+				&amp;&amp; RequestContext.getCurrentContext().sendZuulResponse();
+	&#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+		OkHttpClient httpClient = <span class="hljs-keyword">new</span> OkHttpClient.Builder()
+				<span class="hljs-comment">// customize</span>
+				.build();
+
+		RequestContext context = RequestContext.getCurrentContext();
+		HttpServletRequest request = context.getRequest();
+
+		String method = request.getMethod();
+
+		String uri = <span class="hljs-keyword">this</span>.helper.buildZuulRequestURI(request);
+
+		Headers.Builder headers = <span class="hljs-keyword">new</span> Headers.Builder();
+		Enumeration&lt;String&gt; headerNames = request.getHeaderNames();
+		<span class="hljs-keyword">while</span> (headerNames.hasMoreElements()) &#123;
+			String name = headerNames.nextElement();
+			Enumeration&lt;String&gt; values = request.getHeaders(name);
+
+			<span class="hljs-keyword">while</span> (values.hasMoreElements()) &#123;
+				String value = values.nextElement();
+				headers.add(name, value);
+			&#125;
+		&#125;
+
+		InputStream inputStream = request.getInputStream();
+
+		RequestBody requestBody = <span class="hljs-keyword">null</span>;
+		<span class="hljs-keyword">if</span> (inputStream != <span class="hljs-keyword">null</span> &amp;&amp; HttpMethod.permitsRequestBody(method)) &#123;
+			MediaType mediaType = <span class="hljs-keyword">null</span>;
+			<span class="hljs-keyword">if</span> (headers.get(<span class="hljs-string">"Content-Type"</span>) != <span class="hljs-keyword">null</span>) &#123;
+				mediaType = MediaType.parse(headers.get(<span class="hljs-string">"Content-Type"</span>));
+			&#125;
+			requestBody = RequestBody.create(mediaType, StreamUtils.copyToByteArray(inputStream));
+		&#125;
+
+		Request.Builder builder = <span class="hljs-keyword">new</span> Request.Builder()
+				.headers(headers.build())
+				.url(uri)
+				.method(method, requestBody);
+
+		Response response = httpClient.newCall(builder.build()).execute();
+
+		LinkedMultiValueMap&lt;String, String&gt; responseHeaders = <span class="hljs-keyword">new</span> LinkedMultiValueMap&lt;&gt;();
+
+		<span class="hljs-keyword">for</span> (Map.Entry&lt;String, List&lt;String&gt;&gt; entry : response.headers().toMultimap().entrySet()) &#123;
+			responseHeaders.put(entry.getKey(), entry.getValue());
+		&#125;
+
+		<span class="hljs-keyword">this</span>.helper.setResponse(response.code(), response.body().byteStream(),
+				responseHeaders);
+		context.setRouteHost(<span class="hljs-keyword">null</span>); <span class="hljs-comment">// prevent SimpleHostRoutingFilter from running</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+&#125;</code></pre>
+
+<p>上面的过滤器，将Servlet请求信息转换为OkHttp3请求信息，然后执行HTTP请求，并将OkHttp3响应信息转换到Servlet响应。</p>
+<h3 id="如何写Post-Filter"><a href="#如何写Post-Filter" class="headerlink" title="如何写Post Filter"></a>如何写Post Filter</h3><p>Post过滤器通常负责操作响应。下面的过滤器添加了一个随机<code>UUID</code>作为<code>X-Sample</code>头信息：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddResponseHeaderFilter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ZuulFilter</span> </span>&#123;
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">filterType</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> POST_TYPE;
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">filterOrder</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> SEND_RESPONSE_FILTER_ORDER - <span class="hljs-number">1</span>;
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">shouldFilter</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+		RequestContext context = RequestContext.getCurrentContext();
+    	HttpServletResponse servletResponse = context.getResponse();
+		servletResponse.addHeader(<span class="hljs-string">"X-Sample"</span>, UUID.randomUUID().toString());
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+	&#125;
+&#125;</code></pre>
+
+<blockquote>
+<p>其他处理，如转换响应体，要复杂的多，并需要大量的计算。</p>
+</blockquote>
+<h2 id="Zuul-Errors工作原理"><a href="#Zuul-Errors工作原理" class="headerlink" title="Zuul Errors工作原理"></a>Zuul Errors工作原理</h2><p>如果在Zuul过滤器生命周期中的任何地方抛出异常，都会执行<code>error</code>过滤器。只有<code>RequestContext.getThrowable()</code>非空时才执行<code>SendErrorFilter</code>。然后它在请求中设置特定的<code>javax.servlet.error.*</code>属性，并将请求转发到Spring Boot错误页。</p>
+<h2 id="Zuul-Eager-Application-Context-Loading"><a href="#Zuul-Eager-Application-Context-Loading" class="headerlink" title="Zuul Eager Application Context Loading"></a>Zuul Eager Application Context Loading</h2><p>Zuul内部使用Ribbon调用远程URLs。默认情况下，Ribbon客户端在第一次调用时由Spring Cloud延迟加载。可以通过以下配置来修改Zuul的此行为，从而在应用启动时立即加载子Ribbon相关的应用上下文。下面的例子展示了如何启用即时加载：</p>
+<p><strong>application.yml.</strong></p>
+<pre><code class="hljs yaml"><span class="hljs-attr">zuul:</span>
+  <span class="hljs-attr">ribbon:</span>
+    <span class="hljs-attr">eager-load:</span>
+      <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span></code></pre>
+
+
+
+
+
+
+
+
+
+
 
   
   
