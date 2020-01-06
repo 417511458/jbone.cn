@@ -9,6 +9,8 @@ order: 0
 
 本专题是对Spring Cloud Netflix官方文档中Zuul部分的翻译。
 
+**已完结**
+
 > Spring Cloud Netflix Zuul版本：2.1.3.RELEASE
 
 译文 | 原文 | 贡献者 | 状态

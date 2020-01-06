@@ -11,7 +11,7 @@ order: 19
 
 ## Zuul Servlet
 
-Zuul是以Servlet方式实现的。对于一般情况，Zuul被嵌入到`Spring Dispatch`机制中。这使得Spring MVC可以控制路由。在这种情况下，Zuul缓冲请求。如果在经过Zuul时不需要缓冲请求（例如，上传大文件），在Spring Dispatcher之外也安装了Zuul Servlet。默认情况下，这个servlet的地址是`/zuul`。可以通过`zuul.servlet-path`属性拉修改这个地址。
+Zuul是以Servlet方式实现的。对于一般情况，Zuul被嵌入到`Spring Dispatch`机制中。这使得Spring MVC可以控制路由。在这种情况下，Zuul缓冲请求。如果在经过Zuul时不需要缓冲请求（例如，上传大文件），在Spring Dispatcher之外也安装了Zuul Servlet。默认情况下，这个servlet的地址是`/zuul`。可以通过`zuul.servlet-path`属性来修改这个地址。
 
 > 译者注：
 > Zuul Servlet是一个公共实现，默认情况下，Spring Cloud会初始化两个入口，`ZuulController`和`ZuulServlet`。对于一般请求都是通过`ZuulController`；对于特殊需求（如上传大文件）可通过`ZuulServlet`。
@@ -53,7 +53,7 @@ Zuul使用`RequestContext`在过滤器之间传递信息。其数据保存在每
         * Apache `HttpClient`：默认客户端。
         * Squareup `OkHttpClient` v3：通过添加`com.squareup.okhttp3:okhttp`包，并设置`ribbon.okhttp.enabled=true`来启用。
         * Netflix Ribbon HTTP client: 通过设置`ribbon.restclient.enabled=true`来启用。该客户端有一些限制，其中包括不支持`PATCH`方法，但它内置了重试功能。
-    * `SimpleHostRoutingFilter`：通过Apache HttpClient向预先确定的URLs发送请求。这里的URLs通过`RequestContext.getRouteHost()`获取。
+    * `SimpleHostRoutingFilter`：通过Apache HttpClient向预先确定的URLs发送请求。这里的URLs通过`RequestContext.getRouteHost()`来获取。
 
 ## 自定义Zuul过滤器实例
 
