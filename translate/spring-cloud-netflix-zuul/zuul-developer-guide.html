@@ -350,7 +350,7 @@
 -->
   
     <p>有关Zuul工作原理的概述，请看<a href="https://github.com/Netflix/zuul/wiki/How-it-Works" target="_blank" rel="noopener">Zuul Wiki</a>。</p>
-<h2 id="Zuul-Servlet"><a href="#Zuul-Servlet" class="headerlink" title="Zuul Servlet"></a>Zuul Servlet</h2><p>Zuul是以Servlet方式实现的。对于一般情况，Zuul被嵌入到<code>Spring Dispatch</code>机制中。这使得Spring MVC可以控制路由。在这种情况下，Zuul缓冲请求。如果在经过Zuul时不需要缓冲请求（例如，上传大文件），在Spring Dispatcher之外也安装了Zuul Servlet。默认情况下，这个servlet的地址是<code>/zuul</code>。可以通过<code>zuul.servlet-path</code>属性拉修改这个地址。</p>
+<h2 id="Zuul-Servlet"><a href="#Zuul-Servlet" class="headerlink" title="Zuul Servlet"></a>Zuul Servlet</h2><p>Zuul是以Servlet方式实现的。对于一般情况，Zuul被嵌入到<code>Spring Dispatch</code>机制中。这使得Spring MVC可以控制路由。在这种情况下，Zuul缓冲请求。如果在经过Zuul时不需要缓冲请求（例如，上传大文件），在Spring Dispatcher之外也安装了Zuul Servlet。默认情况下，这个servlet的地址是<code>/zuul</code>。可以通过<code>zuul.servlet-path</code>属性来修改这个地址。</p>
 <blockquote>
 <p>译者注：<br>Zuul Servlet是一个公共实现，默认情况下，Spring Cloud会初始化两个入口，<code>ZuulController</code>和<code>ZuulServlet</code>。对于一般请求都是通过<code>ZuulController</code>；对于特殊需求（如上传大文件）可通过<code>ZuulServlet</code>。</p>
 </blockquote>
@@ -389,7 +389,7 @@
 <li>Netflix Ribbon HTTP client: 通过设置<code>ribbon.restclient.enabled=true</code>来启用。该客户端有一些限制，其中包括不支持<code>PATCH</code>方法，但它内置了重试功能。</li>
 </ul>
 </li>
-<li><code>SimpleHostRoutingFilter</code>：通过Apache HttpClient向预先确定的URLs发送请求。这里的URLs通过<code>RequestContext.getRouteHost()</code>获取。</li>
+<li><code>SimpleHostRoutingFilter</code>：通过Apache HttpClient向预先确定的URLs发送请求。这里的URLs通过<code>RequestContext.getRouteHost()</code>来获取。</li>
 </ul>
 </li>
 </ul>
