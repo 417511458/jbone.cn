@@ -14,12 +14,12 @@ keywords: Zuul，Spring Cloud，微服务
 
 这个时候就需要有个组件负责前后端之间的交互，在微服务生态体系中我们将该组件称之为**网关**。
 
-在Spring Cloud生态体系中，网关是其基础组件之一，它的主流实现方案有两个：
+网关是Spring Cloud生态体系中的基础组件之一，它的主流实现方案有两个：
 
 1. Spring Cloud Netflix Zuul
 2. Spring Cloud Gateway
 
-两者的主要作用都是一样的，都是代理和路由。两者的对比不在本文讨论范围内，本文主要聚焦于Spring Cloud Netflix Zuul。
+两者的主要作用都是一样的，都是代理和路由。牵着是基于Netflix Zuul实现的，猴子两者的对比不在本文讨论范围内，本文主要聚焦于Spring Cloud Netflix Zuul。
 
 本文的焦点主要是剖析Zuul内部的实现原理，如网关初始化过程、路由处理流程、过滤器种类及其功能、度量指标、管理端点等。
 
