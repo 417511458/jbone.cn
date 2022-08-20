@@ -5,7 +5,6 @@ order: 2
 ---
 
 ## 关注作者
-**关注微信公众号：IT渔樵爱买基** ![微信公众号](images/wxgzh.png)
 
 
 
@@ -14,6 +13,9 @@ order: 2
 **[CSDN：IT渔樵爱买基](https://blog.csdn.net/LoveFundLoveCode)**
 
 **[B站：IT渔樵爱买基](https://space.bilibili.com/1997403556)**
+
+**关注微信公众号：IT渔樵爱买基** 
+![微信公众号](images/wxgzh.png)
 
 ## 关注源码
 
