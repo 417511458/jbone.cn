@@ -1,6 +1,6 @@
 ---
 title: 多站点内容管理系统
-type: cmss
+type: cms
 order: 2
 ---
 

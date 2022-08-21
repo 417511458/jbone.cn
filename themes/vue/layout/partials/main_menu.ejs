@@ -1,3 +1,13 @@
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?bf5e4e2a1f519faf831b113c8778381f";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
 <!--
 <li>
   <form id="search-form">
@@ -6,6 +16,7 @@
 </li>
 -->
 <%- partial('partials/learn_dropdown') %>
-<%- partial('partials/ecosystem_dropdown') %>
+<%- partial('partials/fund_dropdown') %>
 <%- partial('partials/translate_dropdown') %>
+<%- partial('partials/ecosystem_dropdown') %>
 <li><a href="<%- url_for("/contact-author/") %>" target="_blank" class="nav-link contribute">联系作者</a></li>

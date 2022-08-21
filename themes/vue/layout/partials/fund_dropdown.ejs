@@ -1,0 +1,7 @@
+<li class="nav-dropdown-container learn">
+  <a class="nav-link<%- page.path.match(/\/(lean(?!\/team.html$)|theory|record)(\/|$)/) ? ' current' : '' %>">爱买基</a><span class="arrow"></span>
+  <ul class="nav-dropdown">
+    <li><a href="<%- url_for("/fund/theory/") %>" class="nav-link<%- page.path.match(/\/theory(\/|$)/) ? ' current' : '' %>">投资理论</a></li>
+    <li><a href="<%- url_for("/fund/record/") %>" class="nav-link<%- page.path.match(/\/record(\/|$)/) ? ' current' : '' %>">实盘分享</a></li>
+  </ul>
+</li>
